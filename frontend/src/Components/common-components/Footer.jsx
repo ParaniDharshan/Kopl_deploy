@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Container, Grid, Typography, Divider } from "@mui/material";
-import { PRIMARY, SECONDARY, NAV_LINKS, CONTACT_INFO } from "../constants";
+import { PRIMARY, SECONDARY, NAV_LINKS, CONTACT_INFO } from "../../constants";
 
 function Footer({ mode }) {
   return (
     <Box component="footer" sx={{ py:6, background:mode==="dark"?"#05111d":"#0c1e30", color:"rgba(255,255,255,0.7)" }}>
       <Container maxWidth="lg">
-        <Grid container spacing={4} justifyContent="space-between">
+        <Grid container spacing={30} justifyContent="space-between">
           <Grid item xs={12} sm={5}>
             <Typography sx={{
               fontFamily:"'Sora',sans-serif", fontWeight:800, fontSize:"1.3rem",
@@ -32,7 +32,8 @@ function Footer({ mode }) {
             <Typography variant="body2" sx={{ opacity:0.55 }}>{CONTACT_INFO.location}</Typography>
           </Grid>
         </Grid>
-        <Divider sx={{ my:4, borderColor:"rgba(255,255,255,0.08)" }} />
+
+        {/*<Divider sx={{ my:4, borderColor:"rgba(255,255,255,0.08)" }} />
         <Box sx={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:1 }}>
           <Typography variant="caption" sx={{ opacity:0.35 }}>
             © {new Date().getFullYear()} CRKL Inc. All rights reserved. Chesterfield, Missouri.
@@ -40,7 +41,8 @@ function Footer({ mode }) {
           <Typography variant="caption" sx={{ opacity:0.35 }}>
             Privacy Policy · Terms of Service
           </Typography>
-        </Box>
+        </Box>*/}
+        
       </Container>
     </Box>
   );

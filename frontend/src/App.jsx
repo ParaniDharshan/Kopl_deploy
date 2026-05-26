@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
-import Navbar from "./Common-components/Navbar";
-import Footer from "./Common-components/Footer";
-import ScrollToTop from "./Common-components/ScrollToTop";
+import Navbar from "./Components/common-components/Navbar";
+import Footer from "./Components/common-components/Footer";
+import ScrollToTop from "./Components/common-components/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";

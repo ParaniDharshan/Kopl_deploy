@@ -8,7 +8,7 @@ import {
   Menu as MenuIcon, Close as CloseIcon,
   DarkMode as DarkModeIcon, LightMode as LightModeIcon,
 } from "@mui/icons-material";
-import { PRIMARY, SECONDARY, BOOKING_URL, NAV_LINKS } from "../constants";
+import { PRIMARY, SECONDARY, BOOKING_URL, NAV_LINKS } from "../../constants";
 
 function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -20,6 +20,19 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
     setDrawerOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+{/* Concerns see full answer */ }
+
+  React.useEffect(() => {
+    const handler = (e) => {
+      if (!e || !e.detail) return;
+      setActiveTab(e.detail);
+      setDrawerOpen(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    window.addEventListener('navigateTab', handler);
+    return () => window.removeEventListener('navigateTab', handler);
+  }, [setActiveTab]);
 
   return (
     <>
