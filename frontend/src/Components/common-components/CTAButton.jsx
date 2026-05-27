@@ -3,7 +3,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { ArrowForward as ArrowIcon } from "@mui/icons-material";
 import { PRIMARY, SECONDARY, BOOKING_URL } from "../../constants";
 
-function CTAButton({ text = "Book a Free Discovery Call", sub, size = "large" }) {
+function CTAButton({ text, sub, size }) {
 	return (
 		<Box>
 			<Button

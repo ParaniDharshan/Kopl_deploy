@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import WhyCRKL from "./pages/WhyCRKL";
 import Contact from "./pages/Contact";
 import { PRIMARY, SECONDARY } from "./constants";
+import AboutPage from "./Components/AboutPage";
 
 const buildTheme = (mode) =>
   createTheme({
