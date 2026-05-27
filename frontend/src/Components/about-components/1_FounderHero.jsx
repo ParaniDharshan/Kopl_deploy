@@ -141,48 +141,6 @@ function SectionHeader({
   );
 }
 
-const education = [
-  {
-    icon: <ScienceIcon fontSize="small" />,
-    degree: "Doctorate in Chemistry",
-    school: "Florida State University",
-    color: PRIMARY,
-    bg: PRIMARY_LIGHT,
-  },
-  {
-    icon: <BusinessCenterIcon fontSize="small" />,
-    degree: "MBA — International Business",
-    school: "Saint Louis University",
-    color: SECONDARY,
-    bg: SECONDARY_LIGHT,
-  },
-  {
-    icon: <GavelIcon fontSize="small" />,
-    degree: "Law Degree",
-    school: "Saint Louis University",
-    color: "#0d3b5e",
-    bg: "#EAF0F5",
-  },
-];
-
-const careerPoints = [
-  "Results-based decision-making & goal-driven operations",
-  "Deep exposure to American business culture at multinational level",
-  "Commitment to quality, cost discipline & strategic execution",
-  "Built a reputation on trust, reliability & professional integrity",
-];
-
-const civicTimeline = [
-  { year: "2012", event: "Joined Chesterfield Regional Chamber of Commerce" },
-  { year: "~3 yrs", event: "Led Business Education Committee" },
-  { year: "2014–2019", event: "Board of Directors — Chamber" },
-  { year: "2019", event: "Chairman of the Board" },
-  {
-    year: "2017–Now",
-    event: "Finance & Admin Citizens Advisory Committee, City of Chesterfield",
-  },
-];
-
 const milestones = [
   {
     icon: <School />,
