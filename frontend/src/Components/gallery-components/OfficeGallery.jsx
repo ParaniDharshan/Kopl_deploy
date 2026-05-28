@@ -1,18 +1,17 @@
 import React from "react";
-import { Box, Container, Typography, Button } from "@mui/material";
-import { alpha } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
+import { Box, Container, Typography } from "@mui/material";
 import Masonry from "./Masonry";
 import { useTheme } from "@mui/material/styles";
-import { PRIMARY, HERO_BG } from "../../constants";
+import { HERO_BG } from "../../constants";
+import CTAButton from "../common-components/CTAButton";
 
 const officeItems = [
-    { id: "office-1", img: new URL("../../assets/Office/Building.jpeg", import.meta.url).href, url: new URL("../../assets/Office/Building.jpeg", import.meta.url).href, height: 500 },
-    { id: "office-2", img: new URL("../../assets/Office/Office space.jpg", import.meta.url).href, url: new URL("../../assets/Office/Office space.jpg", import.meta.url).href, height: 500 },
-    { id: "office-3", img: new URL("../../assets/Office/Conference Hall.jpg", import.meta.url).href, url: new URL("../../assets/Office/Conference Hall.jpg", import.meta.url).href, height: 500 },
-    { id: "office-4", img: new URL("../../assets/Office/Lobby.jpeg", import.meta.url).href, url: new URL("../../assets/Office/Lobby.jpeg", import.meta.url).href, height: 500 },
-    { id: "office-5", img: new URL("../../assets/Office/Corrider.jpg", import.meta.url).href, url: new URL("../../assets/Office/Corrider.jpg", import.meta.url).href, height: 500 },
-    { id: "office-6", img: new URL("../../assets/Office/offc spac2.jpg", import.meta.url).href, url: new URL("../../assets/Office/offc spac2.jpg", import.meta.url).href, height: 500 },
+    { id: "office-1", img: new URL("../../assets/Office/Building.webp", import.meta.url).href, url: new URL("../../assets/Office/Building.webp", import.meta.url).href, height: 500 },
+    { id: "office-2", img: new URL("../../assets/Office/Office space.webp", import.meta.url).href, url: new URL("../../assets/Office/Office space.webp", import.meta.url).href, height: 500 },
+    { id: "office-3", img: new URL("../../assets/Office/Conference Hall.webp", import.meta.url).href, url: new URL("../../assets/Office/Conference Hall.webp", import.meta.url).href, height: 500 },
+    { id: "office-4", img: new URL("../../assets/Office/Lobby.webp", import.meta.url).href, url: new URL("../../assets/Office/Lobby.webp", import.meta.url).href, height: 500 },
+    { id: "office-5", img: new URL("../../assets/Office/Corrider.webp", import.meta.url).href, url: new URL("../../assets/Office/Corrider.webp", import.meta.url).href, height: 500 },
+    { id: "office-6", img: new URL("../../assets/Office/offc spac2.webp", import.meta.url).href, url: new URL("../../assets/Office/offc spac2.webp", import.meta.url).href, height: 500 },
 ];
 
 function OfficeGallery(props) {
@@ -51,43 +50,16 @@ function OfficeGallery(props) {
                 )}
 
                 <Container sx={{ position: "relative", zIndex: 2 }} maxWidth="xl">
-                    <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, alignItems: "flex-start", gap: 3 }}>
-                        <Box sx={{ width: { md: "50%" } }}>
+                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 3 }}>
+                        <Box sx={{ width: { xs: '100%', md: '70%' } }}>
                             <Typography variant="h2" sx={{ fontWeight: 800, color: titleColor, mb: 1 }}>
                                 Office
                             </Typography>
-                            <Typography sx={{ maxWidth: 760, color: subtitleColor, lineHeight: 1.6 }}>
+                            <Typography sx={{ maxWidth: 760, color: subtitleColor, lineHeight: 1.6, margin: '0 auto' }}>
                                 A closer look at the workspace and setup behind the brand.
                             </Typography>
 
-                            <Box sx={{ mt: 2 }}>
-                                <Button
-                                    variant="contained"
-                                    startIcon={<ArrowBack />}
-                                    aria-label="Back to Gallery"
-                                    onClick={() => {
-                                        props.setActiveTab?.("Gallery");
-                                        window.scrollTo({ top: 0, left: 0 });
-                                    }}
-                                    sx={{
-                                        backgroundColor: PRIMARY,
-                                        color: "common.white",
-                                        px: 3,
-                                        py: 1.15,
-                                        fontSize: "0.98rem",
-                                        fontWeight: 800,
-                                        borderRadius: 999,
-                                        textTransform: "none",
-                                        boxShadow: "0 8px 24px rgba(15,40,70,0.12)",
-                                        '&:hover': { filter: 'brightness(0.95)' },
-                                    }}
-                                >
-                                    Back to Gallery
-                                </Button>
-                            </Box>
                         </Box>
-
-                        <Box sx={{ flex: 1 }} />
                     </Box>
                 </Container>
             </Box>
@@ -100,7 +72,23 @@ function OfficeGallery(props) {
                         borderRadius: 2,
                     }}
                 >
-                    <Masonry items={galleryItems} colorShiftOnHover blurToFocus />
+                    <Masonry items={galleryItems} colorShiftOnHover  />
+                </Box>
+
+                <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
+                    <CTAButton
+                        text="Back to Gallery"
+                        size="large"
+                        isBack
+                        onClick={() => {
+                            if (typeof props.setActiveTab === 'function') {
+                                props.setActiveTab("Gallery");
+                                window.scrollTo({ top: 0, left: 0 });
+                            } else {
+                                try { window.history.back(); } catch (e) {}
+                            }
+                        }}
+                    />
                 </Box>
             </Container>
         </Box>

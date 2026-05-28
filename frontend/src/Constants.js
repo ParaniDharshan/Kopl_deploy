@@ -105,7 +105,7 @@ export const SERVICES = [
 
 // Office page hero image part
 export const HERO_BG = {
-	office: new URL("./assets/Office/Conference Hall.jpg", import.meta.url).href,
+	office: new URL("./assets/Office/Conference Hall.webp", import.meta.url).href,
 };
 
 export const TIMELINE = [

@@ -14,14 +14,16 @@ function CTAButton({
   onClick,
   href,
 }) {
+  const isExternalLink = Boolean(href);
+
   return (
     <Box>
       <Button
         variant="contained"
         size={size}
         onClick={onClick}
-        href={href || BOOKING_URL}
-        target="_blank"
+        href={isExternalLink ? href : undefined}
+        target={isExternalLink ? "_blank" : undefined}
         startIcon={isBack ? <ArrowBackIcon /> : null}   // ✅ LEFT arrow
         endIcon={!isBack ? <ArrowForwardIcon /> : null} // ✅ RIGHT arrow
         sx={{

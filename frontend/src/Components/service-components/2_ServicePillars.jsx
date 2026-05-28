@@ -37,7 +37,7 @@ export default function ServicePillars() {
         mx: "auto",
         display: "flex",
         flexDirection: "column",
-        gap: 1,
+        gap: 4,
         px: { xs: 2, md: 5 },
         py: { xs: 6, md: 10 },
       }}

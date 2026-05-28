@@ -1,15 +1,12 @@
 import React, { useMemo, useEffect } from "react";
 import {
-  alpha,
   Box,
-  Button,
-  Chip,
   Container,
   Stack,
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { ArrowBack } from "@mui/icons-material"; // ✅ added
+import CTAButton from "../common-components/CTAButton";
 import Masonry from "./Masonry";
 
 function CategoryGallery({
@@ -21,6 +18,8 @@ function CategoryGallery({
   backTab = "Gallery",
   setActiveTab,
   actions,
+  centered = false,
+  backButtonPosition = "top",
 }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -44,39 +43,36 @@ function CategoryGallery({
   return (
     <Box sx={pageStyles}>
       <Container maxWidth="xl">
-        <Box sx={{ mb: 3 }}>
+        <Box sx={{ mb: 3, ...(centered ? { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' } : {}) }}>
           <Typography variant="h2" sx={{ fontWeight: 800, mb: 2 }}>
             {title}
           </Typography>
           <Typography
-            sx={{ maxWidth: 760, color: "text.secondary", lineHeight: 1.7 }}
+            sx={{ maxWidth: 760, color: "text.secondary", lineHeight: 1.7, ...(centered ? { margin: '0 auto' } : {}) }}
           >
             {subtitle}
           </Typography>
         </Box>
 
-        <Box sx={{ mb: 2.5 }}>
-          <Button
-            variant="outlined"
-            startIcon={<ArrowBack />} // ✅ LEFT ARROW ADDED
-            onClick={() => {
-              setActiveTab?.(backTab);
-              window.scrollTo({ top: 0, left: 0 });
-            }}
-            sx={{
-              borderColor: alpha(accent, 0.4),
-              color: accent,
-              px: 3,
-              py: 1.15,
-              fontSize: "0.98rem",
-              fontWeight: 700,
-              borderRadius: 999,
-              textTransform: "none",
-            }}
-          >
-            Back to Gallery
-          </Button>
-        </Box>
+        {backButtonPosition === "top" && (
+          <Box sx={{ mb: 2.5, ...(centered ? { display: 'flex', justifyContent: 'center' } : {}) }}>
+            <CTAButton
+              text="Back to Gallery"
+              size="large"
+              isBack
+              onClick={() => {
+                if (typeof setActiveTab === 'function') {
+                  setActiveTab(backTab);
+                  window.scrollTo({ top: 0, left: 0 });
+                } else {
+                  try {
+                    window.history.back();
+                  } catch (e) {}
+                }
+              }}
+            />
+          </Box>
+        )}
 
         <Box sx={{ mb: 3 }}>{actions}</Box>
 
@@ -97,8 +93,28 @@ function CategoryGallery({
               : "0 18px 60px rgba(15, 40, 70, 0.08)",
           }}
         >
-          <Masonry items={items} colorShiftOnHover blurToFocus />
+          <Masonry items={items} colorShiftOnHover  />
         </Box>
+
+        {backButtonPosition === "bottom" && (
+          <Box sx={{ mt: 2.5, display: 'flex', justifyContent: 'center' }}>
+            <CTAButton
+              text="Back to Gallery"
+              size="large"
+              isBack
+              onClick={() => {
+                if (typeof setActiveTab === 'function') {
+                  setActiveTab(backTab);
+                  window.scrollTo({ top: 0, left: 0 });
+                } else {
+                  try {
+                    window.history.back();
+                  } catch (e) {}
+                }
+              }}
+            />
+          </Box>
+        )}
       </Container>
     </Box>
   );
