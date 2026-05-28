@@ -8,7 +8,7 @@ export default function StepRoadMap() {
 	const toggle = (p) => (_, isExp) => setExpanded(isExp ? p : false);
 
 	return (
-		<Box sx={{ py:{ xs:8,md:12 }, background:`linear-gradient(160deg,${SECONDARY}0d 0%,${PRIMARY}0d 100%)` }}>
+		<Box sx={{ py: 5, bgcolor: "background.paper" }}>
 			<Container maxWidth="md">
 				<Box sx={{ textAlign:"center", mb:8 }}>
 					<Typography variant="h2" sx={{ fontSize:{ xs:"2rem",md:"2.6rem" }, mb:2 }}>From first call to measurable results</Typography>
@@ -24,7 +24,7 @@ export default function StepRoadMap() {
 								border:`1px solid ${expanded===`r${i}`?PRIMARY:"transparent"}40`,
 								borderRadius:"14px !important", overflow:"hidden", "&:before":{ display:"none" },
 								transition:"border-color .2s",
-								"&.Mui-expanded":{ boxShadow:`0 8px 32px ${PRIMARY}18` },
+								"&.Mui-expanded":{ boxShadow:`0 8px 32px ${PRIMARY}18` },bgcolor: "background.default"
 							}}
 						>
 							<AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color:expanded===`r${i}`?PRIMARY:"inherit" }} />} sx={{ px:3, py:1 }}>

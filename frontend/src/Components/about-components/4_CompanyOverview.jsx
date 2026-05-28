@@ -6,12 +6,12 @@ export default function CompanyOverview() {
   return (
     <Box
       sx={{
-        py: { xs: 8, md: 12 },
-        background: `linear-gradient(160deg,${PRIMARY}0d 0%,${SECONDARY}0d 100%)`,
+        py: 5,
+        background: "background.default",
       }}
     >
       <Container maxWidth="lg">
-        <Box sx={{ textAlign: "center", mb: 8 }}>
+        <Box sx={{ textAlign: "center", mb: 5 }}>
           <Chip
             label="Company Overview"
             sx={{
@@ -57,7 +57,7 @@ export default function CompanyOverview() {
             <Box
               key={co.title}
               sx={{
-                flex: { xs: "1 1 100%", md: "1 1 45%" }, // full width on mobile, ~half width on desktop
+                flex: { xs: "1 1 100%", md: "1 1 45%" },
                 display: "flex",
               }}
             >
@@ -73,7 +73,7 @@ export default function CompanyOverview() {
                     transform: "translateY(-4px)",
                   },
                   transition: "all .28s",
-                  flex: 1, // make card fill its Box
+                  flex: 1,
                 }}
               >
                 <Typography sx={{ fontSize: "3rem", mb: 2 }}>

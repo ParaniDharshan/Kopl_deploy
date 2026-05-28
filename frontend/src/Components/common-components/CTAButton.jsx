@@ -12,7 +12,6 @@ function CTAButton({ text, sub, size }) {
 				variant="contained" size={size}
 				href={BOOKING_URL} target="_blank"
 				endIcon={<ArrowForwardIcon />}
-			
 				sx={{
 					background: `linear-gradient(135deg,${PRIMARY},${SECONDARY})`,
 					px: 4, py: 1.6, fontSize: "1rem",

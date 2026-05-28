@@ -59,8 +59,8 @@ export default function Hero() {
       />
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-        <Grid container spacing={6} alignItems="center">
-          <Grid item xs={12} md={12} sx={{ order: { xs: 2, md: 1 } }}>
+        <Grid container spacing={6}>
+          <Grid xs={12} md={12} sx={{ order: { xs: 2, md: 1 } }}>
             <Box sx={{ maxWidth: 900, mx: "auto", textAlign: "left" }}>
               <Chip
                 label="Chesterfield, Missouri — U.S.-Managed"

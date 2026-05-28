@@ -7,7 +7,7 @@ import GmailButton from "../Components/common-components/Gmailbutton";
 
 function Services() {
   return (
-	<Box sx={{ pt:{ xs:10,md:10 } }}>
+	<Box>
 	  <ServicesHero />
 	  <ServicePillars />
 	  <ServicesCTA />

@@ -9,21 +9,7 @@ export default function WhyHero() {
   const isDark = theme.palette.mode === "dark";
 
   return (
-    <Box
-      sx={{
-        minHeight: { xs: '78vh', md: '82vh' },
-        py: { xs: 4, md: 6 },
-        mb: 0,                        // removed mb — section spacing handled by layout
-        textAlign: "center",
-        background: isDark
-          ? "linear-gradient(180deg, #07131f 0%, #0a1929 100%)"
-          : `radial-gradient(ellipse at 60% 30%, ${SECONDARY}18 0%, transparent 55%)`,
-        position: "relative",
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
+    <Box sx={{ minHeight: "100vh", py: 5, display: "flex", alignItems: "center", justifyContent: "center", textAlign:"center", background:`radial-gradient(ellipse at 50% 30%,${SECONDARY}18 0%,transparent 60%)`, position:"relative", overflow:"hidden" }}>
       <SpiralBg />
 
       <Container maxWidth="md" sx={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>

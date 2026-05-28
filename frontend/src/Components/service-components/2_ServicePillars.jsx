@@ -43,14 +43,7 @@ export default function ServicePillars() {
       }}
     >
       <Box sx={{ textAlign: "center", mb: { xs: 3, md: 5 } }}>
-        <Typography
-          variant="h3"
-          sx={{
-            fontWeight: 900,
-            fontSize: { xs: "1.9rem", sm: "2.3rem", md: "2.8rem" },
-            lineHeight: 1.1,
-          }}
-        >
+        <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.6rem" }, }}>
           Our Services
         </Typography>
         <Typography
@@ -122,7 +115,7 @@ export default function ServicePillars() {
               justifyContent: "center",
             }}
           >
-            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+            <Typography variant="h3" sx={{ mb: 2, fontSize: { xs: "2rem", md: "2.6rem" } }}>
               {s.title}
             </Typography>
 
