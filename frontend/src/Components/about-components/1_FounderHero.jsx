@@ -314,7 +314,7 @@ export default function FounderSection() {
   const dark = theme.palette.mode === "dark";
 
   return (
-    <Box sx={{ py: 10, bgcolor: "background.paper" }}>
+    <Box sx={{ py: 5, bgcolor: "background.default" }}>
       <Container maxWidth="lg">
         <Chip
           label="Leadership"
@@ -342,7 +342,14 @@ export default function FounderSection() {
           {/* bio */}
           <FlexRow gap={4}>
             {/* Left cell with image */}
-            <FlexCell basis="300px">
+            <FlexCell
+              basis="300px"
+              sx={{
+                display: "flex",
+                justifyContent: { xs: "center", md: "space-between" },
+                alignItems: "center",
+              }}
+            >
               <Box
                 sx={{
                   position: "relative",
@@ -363,7 +370,7 @@ export default function FounderSection() {
                   alt="M. Peri Periasamy"
                   sx={{
                     width: "100%",
-                    height: "auto",
+                    height: "100%",
                     objectFit: "cover",
                     display: "block",
                   }}
@@ -509,81 +516,6 @@ export default function FounderSection() {
             </FlexCell>
           </FlexRow>
         </Box>
-
-        {/* Milestone grid */}
-        <Typography
-          variant="h5"
-          sx={{ fontWeight: 700, color: "text.primary", mb: 3 }}
-        >
-          Civic &amp; Professional Journey
-        </Typography>
-
-        <FlexRow gap={3}>
-          {milestones.map((m) => (
-            <FlexCell key={m.title} basis="270px">
-              <Card
-                elevation={0}
-                sx={{
-                  height: "100%",
-                  borderRadius: 3,
-                  bgcolor: "background.default",
-                  border: `1px solid ${dark ? "#1d3a52" : "#ddeaf5"}`,
-                  transition: "box-shadow .2s, transform .2s",
-                  "&:hover": {
-                    boxShadow: "0 8px 32px rgba(29,137,200,.13)",
-                    transform: "translateY(-4px)",
-                  },
-                }}
-              >
-                <CardContent sx={{ p: 3 }}>
-                  <Box
-                    sx={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: "50%",
-                      bgcolor: `${SECONDARY}20`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: SECONDARY,
-                      mb: 2,
-                    }}
-                  >
-                    {m.icon}
-                  </Box>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      color: PRIMARY,
-                      fontWeight: 700,
-                      letterSpacing: 1,
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {m.year}
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    sx={{
-                      fontWeight: 700,
-                      color: "text.primary",
-                      mt: 0.5,
-                      mb: 1,
-                    }}
-                  >
-                    {m.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{ color: "text.secondary", lineHeight: 1.7 }}
-                  >
-                    {m.detail}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </FlexCell>
-          ))}
-        </FlexRow>
 
         {/* Quote */}
         <Box

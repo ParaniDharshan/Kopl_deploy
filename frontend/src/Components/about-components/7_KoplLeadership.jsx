@@ -4,8 +4,8 @@ import { PRIMARY, SECONDARY } from "../../constants";
 
 export default function KoplLeadership() {
 	return (
-		<Box sx={{ py:{ xs:8,md:10 } }}>
-			<Container maxWidth="lg">
+		<Box>
+			{/* <Container maxWidth="lg">
 				<Box sx={{ textAlign:"center", mb:8 }}>
 					<Chip label="KOPL Leadership" sx={{ mb:2, background:`${PRIMARY}20`, color:PRIMARY, fontWeight:700 }} />
 					<Typography variant="h2" sx={{ fontSize:{ xs:"2rem",md:"2.6rem" } }}>The team behind your work</Typography>
@@ -47,7 +47,7 @@ export default function KoplLeadership() {
 						</Grid>
 					</Grid>
 				</Card>
-			</Container>
+			</Container> */}
 		</Box>
 	);
 }

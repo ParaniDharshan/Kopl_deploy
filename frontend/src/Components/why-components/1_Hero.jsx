@@ -5,7 +5,7 @@ import { SECONDARY } from "../../constants";
 
 export default function WhyHero() {
   return (
-    <Box sx={{ minHeight: "100vh", py:{ xs:8,md:12 }, mb:{ xs:6, md:8 }, textAlign:"center", background:`radial-gradient(ellipse at 60% 30%,${SECONDARY}18 0%,transparent 55%)`, position:"relative", overflow:"hidden" }}>
+    <Box sx={{ minHeight: "100vh", py: 5, display: "flex", alignItems: "center", justifyContent: "center", textAlign:"center", background:`radial-gradient(ellipse at 50% 30%,${SECONDARY}18 0%,transparent 60%)`, position:"relative", overflow:"hidden" }}>
       <SpiralBg />
       <Container maxWidth="md" sx={{ position:"relative", zIndex:1 }}>
         <Chip label="Why CRKL Inc." sx={{ mb:3, background:`${SECONDARY}20`, color:SECONDARY, fontWeight:700 }} />

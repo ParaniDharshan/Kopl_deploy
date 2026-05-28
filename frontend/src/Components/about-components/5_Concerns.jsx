@@ -13,9 +13,9 @@ import Grid from "@mui/material/Grid";
 
 export default function Concerns() {
   return (
-    <Box sx={{ py: { xs: 8, md: 12 } }}>
+    <Box sx={{ py: 5, bgcolor: "background.paper" }}>
       <Container maxWidth="lg">
-        <Box sx={{ textAlign: "start", mb: 8 }}>
+        <Box sx={{ textAlign: "start", mb: 4 }}>
           <Chip
             label="We Understand Your Concerns"
             sx={{
@@ -56,8 +56,8 @@ export default function Concerns() {
               key={i}
               sx={{
                 flex: { xs: "1 1 100%", md: "1 1 calc(50% - 24px)" },
-                // full width on mobile, half width on desktop
                 display: "flex",
+                
               }}
             >
               <Card

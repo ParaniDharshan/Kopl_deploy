@@ -5,7 +5,7 @@ import { PRIMARY } from "../../constants";
 
 export default function ServicesHero() {
   return (
-    <Box sx={{ minHeight: { xs: '60vh', md: '70vh' }, py:{ xs:6,md:8 }, mb:{ xs:4, md:6 }, textAlign:"center", background:`radial-gradient(ellipse at 50% 30%,${PRIMARY}18 0%,transparent 60%)`, position:"relative", overflow:"hidden" }}>
+    <Box sx={{ minHeight: "100vh", py: 5, mb:{ xs:4, md:6 }, display: "flex", alignItems: "center", justifyContent: "center", textAlign:"center", background:`radial-gradient(ellipse at 50% 30%,${PRIMARY}18 0%,transparent 60%)`, position:"relative", overflow:"hidden" }}>
       <SpiralBg />
       <Container maxWidth="md" sx={{ position:"relative", zIndex:1 }}>
         <Chip label="Services" sx={{ mb:3, background:`${PRIMARY}20`, color:PRIMARY, fontWeight:700 }} />

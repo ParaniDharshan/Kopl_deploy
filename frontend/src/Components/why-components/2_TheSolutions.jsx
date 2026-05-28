@@ -13,7 +13,7 @@ export default function TheSolutions() {
   ];
 
   return (
-    <Box sx={{ py:{ xs:8,md:12 } }}>
+    <Box sx={{ py: 5 }}>
       <Container maxWidth="lg">
         <Box sx={{ textAlign:"center", mb:8 }}>
           <Chip label="Our Solution" sx={{ mb:2, background:`${PRIMARY}20`, color:PRIMARY, fontWeight:700 }} />
@@ -22,7 +22,7 @@ export default function TheSolutions() {
         </Box>
 
         <Grid container spacing={4}>
-          {items.map((item, i) => (
+          {items.map((item, i) => ( 
             <Grid item xs={12} sm={6} md={4} key={i}>
               <Card sx={{ p:3, height:"100%", border:`1px solid ${i%2===0?PRIMARY:SECONDARY}20`, "&:hover":{ borderColor:i%2===0?PRIMARY:SECONDARY, transform:"translateY(-4px)", boxShadow:`0 12px 40px ${PRIMARY}18` }, transition:"all .25s" }}>
                 <Typography sx={{ fontSize:"2rem", mb:2 }}>{item.icon}</Typography>
