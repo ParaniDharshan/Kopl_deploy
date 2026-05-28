@@ -86,18 +86,6 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
                 {isDark ? <LightModeIcon /> : <DarkModeIcon />}
               </IconButton>
             </Tooltip>
-            <Button
-              variant="contained" size="small"
-              href={BOOKING_URL} target="_blank"
-              sx={{
-                ml: 1.5, px: 2.5, py: 1,
-                background: `linear-gradient(135deg,${PRIMARY},${SECONDARY})`,
-                boxShadow: `0 4px 16px ${PRIMARY}55`,
-                "&:hover": { boxShadow: `0 6px 24px ${PRIMARY}88` },
-              }}
-            >
-              Book a Call
-            </Button>
           </Box>
 
           {/* Mobile */}
@@ -131,10 +119,6 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
               </ListItem>
             ))}
           </List>
-          <Button fullWidth variant="contained" href={BOOKING_URL} target="_blank"
-            sx={{ mt: 2, background: `linear-gradient(135deg,${PRIMARY},${SECONDARY})` }}>
-            Book a Discovery Call
-          </Button>
         </Box>
       </Drawer>
     </>

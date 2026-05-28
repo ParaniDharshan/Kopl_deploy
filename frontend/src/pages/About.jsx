@@ -16,14 +16,12 @@ function About() {
   return (
     <Box>
       <Hero />
+      <MissionVision />
       <FounderHero />
-      <EducationAndCareer />
-      <FounderQuote />
-      <CompanyOverview />
       <Concerns />
+      <CompanyOverview />
       <StepRoadMap />
       <KoplLeadership />
-      <MissionVision />
       <AboutCTA />
       <GmailButton />
     </Box>
