@@ -7,7 +7,7 @@ export default function ServicesHero() {
   return (
     <Box sx={{ minHeight: "100vh", py: 5, mb:{ xs:4, md:6 }, display: "flex", alignItems: "center", justifyContent: "center", textAlign:"center", background:`radial-gradient(ellipse at 50% 30%,${PRIMARY}18 0%,transparent 60%)`, position:"relative", overflow:"hidden" }}>
       <SpiralBg />
-      <Container maxWidth="md" sx={{ position:"relative", zIndex:1 }}>
+      <Container maxWidth="md" sx={{ position:"relative", zIndex:1, display:"flex", flexDirection:"column", alignItems:"center" }}>
         <Chip label="Services" sx={{ mb:3, background:`${PRIMARY}20`, color:PRIMARY, fontWeight:700 }} />
         <Typography variant="h1" sx={{ fontSize:{ xs:"2.2rem",md:"3rem" }, mb:2 }}>Professional services. Measurable outcomes.</Typography>
         <Typography sx={{ opacity:0.65, fontSize:"1.08rem", lineHeight:1.8 }}>Every service is delivered by qualified professionals at KOPL's secure Madurai office — managed from Chesterfield by M. Peri Periasamy.</Typography>

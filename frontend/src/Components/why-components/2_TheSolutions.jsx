@@ -1,16 +1,50 @@
 import React from "react";
-import { Box, Container, Box as MuiBox, Grid, Typography, Chip, Card } from "@mui/material";
+import { Box, Container, Grid, Typography, Chip, Card } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { PRIMARY, SECONDARY } from "../../constants";
 
+const SOLUTIONS = [
+  {
+    icon: "🤝",
+    title: "U.S. Contract, U.S. Accountability",
+    description:
+      "Your signed agreement is with CRKL Inc. — a Missouri-registered U.S. corporation. Not with KOPL. Not with India. With us.",
+  },
+  {
+    icon: "🔒",
+    title: "Secure, Dedicated Office",
+    description:
+      "All work is performed in KOPL's dedicated, secure office in Madurai — not in a remote or unsupervised environment.",
+  },
+  {
+    icon: "👥",
+    title: "You Choose Who You Hire",
+    description:
+      "You conduct the virtual interview. You approve the candidate. No blind placements — ever.",
+  },
+  {
+    icon: "⚡",
+    title: "We Manage Everything Else",
+    description:
+      "Hiring, onboarding, HR, performance management, and daily oversight — handled by CRKL Inc. and KOPL. You review the output.",
+  },
+  {
+    icon: "📋",
+    title: "Written Scope. No Surprises.",
+    description:
+      "Every engagement begins with a formal scope agreement. Costs, timelines, and standards are in writing before work begins.",
+  },
+  {
+    icon: "🎯",
+    title: "Same Team. Every Day.",
+    description:
+      "A dedicated team handles your account. Same professionals, same context — no shared queues, no handoffs.",
+  },
+];
+
 export default function TheSolutions() {
-  const items = [
-    { icon:"🤝", t:"U.S. Contract, U.S. Accountability", d:"Your signed agreement is with CRKL Inc. — a Missouri-registered U.S. corporation. Not with KOPL. Not with India. With us." },
-    { icon:"🔒", t:"Secure, Dedicated Office", d:"All work is performed in KOPL's dedicated, secure office in Madurai — not in a remote or unsupervised environment." },
-    { icon:"👥", t:"You Choose Who You Hire", d:"You conduct the virtual interview. You approve the candidate. No blind placements — ever." },
-    { icon:"⚡", t:"We Manage Everything Else", d:"Hiring, onboarding, HR, performance management, and daily oversight — handled by CRKL Inc. and KOPL. You review the output." },
-    { icon:"📋", t:"Written Scope. No Surprises.", d:"Every engagement begins with a formal scope agreement. Costs, timelines, and standards are in writing before work begins." },
-    { icon:"🎯", t:"Same Team. Every Day.", d:"A dedicated team handles your account. Same professionals, same context — no shared queues, no handoffs." },
-  ];
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   return (
     <Box sx={{ py: 5 }}>
@@ -29,9 +63,10 @@ export default function TheSolutions() {
                 <Typography sx={{ fontWeight:700, mb:1 }}>{item.t}</Typography>
                 <Typography variant="body2" sx={{ opacity:0.7, lineHeight:1.75 }}>{item.d}</Typography>
               </Card>
-            </Grid>
-          ))}
-        </Grid>
+            );
+          })}
+        </Box>
+
       </Container>
     </Box>
   );

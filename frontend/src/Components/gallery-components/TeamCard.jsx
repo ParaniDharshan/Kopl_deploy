@@ -6,8 +6,8 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 export const teamItems = [
 	{
 		id: "team-1",
-		image: new URL("../../assets/Our Team/1.png", import.meta.url).href,
-		url: new URL("../../assets/Our Team/1.png", import.meta.url).href,
+		image: new URL("../../assets/Our Team/1.webp", import.meta.url).href,
+		url: new URL("../../assets/Our Team/1.webp", import.meta.url).href,
 		height: 900,
 		name: "M. Peri Periasamy",
 		role: "Founder & CEO",
@@ -16,8 +16,8 @@ export const teamItems = [
 	},
 	{
 		id: "team-2",
-		image: new URL("../../assets/Our Team/2.png", import.meta.url).href,
-		url: new URL("../../assets/Our Team/2.png", import.meta.url).href,
+		image: new URL("../../assets/Our Team/2.webp", import.meta.url).href,
+		url: new URL("../../assets/Our Team/2.webp", import.meta.url).href,
 		height: 900,
 		name: "Beulah Radhakrishnan",
 		role: "General Manager",
@@ -26,8 +26,8 @@ export const teamItems = [
 	},
 	{
 		id: "team-3",
-		image: new URL("../../assets/Our Team/3.png", import.meta.url).href,
-		url: new URL("../../assets/Our Team/3.png", import.meta.url).href,
+		image: new URL("../../assets/Our Team/3.webp", import.meta.url).href,
+		url: new URL("../../assets/Our Team/3.webp", import.meta.url).href,
 		height: 900,
 		name: "Saravana Kumar",
 		role: "Client Relations",
@@ -37,8 +37,8 @@ export const teamItems = [
 	},
 	{
 		id: "team-4",
-		image: new URL("../../assets/Our Team/4.png", import.meta.url).href,
-		url: new URL("../../assets/Our Team/4.png", import.meta.url).href,
+		image: new URL("../../assets/Our Team/4.webp", import.meta.url).href,
+		url: new URL("../../assets/Our Team/4.webp", import.meta.url).href,
 		height: 900,
 		name: "Bhala Murugan",
 		role: "Administration",
@@ -48,8 +48,8 @@ export const teamItems = [
 	},
 	{
 		id: "team-5",
-		image: new URL("../../assets/Our Team/5.png", import.meta.url).href,
-		url: new URL("../../assets/Our Team/5.png", import.meta.url).href,
+		image: new URL("../../assets/Our Team/5.webp", import.meta.url).href,
+		url: new URL("../../assets/Our Team/5.webp", import.meta.url).href,
 		height: 900,
 		name: "Ragul",
 		role: "Support",
@@ -59,8 +59,8 @@ export const teamItems = [
 	},
 	{
 		id: "team-6",
-		image: new URL("../../assets/Our Team/7.png", import.meta.url).href,
-		url: new URL("../../assets/Our Team/7.png", import.meta.url).href,
+		image: new URL("../../assets/Our Team/7.webp", import.meta.url).href,
+		url: new URL("../../assets/Our Team/7.webp", import.meta.url).href,
 		height: 900,
 		name: "Vasanth",
 		role: "Leadership",

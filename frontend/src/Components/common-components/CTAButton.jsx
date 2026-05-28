@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import {
-  ArrowForward as ArrowForwardIcon,
-  ArrowBack as ArrowBackIcon,
+	ArrowForward as ArrowForwardIcon,
 } from "@mui/icons-material";
 import { PRIMARY, SECONDARY, BOOKING_URL } from "../../constants";
 

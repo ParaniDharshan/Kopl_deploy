@@ -1,6 +1,24 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Tailwind Play CDN: enables Tailwind utility classes without build changes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Add some global utility classes to existing DOM nodes so React components
+      // receive Tailwind layout helpers without editing App.jsx/main.jsx/index.css
+      window.addEventListener('DOMContentLoaded', () => {
+        try {
+          document.documentElement.classList.add('antialiased');
+          document.body.classList.add('bg-white', 'text-slate-800');
+          const root = document.getElementById('root');
+          if (root) root.classList.add('min-h-screen', 'flex', 'flex-col');
+          const main = document.querySelector('main');
+          if (main) main.classList.add('flex-1', 'container', 'mx-auto', 'px-4', 'py-6');
+        } catch (e) {
+          // no-op
+        }
+      });
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

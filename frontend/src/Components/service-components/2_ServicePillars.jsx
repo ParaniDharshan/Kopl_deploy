@@ -37,7 +37,7 @@ export default function ServicePillars() {
         mx: "auto",
         display: "flex",
         flexDirection: "column",
-        gap: 1,
+        gap: 4,
         px: { xs: 2, md: 5 },
         py: { xs: 6, md: 10 },
       }}
@@ -46,7 +46,16 @@ export default function ServicePillars() {
         <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.6rem" }, }}>
           Our Services
         </Typography>
-        <Typography sx={{ opacity: 0.7, mt: 1 }}>
+        <Typography
+          sx={{
+            opacity: 0.7,
+            mt: 1,
+            maxWidth: 760,
+            mx: "auto",
+            fontSize: { xs: "0.98rem", md: "1.05rem" },
+            lineHeight: 1.7,
+          }}
+        >
           Practical, scalable teams and systems that support your day-to-day operations.
         </Typography>
       </Box>
