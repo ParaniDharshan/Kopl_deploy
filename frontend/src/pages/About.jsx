@@ -10,6 +10,7 @@ import StepRoadMap from "../Components/about-components/6_StepRoadMap";
 import KoplLeadership from "../Components/about-components/7_KoplLeadership";
 import MissionVision from "../Components/about-components/8_MissionVision";
 import AboutCTA from "../Components/about-components/9_AboutCTA";
+import GmailButton from "../Components/common-components/Gmailbutton";
 
 function About() {
   return (
@@ -22,6 +23,7 @@ function About() {
       <StepRoadMap />
       <KoplLeadership />
       <AboutCTA />
+      <GmailButton />
     </Box>
   );
 }

@@ -1,6 +1,9 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { ArrowForward as ArrowIcon } from "@mui/icons-material";
+import {
+  ArrowForward as ArrowForwardIcon,
+  ArrowBack as ArrowBackIcon,
+} from "@mui/icons-material";
 import { PRIMARY, SECONDARY, BOOKING_URL } from "../../constants";
 
 function CTAButton({ text, sub, size }) {
