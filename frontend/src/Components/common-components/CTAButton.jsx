@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import {
-  ArrowForward as ArrowForwardIcon,
-  ArrowBack as ArrowBackIcon,
+	ArrowForward as ArrowForwardIcon,
 } from "@mui/icons-material";
 import { PRIMARY, SECONDARY, BOOKING_URL } from "../../constants";
 
@@ -12,7 +11,8 @@ function CTAButton({ text, sub, size }) {
 			<Button
 				variant="contained" size={size}
 				href={BOOKING_URL} target="_blank"
-				endIcon={<ArrowIcon />}
+				endIcon={<ArrowForwardIcon />}
+			
 				sx={{
 					background: `linear-gradient(135deg,${PRIMARY},${SECONDARY})`,
 					px: 4, py: 1.6, fontSize: "1rem",
