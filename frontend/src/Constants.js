@@ -139,27 +139,7 @@ export const CONCERNS = [
 	{
 		q: "Will there be a language or communication barrier?",
 		a: "Our team is fluent in English and experienced in professional U.S. business communication. Our General Manager, Beulah Radhakrishnan, is fluent in English, Hindi, Tamil, and Telugu. All deliverables are produced in clear, professional English.",
-	},
-	{
-		q: "What about time zone differences?",
-		a: "India Standard Time (IST) is 10.5 hours ahead of U.S. Central Time. In practice, your team in India is working while you sleep — so deliverables are often ready when your business day begins. Overlap hours and scheduled check-ins are set from day one.",
-	},
-	{
-		q: "How much does this cost compared to hiring locally?",
-		a: "Outsourcing through KOPL allows U.S. SMEs to access qualified, professional talent at a fraction of the cost of local hiring — without the overhead of benefits, payroll taxes, office space, or onboarding time. Pricing is discussed during your discovery call, scoped to your specific needs.",
-	},
-	{
-		q: "How long does it take to get started?",
-		a: "After the discovery call and scope agreement, onboarding typically takes 1–2 weeks — covering resource allocation, system setup, document protocols, and communication channels. We do not rush onboarding. A clean start prevents problems later.",
-	},
-	{
-		q: "Do I need to manage the team on a daily basis?",
-		a: "No. That is our job. You set the expectations, we manage the execution. CRKL Inc. monitors performance, quality, and timelines — so your time is spent on your business, not managing an offshore team.",
-	},
-	{
-		q: "Can I stop or pause the engagement if my needs change?",
-		a: "Yes. Engagement terms are discussed clearly upfront, including exit and pause conditions. We believe in long-term relationships built on results — not lock-in contracts that trap clients.",
-	},
+	}
 ];
 
 export const ROADMAP = [
