@@ -8,9 +8,14 @@ import {
   Divider,
   Button,
 } from "@mui/material";
-import { PRIMARY, SECONDARY, CONCERNS } from "../../constants";
+import { PRIMARY, SECONDARY, CONCERNS } from "../../Constants.js";
 import Grid from "@mui/material/Grid";
-
+ 
+const TRUNCATE_LENGTH = 80;
+ 
+const truncateAnswer = (answer) =>
+  answer.length > TRUNCATE_LENGTH ? `${answer.slice(0, TRUNCATE_LENGTH).trimEnd()}...` : answer;
+ 
 export default function Concerns() {
   return (
     <Box sx={{ py: 5, bgcolor: "background.paper" }}>
@@ -42,7 +47,7 @@ export default function Concerns() {
             CRKL Inc. has structured its entire model to address each one.
           </Typography>
         </Box>
-
+ 
         <Box
           sx={{
             display: "flex",
@@ -57,13 +62,15 @@ export default function Concerns() {
               sx={{
                 flex: { xs: "1 1 100%", md: "1 1 calc(50% - 24px)" },
                 display: "flex",
-                
+               
               }}
             >
               <Card
                 sx={{
                   p: 3,
                   height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
                   border: `1px solid ${i % 2 === 0 ? PRIMARY : SECONDARY}22`,
                   "&:hover": {
                     borderColor: i % 2 === 0 ? PRIMARY : SECONDARY,
@@ -85,34 +92,48 @@ export default function Concerns() {
                   "{c.q}"
                 </Typography>
                 <Divider sx={{ mb: 1.5 }} />
-                <Typography
-                  variant="body2"
-                  sx={{ opacity: 0.75, lineHeight: 1.8 }}
-                >
-                  {c.a}
-                </Typography>
-
-                {/* See full answer button */}
-                <Box
-                  sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}
-                >
-                  <Button
-                    size="small"
-                    onClick={() =>
-                      window.dispatchEvent(
-                        new CustomEvent("navigateTab", { detail: "Why CRKL" }),
-                      )
-                    }
-                    sx={{ textTransform: "none" }}
+                <Box sx={{ minHeight: 72 }}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      opacity: 0.75,
+                      lineHeight: 1.8,
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                      wordBreak: "break-word",
+                    }}
                   >
-                    See full answer
-                  </Button>
+                    {truncateAnswer(c.a)}
+                    <Button
+                      size="small"
+                      variant="text"
+                      onClick={() =>
+                        window.dispatchEvent(
+                          new CustomEvent("navigateTab", { detail: "Why CRKL" }),
+                        )
+                      }
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: 700,
+                        px: 0,
+                        minWidth: 0,
+                        ml: 0.5,
+                        verticalAlign: "baseline",
+                        display: "inline",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      Read more
+                    </Button>
+                  </Typography>
                 </Box>
               </Card>
             </Box>
           ))}
         </Box>
-
+ 
         <Box
           sx={{
             mt: 6,
