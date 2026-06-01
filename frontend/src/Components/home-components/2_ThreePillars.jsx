@@ -1,9 +1,16 @@
 import React from "react";
-import { Box, Container, Typography, Chip, CardContent, IconButton } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Chip,
+  CardContent,
+  IconButton,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { SERVICES, PRIMARY, SECONDARY } from "../../constants";
-import SpotlightCard from './SpotlightCard';
+import { SERVICES, PRIMARY, SECONDARY } from "../../Constants.js";
+import SpotlightCard from "./SpotlightCard";
 
 export default function ThreePillars() {
   const theme = useTheme();
@@ -12,38 +19,64 @@ export default function ThreePillars() {
   return (
     <Box
       sx={{
-        py:{ xs:8,md:12 },
+        py: { xs: 8, md: 12 },
         background: isDark
           ? `linear-gradient(160deg, rgba(4, 12, 24, 1) 0%, rgba(7, 21, 36, 1) 100%)`
           : `linear-gradient(160deg,${PRIMARY}08 0%,${SECONDARY}08 100%)`,
       }}
     >
       <Container maxWidth="lg">
-        <Box sx={{ textAlign:"center", mb:8 }}>
+        <Box sx={{ textAlign: "center", mb: 8 }}>
           <Chip
             label="What We Do"
             sx={{
-              mb:2,
+              mb: 2,
               background: isDark ? `${SECONDARY}26` : `${SECONDARY}20`,
               color: SECONDARY,
-              fontWeight:700,
+              fontWeight: 700,
             }}
           />
-          <Typography variant="h2" sx={{ fontSize:{ xs:"2rem",md:"2.6rem" }, mb:2, color: isDark ? "#eef6ff" : "inherit" }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: { xs: "2rem", md: "2.6rem" },
+              mb: 2,
+              color: isDark ? "#eef6ff" : "inherit",
+            }}
+          >
             Three pillars. One trusted partner.
           </Typography>
-          <Typography sx={{ opacity:isDark ? 0.78 : 0.65, mx:"auto", lineHeight:1.8, color: isDark ? "rgba(226,239,255,0.86)" : "inherit" }}>
-            Every service is delivered through KOPL's dedicated professionals in Madurai — managed from Chesterfield, Missouri.
+          <Typography
+            sx={{
+              opacity: isDark ? 0.78 : 0.65,
+              mx: "auto",
+              lineHeight: 1.8,
+              color: isDark ? "rgba(226,239,255,0.86)" : "inherit",
+            }}
+          >
+            Every service is delivered through KOPL's dedicated professionals in
+            Madurai — managed from Chesterfield, Missouri.
           </Typography>
         </Box>
 
-        <Box sx={{ display:"flex", flexWrap:"wrap", gap:3, justifyContent:{ xs:"center",md:"flex-start" } }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 3,
+            justifyContent: { xs: "center", md: "flex-start" },
+          }}
+        >
           {SERVICES.map((s, i) => (
             <SpotlightCard
               key={i}
               spotlightColor={PRIMARY}
               sx={{
-                flex: { xs: "1 1 100%", sm: "1 1 calc(50% - 12px)", md: "1 1 calc(33.33% - 16px)" },
+                flex: {
+                  xs: "1 1 100%",
+                  sm: "1 1 calc(50% - 12px)",
+                  md: "1 1 calc(33.33% - 16px)",
+                },
                 maxWidth: { sm: "calc(50% - 12px)", md: "calc(33.33% - 16px)" },
                 border: "none",
                 transition: "all .28s ease",
@@ -59,12 +92,38 @@ export default function ThreePillars() {
                 },
               }}
             >
-              <CardContent sx={{ p:3, pb: 4.5 }}>
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", mb: 2 }}>
+              <CardContent sx={{ p: 3, pb: 4.5 }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    mb: 2,
+                  }}
+                >
                   <s.icon sx={{ fontSize: 44, color: PRIMARY }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight:700, mb:1, color: isDark ? "#f6fbff" : "inherit" }}>{s.title}</Typography>
-                <Typography variant="body2" sx={{ opacity:isDark ? 0.82 : 0.68, lineHeight:1.75, mb:2, color: isDark ? "rgba(226,239,255,0.82)" : "inherit" }}>{s.summary}</Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 1,
+                    color: isDark ? "#f6fbff" : "inherit",
+                  }}
+                >
+                  {s.title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    opacity: isDark ? 0.82 : 0.68,
+                    lineHeight: 1.75,
+                    mb: 2,
+                    color: isDark ? "rgba(226,239,255,0.82)" : "inherit",
+                  }}
+                >
+                  {s.summary}
+                </Typography>
               </CardContent>
               <Box
                 sx={{
@@ -90,7 +149,8 @@ export default function ThreePillars() {
                     position: "relative",
                     overflow: "hidden",
                     backdropFilter: "blur(10px)",
-                    transition: "transform .32s ease, background-color .32s ease, box-shadow .32s ease",
+                    transition:
+                      "transform .32s ease, background-color .32s ease, box-shadow .32s ease",
                     "&::before": {
                       content: '""',
                       position: "absolute",
@@ -109,7 +169,9 @@ export default function ThreePillars() {
                     },
                   }}
                 >
-                  <ArrowForwardIcon sx={{ fontSize: 24, position: "relative", zIndex: 1 }} />
+                  <ArrowForwardIcon
+                    sx={{ fontSize: 24, position: "relative", zIndex: 1 }}
+                  />
                 </IconButton>
               </Box>
             </SpotlightCard>

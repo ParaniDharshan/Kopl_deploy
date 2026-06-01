@@ -10,13 +10,19 @@ import {
 } from "@mui/material";
 import { PRIMARY, SECONDARY, CONCERNS } from "../../Constants.js";
 import Grid from "@mui/material/Grid";
- 
+import { useNavigate } from "react-router-dom";
+
 const TRUNCATE_LENGTH = 80;
- 
+
 const truncateAnswer = (answer) =>
-  answer.length > TRUNCATE_LENGTH ? `${answer.slice(0, TRUNCATE_LENGTH).trimEnd()}...` : answer;
- 
+  answer.length > TRUNCATE_LENGTH
+    ? `${answer.slice(0, TRUNCATE_LENGTH).trimEnd()}...`
+    : answer;
+
 export default function Concerns() {
+
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ py: 5, bgcolor: "background.paper" }}>
       <Container maxWidth="lg">
@@ -47,7 +53,7 @@ export default function Concerns() {
             CRKL Inc. has structured its entire model to address each one.
           </Typography>
         </Box>
- 
+
         <Box
           sx={{
             display: "flex",
@@ -62,7 +68,6 @@ export default function Concerns() {
               sx={{
                 flex: { xs: "1 1 100%", md: "1 1 calc(50% - 24px)" },
                 display: "flex",
-               
               }}
             >
               <Card
@@ -110,9 +115,7 @@ export default function Concerns() {
                       size="small"
                       variant="text"
                       onClick={() =>
-                        window.dispatchEvent(
-                          new CustomEvent("navigateTab", { detail: "Why CRKL" }),
-                        )
+                        {navigate("/why-crkl"), window.scrollTo({ top: 0, behavior: "smooth" })}
                       }
                       sx={{
                         textTransform: "none",
@@ -133,7 +136,7 @@ export default function Concerns() {
             </Box>
           ))}
         </Box>
- 
+
         <Box
           sx={{
             mt: 6,

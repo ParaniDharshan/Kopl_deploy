@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { PRIMARY } from "../../constants";
+import { PRIMARY } from "../../Constants.js";
 import CTAButton from "../common-components/CTAButton";
 import InaugurationGallery from "./events-components/InaugurationGallery";
 import AnnualConferenceGallery from "./events-components/AnnualConferenceGallery";
@@ -23,7 +23,7 @@ const eventGroups = [
     accent: PRIMARY,
     preview: new URL(
       "../../assets/Events/Inaugration/Inaugration_cake_02.webp",
-      import.meta.url
+      import.meta.url,
     ).href,
     Component: InaugurationGallery,
   },
@@ -34,7 +34,7 @@ const eventGroups = [
     accent: PRIMARY,
     preview: new URL(
       "../../assets/Events/Annual Conference/IMG-20250605-WA0005.webp",
-      import.meta.url
+      import.meta.url,
     ).href,
     Component: AnnualConferenceGallery,
   },
@@ -45,7 +45,7 @@ const eventGroups = [
     accent: PRIMARY,
     preview: new URL(
       "../../assets/Events/Essex Visit/Essex001.webp",
-      import.meta.url
+      import.meta.url,
     ).href,
     Component: EssexVisitGallery,
   },
@@ -89,7 +89,7 @@ function EventsGallery({ setActiveTab }) {
         ? "linear-gradient(180deg, #07131f 0%, #0a1929 45%, #07131f 100%)"
         : "linear-gradient(180deg, #f8fcff 0%, #eef8ff 45%, #f8fcff 100%)",
     }),
-    [isDark]
+    [isDark],
   );
 
   const selectedData = selectedGroup
@@ -119,7 +119,12 @@ function EventsGallery({ setActiveTab }) {
               sx={{
                 fontWeight: 800,
                 mb: 2,
-                fontSize: { xs: "1.75rem", sm: "2.25rem", md: "3rem", lg: "3.75rem" },
+                fontSize: {
+                  xs: "1.75rem",
+                  sm: "2.25rem",
+                  md: "3rem",
+                  lg: "3.75rem",
+                },
               }}
             >
               Events Gallery
@@ -184,13 +189,11 @@ function EventsGallery({ setActiveTab }) {
                     ? "rgba(11, 27, 43, 0.92)"
                     : "#ffffff",
                   border: `1px solid ${
-                    isDark
-                      ? "rgba(93,147,194,0.2)"
-                      : "rgba(29,137,200,0.12)"
+                    isDark ? "rgba(93,147,194,0.2)" : "rgba(29,137,200,0.12)"
                   }`,
                   boxShadow: `0 16px 40px ${alpha(
                     "#0a1929",
-                    isDark ? 0.2 : 0.08
+                    isDark ? 0.2 : 0.08,
                   )}`,
                   transition: "0.25s",
                   "&:hover": {

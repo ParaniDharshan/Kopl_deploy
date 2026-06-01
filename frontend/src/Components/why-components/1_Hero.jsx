@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Container, Typography, Chip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import SpiralBg from "../common-components/SpiralBg";
-import { SECONDARY } from "../../constants";
+import { SECONDARY } from "../../Constants.js";
 
 export default function WhyHero() {
   const theme = useTheme();
@@ -11,9 +11,9 @@ export default function WhyHero() {
   return (
     <Box
       sx={{
-        minHeight: { xs: '78vh', md: '82vh' },
+        minHeight: { xs: "78vh", md: "82vh" },
         py: { xs: 4, md: 6 },
-        mb: 0,                        // removed mb — section spacing handled by layout
+        mb: 0, // removed mb — section spacing handled by layout
         textAlign: "center",
         background: isDark
           ? "linear-gradient(180deg, #07131f 0%, #0a1929 100%)"
@@ -26,7 +26,16 @@ export default function WhyHero() {
     >
       <SpiralBg />
 
-      <Container maxWidth="md" sx={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Container
+        maxWidth="md"
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Chip
           label="Why CRKL Inc."
           sx={{

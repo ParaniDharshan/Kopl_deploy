@@ -16,6 +16,7 @@ function EssexVisitGallery(props) {
 			backTab="Events"
 			backButtonPosition="top"
 			centered
+			
 			setActiveTab={props.setActiveTab}
 			onBack={props.onBack}
 			{...props}

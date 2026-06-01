@@ -3,15 +3,19 @@ import { useMemo, useState } from "react";
 import { Box, Button } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
 import CategoryGallery from "./CategoryGallery";
-import { SECONDARY } from "../../constants";
+import { SECONDARY } from "../../Constants.js";
 import { teamItems } from "./TeamCard";
 
 function TeamGallery(props) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-  const activeColor = isDark ? theme.palette.primary.light : theme.palette.primary.main;
-  const inactiveColor = isDark ? theme.palette.text.secondary : theme.palette.text.primary;
+  const activeColor = isDark
+    ? theme.palette.primary.light
+    : theme.palette.primary.main;
+  const inactiveColor = isDark
+    ? theme.palette.text.secondary
+    : theme.palette.text.primary;
   const dividerColor = alpha(theme.palette.divider, isDark ? 0.75 : 1);
 
   // REMOVED: redundant useEffect preload loop.
@@ -54,17 +58,21 @@ function TeamGallery(props) {
                 textTransform: "none",
                 fontWeight: selectedCategory === category ? 800 : 700,
                 fontSize: { xs: "0.95rem", sm: "1.08rem" },
-                color: selectedCategory === category ? activeColor : inactiveColor,
+                color:
+                  selectedCategory === category ? activeColor : inactiveColor,
                 backgroundColor: "transparent",
                 borderBottom:
                   selectedCategory === category
                     ? `4px solid ${activeColor}`
                     : "4px solid transparent",
-                transition: "color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease",
+                transition:
+                  "color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease",
                 "&:hover": {
                   backgroundColor: alpha(activeColor, isDark ? 0.08 : 0.04),
                   borderBottomColor:
-                    selectedCategory === category ? activeColor : alpha(activeColor, 0.18),
+                    selectedCategory === category
+                      ? activeColor
+                      : alpha(activeColor, 0.18),
                 },
               }}
             >

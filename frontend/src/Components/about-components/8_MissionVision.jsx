@@ -19,7 +19,7 @@ import GavelIcon from "@mui/icons-material/Gavel";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import StarIcon from "@mui/icons-material/Star";
-import { PRIMARY, SECONDARY } from "../../Constants";
+import { PRIMARY, SECONDARY } from "../../Constants.js";
 import {
   TrackChanges,
   Visibility,
@@ -180,7 +180,7 @@ export default function MissionVision() {
             variant="h2"
             sx={{ fontSize: { xs: "2rem", md: "2.6rem" }, mb: 2 }}
           >
-            Why CRKL Inc. Exists
+            About CRKL
           </Typography>
           <Typography
             sx={{ opacity: 0.65, mx: "auto", lineHeight: 1.8, mb: 2 }}
@@ -219,7 +219,7 @@ export default function MissionVision() {
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
-					          textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   <Box

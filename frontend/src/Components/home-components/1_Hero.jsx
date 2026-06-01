@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Container, Grid, Typography, Chip } from "@mui/material";
 import CTAButton from "../common-components/CTAButton";
 import SpiralBg from "../common-components/SpiralBg";
-import { PRIMARY, SECONDARY } from "../../Constants";
+import { PRIMARY, SECONDARY } from "../../Constants.js";
 
 export default function Hero() {
   return (

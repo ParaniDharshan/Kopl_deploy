@@ -1,11 +1,19 @@
 import React from "react";
-import { Box, Container, Chip, Typography, Card, Grid, Avatar } from "@mui/material";
-import { PRIMARY, SECONDARY } from "../../constants";
+import {
+  Box,
+  Container,
+  Chip,
+  Typography,
+  Card,
+  Grid,
+  Avatar,
+} from "@mui/material";
+import { PRIMARY, SECONDARY } from "../../Constants.js";
 
 export default function KoplLeadership() {
-	return (
-		<Box>
-			{/* <Container maxWidth="lg">
+  return (
+    <Box>
+      {/* <Container maxWidth="lg">
 				<Box sx={{ textAlign:"center", mb:8 }}>
 					<Chip label="KOPL Leadership" sx={{ mb:2, background:`${PRIMARY}20`, color:PRIMARY, fontWeight:700 }} />
 					<Typography variant="h2" sx={{ fontSize:{ xs:"2rem",md:"2.6rem" } }}>The team behind your work</Typography>
@@ -48,7 +56,6 @@ export default function KoplLeadership() {
 					</Grid>
 				</Card>
 			</Container> */}
-		</Box>
-	);
+    </Box>
+  );
 }
-

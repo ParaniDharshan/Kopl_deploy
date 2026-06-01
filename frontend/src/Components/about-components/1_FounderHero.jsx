@@ -33,26 +33,26 @@ import GavelIcon from "@mui/icons-material/Gavel";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import StarIcon from "@mui/icons-material/Star";
-import { PRIMARY, SECONDARY } from "../../Constants";
+import { PRIMARY, SECONDARY } from "../../Constants.js";
 import PERI_SIR_IMAGE from "../../assets/Images/Peri_Sir_Image.png";
 import { MailIcon } from "lucide-react";
 import FounderJourneyModal from "./Model";
 import { NavLink, useNavigate } from "react-router-dom";
- 
+
 const PRIMARY_LIGHT = "#E8F4FC";
 const SECONDARY_LIGHT = "#E8F8F7";
 const DARK = "#0d3b5e";
- 
+
 const NAVY = "#0d2d45";
 const MUTED = "#6b8ca4";
- 
+
 const primaryGrad = `linear-gradient(135deg, ${PRIMARY} 0%, #1568a0 100%)`;
 const secondaryGrad = `linear-gradient(135deg, ${SECONDARY} 0%, #2a9990 100%)`;
- 
+
 // ─────────────────────────────────────────────────────────────────────────────
 // LAYOUT HELPERS  — Box flexbox only, no MUI Grid anywhere
 // ─────────────────────────────────────────────────────────────────────────────
- 
+
 /** Responsive flex row — wraps to column on narrow screens automatically */
 function FlexRow({ children, gap = 3, sx = {}, ...props }) {
   return (
@@ -61,7 +61,7 @@ function FlexRow({ children, gap = 3, sx = {}, ...props }) {
     </Box>
   );
 }
- 
+
 /** Flex child — grows equally; stacks when viewport is too narrow for `basis` */
 function FlexCell({ children, basis = "280px", grow = 1, sx = {}, ...props }) {
   return (
@@ -70,7 +70,7 @@ function FlexCell({ children, basis = "280px", grow = 1, sx = {}, ...props }) {
     </Box>
   );
 }
- 
+
 // ─────────────────────────────────────────────────────────────────────────────
 // SHARED SECTION HEADER
 // ─────────────────────────────────────────────────────────────────────────────
@@ -94,7 +94,7 @@ function SectionHeader({
       >
         {overline}
       </Typography>
- 
+
       <Typography
         variant="h3"
         sx={{
@@ -107,7 +107,7 @@ function SectionHeader({
       >
         {title}
       </Typography>
- 
+
       {subtitle && (
         <Typography
           variant="body1"
@@ -122,11 +122,11 @@ function SectionHeader({
           {subtitle}
         </Typography>
       )}
- 
+
       <Typography sx={{ opacity: 0.65, lineHeight: 1.8 }}>
         {description}
       </Typography>
- 
+
       <Divider
         sx={{
           width: 56,
@@ -140,7 +140,7 @@ function SectionHeader({
     </Box>
   );
 }
- 
+
 const milestones = [
   {
     icon: <School />,
@@ -185,7 +185,7 @@ const milestones = [
       "Ongoing civic role deepening understanding of local government and the small businesses it serves.",
   },
 ];
- 
+
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -201,7 +201,7 @@ function useInView(threshold = 0.15) {
   }, []);
   return [ref, visible];
 }
- 
+
 function BentoCard({ children, sx = {}, delay = 0, visible }) {
   return (
     <Paper
@@ -222,7 +222,7 @@ function BentoCard({ children, sx = {}, delay = 0, visible }) {
     </Paper>
   );
 }
- 
+
 function CivicStepper({ visible }) {
   const [active, setActive] = useState(0);
   useEffect(() => {
@@ -232,7 +232,7 @@ function CivicStepper({ visible }) {
     }, 700);
     return () => clearInterval(timer);
   }, [visible]);
- 
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       {civicTimeline.map((item, i) => (
@@ -305,14 +305,14 @@ function CivicStepper({ visible }) {
     </Box>
   );
 }
- 
+
 export default function FounderSection() {
   const [ref, visible] = useInView(0.1);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
   const dark = theme.palette.mode === "dark";
- 
+
   return (
     <Box sx={{ py: 5, bgcolor: "background.default" }}>
       <Container maxWidth="lg">
@@ -331,7 +331,7 @@ export default function FounderSection() {
         >
           Meet Our Founder
         </Typography>
- 
+
         {/* Bio block */}
         <Box
           sx={{
@@ -375,7 +375,7 @@ export default function FounderSection() {
                     display: "block",
                   }}
                 />
- 
+
                 {/* Overlay with name, role, buttons */}
                 <Box
                   className="overlay"
@@ -416,7 +416,7 @@ export default function FounderSection() {
                       >
                         <MailIcon />
                       </Button>
- 
+
                       <Button
                         href="https://www.linkedin.com/in/peri-periasamy"
                         target="_blank"
@@ -440,7 +440,7 @@ export default function FounderSection() {
                 </Box>
               </Box>
             </FlexCell>
- 
+
             <FlexCell
               basis="300px"
               sx={{
@@ -453,7 +453,7 @@ export default function FounderSection() {
                 variant="h4"
                 sx={{ fontWeight: 700, color: PRIMARY, mb: 2 }}
               >
-                Who is M.P Periyasamy ?
+                Who is M.Peri Periasamy ?
               </Typography>
               <Typography
                 variant="body1"
@@ -516,7 +516,7 @@ export default function FounderSection() {
             </FlexCell>
           </FlexRow>
         </Box>
- 
+
         {/* Quote */}
         <Box
           sx={{

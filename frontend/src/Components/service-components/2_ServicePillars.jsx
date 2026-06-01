@@ -7,13 +7,20 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { SERVICES } from "../../constants";
+import { SERVICES } from "../../Constants.js";
 import { useTheme, alpha } from "@mui/material/styles";
 
 const SERVICE_MEDIA = {
-  "Accounting & Finance": new URL("../../assets/Videos/Accounting & Finance.mp4", import.meta.url).href,
-  "Tax Services": new URL("../../assets/Videos/Tax Services.mp4", import.meta.url).href,
-  "IT Services": new URL("../../assets/Videos/IT Services.mp4", import.meta.url).href,
+  "Accounting & Finance": new URL(
+    "../../assets/Videos/Accounting & Finance.mp4",
+    import.meta.url,
+  ).href,
+  "Tax Services": new URL(
+    "../../assets/Videos/Tax Services.mp4",
+    import.meta.url,
+  ).href,
+  "IT Services": new URL("../../assets/Videos/IT Services.mp4", import.meta.url)
+    .href,
 };
 
 export default function ServicePillars() {
@@ -24,7 +31,7 @@ export default function ServicePillars() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const getItemKey  = (item) => (typeof item === "string" ? item : item.title);
+  const getItemKey = (item) => (typeof item === "string" ? item : item.title);
   const getItemDesc = (item, title) =>
     typeof item === "object" && item.description
       ? item.description
@@ -43,20 +50,15 @@ export default function ServicePillars() {
       }}
     >
       <Box sx={{ textAlign: "center", mb: { xs: 3, md: 5 } }}>
-        <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.6rem" }, }}>
+        <Typography
+          variant="h2"
+          sx={{ fontSize: { xs: "2rem", md: "2.6rem" } }}
+        >
           Our Services
         </Typography>
-        <Typography
-          sx={{
-            opacity: 0.7,
-            mt: 1,
-            maxWidth: 760,
-            mx: "auto",
-            fontSize: { xs: "0.98rem", md: "1.05rem" },
-            lineHeight: 1.7,
-          }}
-        >
-          Practical, scalable teams and systems that support your day-to-day operations.
+        <Typography sx={{ opacity: 0.7, mt: 1 }}>
+          Practical, scalable teams and systems that support your day-to-day
+          operations.
         </Typography>
       </Box>
       {SERVICES.map((s, i) => {
@@ -115,18 +117,23 @@ export default function ServicePillars() {
               justifyContent: "center",
             }}
           >
-            <Typography variant="h3" sx={{ mb: 2, fontSize: { xs: "2rem", md: "2.6rem" } }}>
+            <Typography
+              variant="h3"
+              sx={{ mb: 2, fontSize: { xs: "2rem", md: "2.6rem" } }}
+            >
               {s.title}
             </Typography>
 
-            <Typography sx={{ opacity: 0.72, lineHeight: 1.85, mb: 2, fontWeight: 600 }}>
+            <Typography
+              sx={{ opacity: 0.72, lineHeight: 1.85, mb: 2, fontWeight: 600 }}
+            >
               {s.summary}
             </Typography>
 
             {/* MUI Accordion */}
             <Box>
               {s.items.map((item, idx) => {
-                const key  = getItemKey(item);
+                const key = getItemKey(item);
                 const desc = getItemDesc(item, s.title);
                 const panelId = `${i}-${idx}`;
 
@@ -138,14 +145,14 @@ export default function ServicePillars() {
                     disableGutters
                     elevation={0}
                     sx={{
-                        backgroundColor: "transparent",
-                        borderBottom: "1px solid",
-                        borderColor: "divider",
-                        "&:before": { display: "none" },
-                        "&.Mui-expanded": {
-                          backgroundColor: alpha(s.color, 0.06),
-                        },
-                      }}
+                      backgroundColor: "transparent",
+                      borderBottom: "1px solid",
+                      borderColor: "divider",
+                      "&:before": { display: "none" },
+                      "&.Mui-expanded": {
+                        backgroundColor: alpha(s.color, 0.06),
+                      },
+                    }}
                   >
                     <AccordionSummary
                       expandIcon={
@@ -161,7 +168,7 @@ export default function ServicePillars() {
                           }}
                         />
                       }
-                        sx={{
+                      sx={{
                         px: 1,
                         minHeight: 48,
                         "& .MuiAccordionSummary-expandIconWrapper": {
@@ -194,11 +201,11 @@ export default function ServicePillars() {
           theme.palette.mode === "dark"
             ? `linear-gradient(135deg, ${alpha(s.color, 0.06)}, ${alpha(
                 theme.palette.background.paper,
-                0.06
+                0.06,
               )})`
             : `linear-gradient(135deg, ${alpha(s.color, 0.07)}, ${alpha(
                 theme.palette.background.paper,
-                0.97
+                0.97,
               )})`;
 
         const cardBoxShadow =
@@ -218,7 +225,10 @@ export default function ServicePillars() {
               border: cardBorder,
               background: cardBg,
               display: "flex",
-              flexDirection: { xs: "column", md: isReverse ? "row-reverse" : "row" },
+              flexDirection: {
+                xs: "column",
+                md: isReverse ? "row-reverse" : "row",
+              },
               minHeight: { md: 320 },
             }}
           >

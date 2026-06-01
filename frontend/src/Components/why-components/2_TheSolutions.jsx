@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Grid, Typography, Chip, Card } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { PRIMARY, SECONDARY } from "../../constants";
+import { PRIMARY, SECONDARY } from "../../Constants.js";
 
 const SOLUTIONS = [
   {
@@ -83,9 +83,10 @@ export default function TheSolutions() {
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-
         {/* Section Header */}
-        <Box sx={{ textAlign: "center", mb: 8, transition: "color 280ms ease" }}>
+        <Box
+          sx={{ textAlign: "center", mb: 8, transition: "color 280ms ease" }}
+        >
           <Chip
             label="Our Solution"
             sx={{
@@ -96,7 +97,8 @@ export default function TheSolutions() {
               fontWeight: 700,
               fontSize: "0.8rem",
               letterSpacing: 0.5,
-              transition: "background-color 280ms ease, color 280ms ease, border-color 280ms ease",
+              transition:
+                "background-color 280ms ease, color 280ms ease, border-color 280ms ease",
             }}
           />
           <Typography
@@ -151,7 +153,9 @@ export default function TheSolutions() {
                   alignItems: "flex-start",
                   gap: 2.5,
                   p: 3.5,
-                  background: isDark ? "rgba(13, 33, 55, 0.82)" : "rgba(255, 255, 255, 0.55)",
+                  background: isDark
+                    ? "rgba(13, 33, 55, 0.82)"
+                    : "rgba(255, 255, 255, 0.55)",
                   backdropFilter: "blur(18px)",
                   WebkitBackdropFilter: "blur(18px)",
                   border: isDark
@@ -161,9 +165,12 @@ export default function TheSolutions() {
                   boxShadow: isDark
                     ? `0 10px 28px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.05)`
                     : `0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)`,
-                    transition: "background-color 280ms ease, background 280ms ease, color 280ms ease, border-color 280ms ease, box-shadow 280ms ease, transform 280ms ease",
+                  transition:
+                    "background-color 280ms ease, background 280ms ease, color 280ms ease, border-color 280ms ease, box-shadow 280ms ease, transform 280ms ease",
                   "&:hover": {
-                    background: isDark ? "rgba(16, 42, 68, 0.96)" : "rgba(255, 255, 255, 0.78)",
+                    background: isDark
+                      ? "rgba(16, 42, 68, 0.96)"
+                      : "rgba(255, 255, 255, 0.78)",
                     border: `1px solid ${accentColor}50`,
                     transform: "translateY(-4px)",
                     boxShadow: isDark
@@ -182,16 +189,27 @@ export default function TheSolutions() {
                     display: "grid",
                     placeItems: "center",
                     fontSize: "1.6rem",
-                    background: isDark ? `${accentColor}22` : `${accentColor}14`,
+                    background: isDark
+                      ? `${accentColor}22`
+                      : `${accentColor}14`,
                     border: `1px solid ${accentColor}25`,
-                    transition: "background-color 280ms ease, border-color 280ms ease, color 280ms ease",
+                    transition:
+                      "background-color 280ms ease, border-color 280ms ease, color 280ms ease",
                   }}
                 >
                   {item.icon}
                 </Box>
 
                 {/* Text */}
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 0.75, minWidth: 0, flex: 1 }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 0.75,
+                    minWidth: 0,
+                    flex: 1,
+                  }}
+                >
                   <Typography
                     sx={{
                       fontWeight: 700,
@@ -211,7 +229,9 @@ export default function TheSolutions() {
                       opacity: isDark ? 0.82 : 0.68,
                       lineHeight: 1.8,
                       fontSize: "0.88rem",
-                      color: isDark ? "rgba(255,255,255,0.78)" : "text.secondary",
+                      color: isDark
+                        ? "rgba(255,255,255,0.78)"
+                        : "text.secondary",
                       maxWidth: "100%",
                       overflowWrap: "anywhere",
                       transition: "color 280ms ease, opacity 280ms ease",
@@ -224,7 +244,6 @@ export default function TheSolutions() {
             );
           })}
         </Box>
-
       </Container>
     </Box>
   );

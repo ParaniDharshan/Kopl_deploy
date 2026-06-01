@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/common-components/Navbar";
 import Footer from "./components/common-components/Footer";
 import ScrollToTop from "./components/common-components/ScrollToTop";
+
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -12,7 +15,8 @@ import TeamGallery from "./components/gallery-components/TeamGallery";
 import EventsGallery from "./components/gallery-components/EventsGallery";
 import WhyCRKL from "./pages/WhyCRKL";
 import Contact from "./pages/Contact";
-import { PRIMARY, SECONDARY } from "./Constants";
+
+import { PRIMARY, SECONDARY } from "./Constants.js";
 
 const buildTheme = (mode) =>
   createTheme({
@@ -46,7 +50,6 @@ const buildTheme = (mode) =>
 
 export default function App() {
   const [mode, setMode] = useState("light");
-  const [activeTab, setActiveTab] = useState("Home");
   const theme = buildTheme(mode);
 
   useEffect(() => {
@@ -57,43 +60,33 @@ export default function App() {
     document.head.appendChild(link);
   }, []);
 
-  const renderTab = () => {
-    switch (activeTab) {
-      case "Home":
-        return <Home />;
-      case "About":
-        return <About />;
-      case "Services":
-        return <Services />;
-      case "Gallery":
-        return <Gallery setActiveTab={setActiveTab} />;
-      case "Office":
-        return <OfficeGallery setActiveTab={setActiveTab} />;
-      case "Team":
-        return <TeamGallery setActiveTab={setActiveTab} />;
-      case "Events":
-        return <EventsGallery setActiveTab={setActiveTab} />;
-      case "Why CRKL":
-        return <WhyCRKL />;
-      case "Contact":
-        return <Contact />;
-      default:
-        return <Home />;
-    }
-  };
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Navbar
-        mode={mode}
-        toggleMode={() => setMode((m) => (m === "light" ? "dark" : "light"))}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
-      <main>{renderTab()}</main>
-      <Footer mode={mode} />
-      <ScrollToTop />
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar
+          mode={mode}
+          toggleMode={() =>
+            setMode((m) => (m === "light" ? "dark" : "light"))
+          }
+        />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/office" element={<OfficeGallery />} />
+            <Route path="/gallery/team" element={<TeamGallery />} />
+            <Route path="/gallery/events" element={<EventsGallery />} />
+            <Route path="/why-crkl" element={<WhyCRKL />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+
+        <Footer mode={mode} />
+        <ScrollToTop />
+      </ThemeProvider>
+    </>
   );
 }

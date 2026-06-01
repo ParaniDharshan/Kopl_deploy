@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
-import { ROADMAP } from "../../constants";
+import { ROADMAP } from "../../Constants.js";
 
 const PRIMARY = "#1d89c8";
 const SECONDARY = "#3eb8af";
@@ -44,7 +44,6 @@ export default function StepRoadMap() {
   return (
     <Box sx={{ py: 8, bgcolor: "background.paper" }}>
       <Container maxWidth="lg">
-
         {/* Header */}
         <Box sx={{ textAlign: "center", mb: 7 }}>
           <Box
@@ -66,11 +65,18 @@ export default function StepRoadMap() {
           </Box>
           <Typography
             variant="h2"
-            sx={{ fontSize: { xs: "2rem", md: "2.6rem" }, fontWeight: 700, mb: 1.5, lineHeight: 1.2 }}
+            sx={{
+              fontSize: { xs: "2rem", md: "2.6rem" },
+              fontWeight: 700,
+              mb: 1.5,
+              lineHeight: 1.2,
+            }}
           >
             From first call to measurable results
           </Typography>
-          <Typography sx={{ opacity: 0.55, fontSize: "1rem", maxWidth: 480, mx: "auto" }}>
+          <Typography
+            sx={{ opacity: 0.55, fontSize: "1rem", maxWidth: 480, mx: "auto" }}
+          >
             Your contract is with CRKL Inc. Your concerns are ours to carry.
           </Typography>
         </Box>
@@ -82,10 +88,17 @@ export default function StepRoadMap() {
             justifyContent: "space-between",
             alignItems: "center",
             mb: 1.5,
-            maxWidth: svgWidth,
+            maxWidth: { xs: "100%", md: svgWidth }, // ✅ fixed
           }}
         >
-          <Typography sx={{ fontSize: "0.78rem", fontWeight: 600, opacity: 0.4, letterSpacing: 0.5 }}>
+          <Typography
+            sx={{
+              fontSize: "0.78rem",
+              fontWeight: 600,
+              opacity: 0.4,
+              letterSpacing: 0.5,
+            }}
+          >
             Project journey
           </Typography>
           <Box
@@ -114,8 +127,8 @@ export default function StepRoadMap() {
             flexWrap: { xs: "wrap", md: "nowrap" },
           }}
         >
-          {/* SVG Map */}
-          <Box sx={{ flexShrink: 0 }}>
+          {/* SVG Map — hidden on small screens */}
+          <Box sx={{ flexShrink: 0, display: { xs: "none", md: "block" } }}>
             <svg
               width={svgWidth}
               height={svgHeight}
@@ -136,7 +149,9 @@ export default function StepRoadMap() {
                     strokeWidth={colored ? 2.5 : 1.5}
                     strokeDasharray={colored ? "none" : "4 7"}
                     strokeLinecap="round"
-                    style={{ transition: "stroke 0.4s ease, stroke-width 0.3s ease" }}
+                    style={{
+                      transition: "stroke 0.4s ease, stroke-width 0.3s ease",
+                    }}
                   />
                 );
               })}
@@ -148,19 +163,42 @@ export default function StepRoadMap() {
                 const current = isCurrent(i);
                 const completed = isCompleted(i);
 
-                const fill = current ? PRIMARY : completed ? SECONDARY : "white";
-                const stroke = current ? PRIMARY : completed ? SECONDARY : "#d0d0d0";
+                const fill = current
+                  ? PRIMARY
+                  : completed
+                    ? SECONDARY
+                    : "white";
+                const stroke = current
+                  ? PRIMARY
+                  : completed
+                    ? SECONDARY
+                    : "#d0d0d0";
                 const textColor = current || completed ? "#fff" : "#bbb";
-                const labelColor = current ? "#111" : completed ? SECONDARY : "#bbb";
+                const labelColor = current
+                  ? "#111"
+                  : completed
+                    ? SECONDARY
+                    : "#bbb";
                 const labelWeight = current ? "700" : completed ? "600" : "400";
 
                 return (
-                  <g key={i} style={{ cursor: "pointer" }} onClick={() => setActive(i)}>
+                  <g
+                    key={i}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setActive(i)}
+                  >
                     {current && (
                       <>
-                        <circle cx={x} cy={y} r={NODE_R + 14} fill={`${PRIMARY}10`} />
                         <circle
-                          cx={x} cy={y} r={NODE_R + 7}
+                          cx={x}
+                          cy={y}
+                          r={NODE_R + 14}
+                          fill={`${PRIMARY}10`}
+                        />
+                        <circle
+                          cx={x}
+                          cy={y}
+                          r={NODE_R + 7}
                           fill="none"
                           stroke={PRIMARY}
                           strokeWidth={1.5}
@@ -169,18 +207,28 @@ export default function StepRoadMap() {
                       </>
                     )}
                     {(current || completed) && (
-                      <circle cx={x + 1} cy={y + 2} r={NODE_R} fill="rgba(0,0,0,0.08)" />
+                      <circle
+                        cx={x + 1}
+                        cy={y + 2}
+                        r={NODE_R}
+                        fill="rgba(0,0,0,0.08)"
+                      />
                     )}
                     <circle
-                      cx={x} cy={y} r={NODE_R}
+                      cx={x}
+                      cy={y}
+                      r={NODE_R}
                       fill={fill}
                       stroke={stroke}
                       strokeWidth={current || completed ? 0 : 1.5}
-                      style={{ transition: "fill 0.35s ease, stroke 0.35s ease" }}
+                      style={{
+                        transition: "fill 0.35s ease, stroke 0.35s ease",
+                      }}
                     />
                     {completed ? (
                       <text
-                        x={x} y={y}
+                        x={x}
+                        y={y}
                         textAnchor="middle"
                         dominantBaseline="central"
                         fontSize={15}
@@ -191,24 +239,32 @@ export default function StepRoadMap() {
                       </text>
                     ) : (
                       <text
-                        x={x} y={y}
+                        x={x}
+                        y={y}
                         textAnchor="middle"
                         dominantBaseline="central"
                         fontSize={current ? 14 : 12}
                         fontWeight={current ? "700" : "500"}
                         fill={textColor}
-                        style={{ transition: "fill 0.35s ease", pointerEvents: "none" }}
+                        style={{
+                          transition: "fill 0.35s ease",
+                          pointerEvents: "none",
+                        }}
                       >
                         {String(i + 1).padStart(2, "0")}
                       </text>
                     )}
                     <text
-                      x={x} y={y + NODE_R + 15}
+                      x={x}
+                      y={y + NODE_R + 15}
                       textAnchor="middle"
                       fontSize={10.5}
                       fontWeight={labelWeight}
                       fill={labelColor}
-                      style={{ transition: "fill 0.35s ease", pointerEvents: "none" }}
+                      style={{
+                        transition: "fill 0.35s ease",
+                        pointerEvents: "none",
+                      }}
                     >
                       {r.title}
                     </text>
@@ -226,6 +282,7 @@ export default function StepRoadMap() {
               position: { md: "sticky" },
               top: { md: 32 },
               minWidth: 0,
+              width: { xs: "100%", md: "auto" }, // ✅ full width on mobile
             }}
           >
             <Box
@@ -245,7 +302,14 @@ export default function StepRoadMap() {
 
               <Box sx={{ p: { xs: 3, md: 4 } }}>
                 {/* Step badge + sub label */}
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 2.5 }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.5,
+                    mb: 2.5,
+                  }}
+                >
                   <Box
                     sx={{
                       width: 36,
@@ -289,7 +353,9 @@ export default function StepRoadMap() {
                 </Typography>
 
                 {/* Divider */}
-                <Box sx={{ height: "1.5px", bgcolor: `${PRIMARY}12`, mb: 2.5 }} />
+                <Box
+                  sx={{ height: "1.5px", bgcolor: `${PRIMARY}12`, mb: 2.5 }}
+                />
 
                 {/* Body */}
                 <Typography
@@ -312,7 +378,12 @@ export default function StepRoadMap() {
                         height: 6,
                         width: i === active ? 24 : i < active ? 10 : 6,
                         borderRadius: "3px",
-                        bgcolor: i === active ? PRIMARY : i < active ? SECONDARY : "#e0e0e0",
+                        bgcolor:
+                          i === active
+                            ? PRIMARY
+                            : i < active
+                              ? SECONDARY
+                              : "#e0e0e0",
                         cursor: "pointer",
                         transition: "all 0.3s ease",
                       }}
@@ -357,7 +428,10 @@ export default function StepRoadMap() {
                       color: active === ROADMAP.length - 1 ? "#aaa" : "#fff",
                       fontSize: "0.88rem",
                       fontWeight: 600,
-                      cursor: active === ROADMAP.length - 1 ? "not-allowed" : "pointer",
+                      cursor:
+                        active === ROADMAP.length - 1
+                          ? "not-allowed"
+                          : "pointer",
                       transition: "all 0.2s",
                     }}
                   >
@@ -401,8 +475,9 @@ export default function StepRoadMap() {
               mx: "auto",
             }}
           >
-            Our motto is to promise what we can deliver, and then deliver what we
-            promised. Our strategy, however, is to deliver more than we promised.
+            Our motto is to promise what we can deliver, and then deliver what
+            we promised. Our strategy, however, is to deliver more than we
+            promised.
           </Typography>
           <Typography
             variant="caption"
@@ -411,7 +486,6 @@ export default function StepRoadMap() {
             — M. Peri Periasamy
           </Typography>
         </Box>
-
       </Container>
     </Box>
   );

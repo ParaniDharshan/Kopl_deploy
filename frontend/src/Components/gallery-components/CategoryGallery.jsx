@@ -1,27 +1,34 @@
-import React, { useEffect, useMemo } from "react";
-import { Box, Container } from "@mui/material";
+import React, { useMemo, useEffect } from "react";
+import {
+  alpha,
+  Box,
+  Button,
+  Container,
+  Typography,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import CTAButton from "../common-components/CTAButton";
+import { ArrowBack } from "@mui/icons-material";
 import Masonry from "./Masonry";
-import CategoryGalleryHero from "./CategoryGalleryHero";
 
 function CategoryGallery({
   title,
   subtitle,
-  items,
+  chipLabel,
+  items = [],          
+  accent,              
   backTab = "Gallery",
   setActiveTab,
   actions,
-  centered = false,
-  backButtonPosition = "top",
-  onBack,
 }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
+  // ✅ fallback accent color if not provided
+  const accentColor = accent || theme.palette.primary.main;
+
   const pageStyles = useMemo(
     () => ({
-      pt: { xs: 2, md: 3 },
+      pt: { xs: 11, md: 14 },
       pb: 10,
       minHeight: "100vh",
       background: isDark
@@ -35,49 +42,27 @@ function CategoryGallery({
     window.scrollTo({ top: 0, left: 0 });
   }, []);
 
-  const backPath = backTab === "Events" ? "/events" : "/gallery";
-  const backText = backTab === "Events" ? "Back to Events Cards" : "Back to Gallery";
-
-  const handleBack = () => {
-    if (typeof onBack === "function") {
-      try {
-        window.history.pushState({}, "", backPath);
-      } catch (e) {}
-      onBack();
-      return;
-    }
-
-    if (typeof setActiveTab === "function") {
-      setActiveTab(backTab);
-      try {
-        window.history.pushState({}, "", backPath);
-      } catch (e) {}
-      window.scrollTo({ top: 0, left: 0 });
-      return;
-    }
-
-    try {
-      window.history.pushState({}, "", backPath);
-    } catch (e) {}
-    try {
-      window.history.back();
-    } catch (e) {}
-  };
-
   return (
     <Box sx={pageStyles}>
-      <CategoryGalleryHero
-        title={title}
-        subtitle={subtitle}
-        centered={centered}
-        backText={backText}
-        backButtonPosition={backButtonPosition}
-        onBack={handleBack}
-      />
-
       <Container maxWidth="xl">
-        <Box sx={{ mb: 3 }}>{actions}</Box>
+        {/* Header */}
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="h2" sx={{ fontWeight: 800, mb: 2 }}>
+            {title}
+          </Typography>
+          {subtitle && (
+            <Typography
+              sx={{ maxWidth: 760, color: "text.secondary", lineHeight: 1.7 }}
+            >
+              {subtitle}
+            </Typography>
+          )}
+        </Box>
 
+        {/* Optional actions */}
+        {actions && <Box sx={{ mb: 3 }}>{actions}</Box>}
+
+        {/* Masonry grid */}
         <Box
           sx={{
             p: { xs: 1, md: 2 },
@@ -93,14 +78,8 @@ function CategoryGallery({
               : "0 18px 60px rgba(15, 40, 70, 0.08)",
           }}
         >
-          <Masonry items={items} colorShiftOnHover />
+          <Masonry items={items} colorShiftOnHover blurToFocus />
         </Box>
-
-        {backButtonPosition === "bottom" && (
-          <Box sx={{ mt: 2.5, display: "flex", justifyContent: "center" }}>
-            <CTAButton text={backText} size="large" isBack onClick={handleBack} />
-          </Box>
-        )}
       </Container>
     </Box>
   );
