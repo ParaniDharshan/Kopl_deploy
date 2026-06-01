@@ -2,8 +2,7 @@ import React from "react";
 import { Box, Container, Grid, Typography, Chip } from "@mui/material";
 import CTAButton from "../common-components/CTAButton";
 import SpiralBg from "../common-components/SpiralBg";
-import { PRIMARY, SECONDARY } from "../../constants";
-import Orb from "../common-components/BGAnimation";
+import { PRIMARY, SECONDARY } from "../../Constants.js";
 
 export default function Hero() {
   return (
@@ -19,15 +18,18 @@ export default function Hero() {
       }}
     >
       <SpiralBg />
-      <div style={{ width: "100%", height: "600px", position: "absolute", zIndex: 10, 
-        display: "flex", justifyContent: "center", alignItems: "center", opacity: 0.5 }}>
-        <Orb
-          hoverIntensity={2}
-          rotateOnHover
-          hue={0}
-          forceHoverState={false}
-          backgroundColor="#000000"
-        />
+      <div
+        style={{
+          width: "100%",
+          height: "600px",
+          position: "absolute",
+          zIndex: 10,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          opacity: 0.5,
+        }}
+      >
       </div>
       <Box
         sx={{

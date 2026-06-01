@@ -3,7 +3,7 @@ export const PRIMARY = "#1d89c8";
 export const SECONDARY = "#3eb8af";
 export const BOOKING_URL = "#";
 
-export const NAV_LINKS = ["Home", "About", "Services", "Gallery", "Why CRKL", "Contact"];
+export const NAV_LINKS = ["Home", "Why CRKL", "About", "Services", "Gallery",  "Contact"];
 
 export const SERVICES = [
 	{
@@ -105,7 +105,7 @@ export const SERVICES = [
 
 // Office page hero image part
 export const HERO_BG = {
-	office: new URL("./assets/Office/Conference Hall.jpg", import.meta.url).href,
+	office: new URL("./assets/Office/Conference Hall.webp", import.meta.url).href,
 };
 
 export const TIMELINE = [
@@ -166,4 +166,3 @@ export const CONTACT_INFO = {
 	email: "peri@crklinc.com",
 	location: "Chesterfield, Missouri, USA",
 };
-

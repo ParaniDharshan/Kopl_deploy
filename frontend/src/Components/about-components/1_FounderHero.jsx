@@ -33,7 +33,7 @@ import GavelIcon from "@mui/icons-material/Gavel";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import StarIcon from "@mui/icons-material/Star";
-import { PRIMARY, SECONDARY } from "../../Constants";
+import { PRIMARY, SECONDARY } from "../../Constants.js";
 import PERI_SIR_IMAGE from "../../assets/Images/Peri_Sir_Image.png";
 import { MailIcon } from "lucide-react";
 import FounderJourneyModal from "./Model";
@@ -453,7 +453,7 @@ export default function FounderSection() {
                 variant="h4"
                 sx={{ fontWeight: 700, color: PRIMARY, mb: 2 }}
               >
-                Who is M.P Periyasamy ?
+                Who is M.Peri Periasamy ?
               </Typography>
               <Typography
                 variant="body1"
@@ -523,7 +523,7 @@ export default function FounderSection() {
             mt: 5,
             p: 4,
             borderRadius: 3,
-            bgcolor: NAVY,
+            bgcolor: dark ? NAVY : PRIMARY_LIGHT,
             textAlign: "center",
           }}
         >
@@ -531,7 +531,7 @@ export default function FounderSection() {
             variant="body1"
             sx={{
               fontStyle: "italic",
-              color: "rgba(255,255,255,.88)",
+              color: "rgba(26, 25, 25, 0.88)",
               lineHeight: 1.9,
             }}
           >

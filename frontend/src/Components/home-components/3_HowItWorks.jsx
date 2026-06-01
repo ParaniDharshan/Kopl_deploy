@@ -12,7 +12,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { PhoneInTalk, VerifiedUser, Autorenew } from "@mui/icons-material";
-import { PRIMARY, SECONDARY } from "../../constants";
+import { PRIMARY, SECONDARY } from "../../Constants.js";
 
 const steps = [
   {

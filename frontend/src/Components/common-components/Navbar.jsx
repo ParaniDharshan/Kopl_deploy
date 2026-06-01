@@ -21,33 +21,33 @@ import {
   DarkMode as DarkModeIcon,
   LightMode as LightModeIcon,
 } from "@mui/icons-material";
-import { PRIMARY, SECONDARY, BOOKING_URL, NAV_LINKS } from "../../constants";
 
-function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
+import { Link, useLocation } from "react-router-dom";
+import { PRIMARY, SECONDARY, NAV_LINKS } from "../../Constants.js";
+import CRKL_LOGO from "../../assets/Images/CRKL_WEB_LOGO-removebg-preview.png";
+
+const routeMap = {
+  Home: "/",
+  "Why CRKL": "/why-crkl",
+  About: "/about",
+  Services: "/services",
+  Gallery: "/gallery",
+  Office: "/gallery/office",
+  Team: "/gallery/team",
+  Events: "/gallery/events",
+  Contact: "/contact",
+};
+
+function Navbar({ mode, toggleMode }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 60 });
   const isDark = mode === "dark";
 
-  const navigate = (link) => {
-    setActiveTab(link);
-    setDrawerOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const location = useLocation();
+
+  const isActive = (link) => {
+    return location.pathname === routeMap[link];
   };
-
-  {
-    /* Concerns see full answer */
-  }
-
-  React.useEffect(() => {
-    const handler = (e) => {
-      if (!e || !e.detail) return;
-      setActiveTab(e.detail);
-      setDrawerOpen(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-    window.addEventListener("navigateTab", handler);
-    return () => window.removeEventListener("navigateTab", handler);
-  }, [setActiveTab]);
 
   return (
     <>
@@ -63,7 +63,9 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
             : trigger
               ? "rgba(255,255,255,0.97)"
               : "rgba(255,255,255,0.75)",
-          borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.07)" : "rgba(29,137,200,0.12)"}`,
+          borderBottom: `1px solid ${
+            isDark ? "rgba(255,255,255,0.07)" : "rgba(29,137,200,0.12)"
+          }`,
           transition: "all 0.3s ease",
         }}
       >
@@ -77,27 +79,27 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
         >
           {/* Logo */}
           <Box
-            onClick={() => navigate("Home")}
+            component={Link}
+            to="/"
             sx={{
               flexGrow: 1,
               cursor: "pointer",
               display: "flex",
-              alignItems: "baseline",
+              alignItems: "center",
               gap: 1,
+              textDecoration: "none",
             }}
           >
-            <Typography
+            <Box
+              component="img"
+              src={CRKL_LOGO}
+              alt="CRKL Inc. Logo"
               sx={{
-                fontFamily: "'Sora',sans-serif",
-                fontWeight: 800,
-                fontSize: { xs: "1.2rem", md: "1.4rem" },
-                background: `linear-gradient(90deg,${PRIMARY},${SECONDARY})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                height: { xs: 40, md: 50 }, // responsive sizing
+                width: "auto",
+                display: "block",
               }}
-            >
-              CRKL Inc.
-            </Typography>
+            />
             <Typography
               sx={{
                 fontSize: "0.7rem",
@@ -110,7 +112,7 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
             </Typography>
           </Box>
 
-          {/* Desktop nav */}
+          {/* Desktop Nav */}
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
@@ -121,19 +123,18 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
             {NAV_LINKS.map((link) => (
               <Button
                 key={link}
-                onClick={() => navigate(link)}
+                component={Link}
+                to={routeMap[link]}
                 sx={{
-                  color:
-                    activeTab === link
-                      ? PRIMARY
-                      : isDark
-                        ? "rgba(255,255,255,0.8)"
-                        : "rgba(20,40,60,0.8)",
-                  fontWeight: activeTab === link ? 700 : 500,
-                  borderBottom:
-                    activeTab === link
-                      ? `2px solid ${PRIMARY}`
-                      : "2px solid transparent",
+                  color: isActive(link)
+                    ? PRIMARY
+                    : isDark
+                      ? "rgba(255,255,255,0.8)"
+                      : "rgba(20,40,60,0.8)",
+                  fontWeight: isActive(link) ? 700 : 500,
+                  borderBottom: isActive(link)
+                    ? `2px solid ${PRIMARY}`
+                    : "2px solid transparent",
                   borderRadius: 0,
                   px: 1.5,
                   pb: 0.25,
@@ -143,6 +144,7 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
                 {link}
               </Button>
             ))}
+
             <Tooltip title={isDark ? "Light mode" : "Dark mode"}>
               <IconButton
                 onClick={toggleMode}
@@ -167,6 +169,7 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
             >
               {isDark ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
+
             <IconButton
               onClick={() => setDrawerOpen(true)}
               sx={{ color: isDark ? "#fff" : "#1d3a5a" }}
@@ -206,13 +209,17 @@ function Navbar({ mode, toggleMode, activeTab, setActiveTab }) {
               <CloseIcon />
             </IconButton>
           </Box>
+
           <Divider />
+
           <List>
             {NAV_LINKS.map((link) => (
               <ListItem key={link} disablePadding>
                 <ListItemButton
-                  onClick={() => navigate(link)}
-                  selected={activeTab === link}
+                  component={Link}
+                  to={routeMap[link]}
+                  onClick={() => setDrawerOpen(false)}
+                  selected={isActive(link)}
                   sx={{ borderRadius: 2, my: 0.25 }}
                 >
                   <ListItemText

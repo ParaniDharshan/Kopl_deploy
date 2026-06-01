@@ -1,793 +1,1250 @@
 /**
- * ============================================================
- * CRKL Inc. — Two Drop-in Components
- * ============================================================
- * 1. <ContactPage />   — Hero + Full Contact Form
- * 2. <FounderProfile /> — Director Bio with Stepper + Cards
+ * CRKLContact.jsx
+ * ─────────────────────────────────────────────────────────────
+ * CRKL Inc. — Contact Page
+ * Fits exactly like a Hero section: height: 100vh, no scroll.
+ * Fully responsive · All fields validated · Themed success popup
  *
- * USAGE in your App.jsx:
- *   import ContactPage, { FounderProfile } from "./CRKLContactAndFounder";
- *   // In renderTab():
- *   case "Contact": return <ContactPage />;
- *   // Replace or add inside About():
- *   <FounderProfile />
+ * STACK : Material UI v5 + Tailwind CSS + Framer Motion
+ * PLACE : frontend/src/pages/Contact.jsx
  *
- * Dependencies already in your project:
- *   @mui/material  @mui/icons-material  @emotion/react  @emotion/styled
- *   Tailwind CSS (optional — only for gap/padding utility classes used below)
- * ============================================================
+ * ── WHERE TO EDIT ──────────────────────────────────────────
+ *  [EDIT: COLORS]        PRIMARY / SECONDARY brand colors
+ *  [EDIT: BRAND]         Name, tagline, chip text, CTA label
+ *  [EDIT: ABOUT]         Left-panel paragraph
+ *  [EDIT: CONTACT_INFO]  Address / phone / email / hours
+ *  [EDIT: TRUST_ITEMS]   Four trust bullets
+ *  [EDIT: SERVICES]      Checkbox options
+ *  [EDIT: SIZE_OPTIONS]  Company size dropdown
+ *  [EDIT: POPUP]         Success popup copy
+ *  [EDIT: SUBMIT_HANDLER]Replace the console.log with your API call
+ * ───────────────────────────────────────────────────────────
  */
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Box, Container, Grid, Typography, TextField, Button,
-  Card, CardContent, Chip, Avatar, Stepper, Step, StepLabel,
-  StepContent, Paper, Divider, Snackbar, Alert, MenuItem,
-  InputAdornment, Fade, Zoom, LinearProgress, Tooltip,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Chip,
+  MenuItem,
+  Select,
+  FormControl,
+  Checkbox,
+  Grid,
+  Paper,
+  Divider,
+  IconButton,
+  Portal,
 } from "@mui/material";
-import {
-  Send as SendIcon,
-  Business as BusinessIcon,
-  Person as PersonIcon,
-  Email as EmailIcon,
-  Phone as PhoneIcon,
-  Work as WorkIcon,
-  Message as MessageIcon,
-  CheckCircle as CheckIcon,
-  School as SchoolIcon,
-  EmojiEvents as TrophyIcon,
-  Groups as CivicIcon,
-  Verified as VerifiedIcon,
-  ArrowForward as ArrowIcon,
-  LocationOn as LocationIcon,
-  Flag as FlagIcon,
-  Star as StarIcon,
-} from "@mui/icons-material";
+import { PRIMARY, SECONDARY } from "../Constants.js";
 
-// ── Brand tokens ──────────────────────────────────────────────
-const P  = "#1d89c8"; // primary blue
-const S  = "#3eb8af"; // secondary teal
-const GRAD = `linear-gradient(135deg, ${P}, ${S})`;
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
+import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CloseIcon from "@mui/icons-material/Close";
+import EastIcon from "@mui/icons-material/East";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 
-// ── Helpers ──────────────────────────────────────────────────
-const sx = (styles) => styles; // identity for readability
+// ─── [EDIT: COLORS] ────────────────────────────────────────
+const DARK_BG =
+  "linear-gradient(145deg, #0a1929 0%, #12375f 52%, #0d2137 100%)";
+// ───────────────────────────────────────────────────────────
 
-// ============================================================
-// CONTACT PAGE
-// ============================================================
-// Fields definition — label, key, type, icon, validation rule
-const FIELDS = [
+// ─── [EDIT: BRAND] ─────────────────────────────────────────
+const BRAND = {
+  chip: "Chesterfield, Missouri — U.S.-Managed",
+  cta: "Book a Free Discovery Call",
+  ctaSub: "No commitment · 30 minutes · We understand your business first",
+};
+// ───────────────────────────────────────────────────────────
+
+// ─── [EDIT: ABOUT] ─────────────────────────────────────────
+const ABOUT =
+  "CRKL Inc. helps U.S. small and mid-sized businesses manage accounting, finance, and IT operations through a structured, secure, and professionally managed outsourcing model. You work with a trusted U.S.-based partner. We handle the rest.";
+// ───────────────────────────────────────────────────────────
+
+// ─── [EDIT: CONTACT_INFO] ──────────────────────────────────
+const CONTACT_INFO = [
   {
-    label: "Full Name",
-    key: "name",
-    type: "text",
-    icon: <PersonIcon />,
-    required: true,
-    validate: (v) => (v.trim().length < 2 ? "Please enter your full name." : ""),
-    placeholder: "e.g. Jane Smith",
+    Icon: LocationOnOutlinedIcon,
+    label: "Office",
+    value: "Chesterfield, Missouri, USA",
   },
+  { Icon: PhoneOutlinedIcon, label: "Phone", value: "+1 (636) 555-0180" },
+  { Icon: EmailOutlinedIcon, label: "Email", value: "hello@crklinc.com" },
   {
-    label: "Work Email",
-    key: "email",
-    type: "email",
-    icon: <EmailIcon />,
-    required: true,
-    validate: (v) =>
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
-        ? ""
-        : "Enter a valid business email address.",
-    placeholder: "you@company.com",
-  },
-  {
-    label: "Phone Number",
-    key: "phone",
-    type: "tel",
-    icon: <PhoneIcon />,
-    required: false,
-    validate: (v) =>
-      v.trim() === "" || /^[\d\s\+\-().]{7,20}$/.test(v.trim())
-        ? ""
-        : "Enter a valid phone number.",
-    placeholder: "+1 (314) 000-0000",
-  },
-  {
-    label: "Company / Business Name",
-    key: "company",
-    type: "text",
-    icon: <BusinessIcon />,
-    required: true,
-    validate: (v) => (v.trim().length < 2 ? "Please enter your company name." : ""),
-    placeholder: "e.g. Acme Corp LLC",
-  },
-  {
-    label: "Industry / Sector",
-    key: "industry",
-    type: "select",
-    icon: <WorkIcon />,
-    required: true,
-    validate: (v) => (v ? "" : "Please select your industry."),
-    options: [
-      "Accounting & CPA Firm",
-      "Legal / Law Firm",
-      "Healthcare / Medical",
-      "Real Estate",
-      "Retail / E-commerce",
-      "Manufacturing",
-      "Technology / SaaS",
-      "Construction",
-      "Financial Services",
-      "Other",
-    ],
-  },
-  {
-    label: "Company Size",
-    key: "size",
-    type: "select",
-    icon: <BusinessIcon />,
-    required: false,
-    validate: () => "",
-    options: [
-      "Solo / Freelancer",
-      "2–10 employees",
-      "11–50 employees",
-      "51–200 employees",
-      "200+ employees",
-    ],
-  },
-  {
-    label: "Service of Interest",
-    key: "service",
-    type: "select",
-    icon: <WorkIcon />,
-    required: true,
-    validate: (v) => (v ? "" : "Please select a service."),
-    options: [
-      "Accounting & Finance (QuickBooks Online)",
-      "Tax Services (IRS Enrolled Agent)",
-      "IT Services (MERN Stack / Automation)",
-      "All Three Services",
-      "General Inquiry / Discovery Call",
-    ],
-  },
-  {
-    label: "How did you hear about us?",
-    key: "source",
-    type: "select",
-    icon: <StarIcon />,
-    required: false,
-    validate: () => "",
-    options: [
-      "Chesterfield Chamber of Commerce",
-      "Referral / Word of Mouth",
-      "Google Search",
-      "LinkedIn",
-      "Other",
-    ],
-  },
-  {
-    label: "Describe your business needs",
-    key: "message",
-    type: "textarea",
-    icon: <MessageIcon />,
-    required: true,
-    validate: (v) =>
-      v.trim().length < 20
-        ? "Please describe your needs in at least 20 characters."
-        : "",
-    placeholder:
-      "Tell us about your current challenges, team size, systems you use, and what outcome you're looking for…",
-    rows: 5,
+    Icon: AccessTimeOutlinedIcon,
+    label: "Hours",
+    value: "Mon – Fri  8 AM – 6 PM CST",
   },
 ];
+// ───────────────────────────────────────────────────────────
 
-function FormField({ field, value, error, onChange, onBlur, dark }) {
-  const common = {
-    fullWidth: true,
-    label: `${field.label}${field.required ? " *" : ""}`,
-    value,
-    onChange: (e) => onChange(field.key, e.target.value),
-    onBlur: () => onBlur(field.key),
-    error: !!error,
-    helperText: error || " ",
-    placeholder: field.placeholder,
-    InputProps: {
-      startAdornment: (
-        <InputAdornment position="start">
-          {React.cloneElement(field.icon, {
-            sx: { color: error ? "error.main" : P, fontSize: "1.1rem" },
-          })}
-        </InputAdornment>
-      ),
+// ─── [EDIT: TRUST_ITEMS] ───────────────────────────────────
+const TRUST_ITEMS = [
+  { Icon: VerifiedOutlinedIcon, text: "U.S.-Based Management & Oversight" },
+  { Icon: LockOutlinedIcon, text: "NDA & Data Protection Guaranteed" },
+  {
+    Icon: SupportAgentOutlinedIcon,
+    text: "Dedicated Account Manager Assigned",
+  },
+  {
+    Icon: HandshakeOutlinedIcon,
+    text: "Free Initial Consultation — No Strings",
+  },
+];
+// ───────────────────────────────────────────────────────────
+
+// ─── [EDIT: SERVICES] ──────────────────────────────────────
+const SERVICES = [
+  "Accounting & Bookkeeping",
+  "Tax Preparation & Planning",
+  "Payroll Management",
+  "IT Support & Infrastructure",
+  "Financial Reporting & Analysis",
+  "CFO Advisory Services",
+];
+// ───────────────────────────────────────────────────────────
+
+// ─── [EDIT: SIZE_OPTIONS] ──────────────────────────────────
+const SIZE_OPTIONS = [
+  "1–10 employees",
+  "11–50 employees",
+  "51–200 employees",
+  "200+ employees",
+];
+// ───────────────────────────────────────────────────────────
+
+// ─── [EDIT: POPUP] ─────────────────────────────────────────
+const POPUP = {
+  title: "You're all set!",
+  body: "A CRKL Inc. specialist will reach out within 2–3 business days to schedule your free 30-minute discovery call. Watch your inbox — a confirmation is on its way.",
+  badge1: "2–3 Business Days",
+  badge2: "Confirmation Email Sent",
+  cta: "Got it — thank you!",
+};
+// ───────────────────────────────────────────────────────────
+
+// ── Shared MUI TextField/Select sx ─────────────────────────
+const fieldSx = {
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "10px",
+    background: "#ffffff",
+    fontSize: "0.87rem",
+    transition: "box-shadow 0.2s",
+    "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: PRIMARY },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: PRIMARY,
+      borderWidth: "1.5px",
     },
-    sx: {
-      "& .MuiOutlinedInput-root": {
-        borderRadius: "12px",
-        transition: "box-shadow .2s",
-        "&:hover fieldset": { borderColor: P },
-        "&.Mui-focused fieldset": { borderColor: P, borderWidth: 2 },
-        "&.Mui-focused": { boxShadow: `0 0 0 3px ${P}22` },
-      },
-      "& label.Mui-focused": { color: P },
-    },
-  };
+    "&.Mui-focused": { boxShadow: `0 0 0 3px ${PRIMARY}1e` },
+  },
+  "& label.Mui-focused": { color: PRIMARY },
+  "& .MuiFormHelperText-root": { fontSize: "0.72rem", mt: "3px" },
+};
 
-  if (field.type === "textarea")
-    return (
-      <TextField
-        {...common}
-        multiline
-        rows={field.rows || 4}
-        placeholder={field.placeholder}
-        InputProps={{
-          sx: { borderRadius: "12px" },
-        }}
-      />
-    );
-
-  if (field.type === "select")
-    return (
-      <TextField {...common} select>
-        {field.options.map((o) => (
-          <MenuItem key={o} value={o}>
-            {o}
-          </MenuItem>
-        ))}
-      </TextField>
-    );
-
-  return <TextField {...common} type={field.type} />;
+function FieldLabel({ children, required = false }) {
+  return (
+    <Typography
+      sx={{
+        fontSize: "0.68rem",
+        fontWeight: 800,
+        color: "#38505e",
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        lineHeight: 1.2,
+      }}
+    >
+      {children}
+      {required && (
+        <Box component="span" sx={{ color: PRIMARY, ml: 0.5 }}>
+          *
+        </Box>
+      )}
+    </Typography>
+  );
 }
 
-export default function ContactPage() {
-  const empty = Object.fromEntries(FIELDS.map((f) => [f.key, ""]));
-  const [form, setForm]     = useState(empty);
-  const [touched, setTouched] = useState({});
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [snack, setSnack]   = useState(false);
-  const [progress, setProgress] = useState(0);
+const EASE = [0.22, 1, 0.36, 1];
 
-  // Live progress bar — how many required fields are filled
-  useEffect(() => {
-    const req = FIELDS.filter((f) => f.required);
-    const filled = req.filter((f) => {
-      const v = form[f.key];
-      return v && !f.validate(v);
-    });
-    setProgress(Math.round((filled.length / req.length) * 100));
-  }, [form]);
+// ── Validation helpers ──────────────────────────────────────
+const VALIDATORS = {
+  name: (v) => (v.trim().length >= 2 ? "" : "Please enter your full name"),
+  email: (v) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
+      ? ""
+      : "Enter a valid work email",
+  company: (v) => (v.trim().length >= 2 ? "" : "Company name is required"),
+  phone: (v) =>
+    v === "" || /^[\d\s\-()+]{7,}$/.test(v.trim())
+      ? ""
+      : "Enter a valid phone number",
+  size: (v) => (v !== "" ? "" : "Please select a company size"),
+};
 
-  const handleChange = (key, val) =>
-    setForm((p) => ({ ...p, [key]: val }));
+// ════════════════════════════════════════════════════════════
+// Sub-components
+// ════════════════════════════════════════════════════════════
 
-  const handleBlur = (key) =>
-    setTouched((p) => ({ ...p, [key]: true }));
-
-  const errors = Object.fromEntries(
-    FIELDS.map((f) => [f.key, f.validate(form[f.key])])
-  );
-  const hasErrors = FIELDS.some((f) => f.required && errors[f.key]);
-
-  const handleSubmit = () => {
-    // Mark all as touched
-    setTouched(Object.fromEntries(FIELDS.map((f) => [f.key, true])));
-    if (hasErrors) return;
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-      setSnack(true);
-    }, 1400);
-  };
-
-  if (submitted) {
-    return (
-      <Box sx={{ minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center", px: 2 }}>
-        <Zoom in>
-          <Card sx={{ maxWidth: 520, width: "100%", textAlign: "center", p: { xs: 4, md: 6 }, border: `1px solid ${S}40`, boxShadow: `0 24px 80px ${P}18` }}>
-            <Box sx={{ width: 80, height: 80, borderRadius: "50%", background: GRAD, display: "flex", alignItems: "center", justifyContent: "center", mx: "auto", mb: 3 }}>
-              <CheckIcon sx={{ color: "#fff", fontSize: "2.5rem" }} />
-            </Box>
-            <Typography variant="h5" sx={{ fontWeight: 800, mb: 1.5 }}>Message Received!</Typography>
-            <Typography sx={{ opacity: 0.7, lineHeight: 1.8, mb: 3 }}>
-              Thank you, <strong>{form.name}</strong>. We've received your inquiry from <strong>{form.company}</strong>. Peri or a CRKL team member will reach out within one business day.
-            </Typography>
-            <Chip label="No commitment · 30-minute discovery call" sx={{ background: `${P}18`, color: P, fontWeight: 700 }} />
-          </Card>
-        </Zoom>
+function InfoRow({ Icon, label, value }) {
+  return (
+    <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1.4, mb: 1.6 }}>
+      <Box sx={{ mt: "2px", color: SECONDARY, flexShrink: 0 }}>
+        <Icon sx={{ fontSize: 16 }} />
       </Box>
-    );
-  }
+      <Box>
+        <Typography
+          sx={{
+            fontSize: "0.62rem",
+            color: "rgba(255,255,255,0.35)",
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            lineHeight: 1,
+          }}
+        >
+          {label}
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: "0.84rem",
+            color: "rgba(255,255,255,0.85)",
+            fontWeight: 500,
+            mt: 0.2,
+          }}
+        >
+          {value}
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
+function TrustRow({ Icon, text, delay }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -16 }}
+      animate={{
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.45, delay, ease: EASE },
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1.2,
+          py: 0.75,
+          px: 1.2,
+          mb: 0.7,
+          borderRadius: "8px",
+          border: "1px solid rgba(255,255,255,0.06)",
+          background: "rgba(255,255,255,0.03)",
+          transition: "background 0.2s",
+          "&:hover": { background: "rgba(255,255,255,0.07)" },
+        }}
+      >
+        <Box sx={{ color: `${SECONDARY}bb`, flexShrink: 0 }}>
+          <Icon sx={{ fontSize: 15 }} />
+        </Box>
+        <Typography
+          sx={{ fontSize: "0.79rem", color: "rgba(255,255,255,0.65)" }}
+        >
+          {text}
+        </Typography>
+      </Box>
+    </motion.div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════
+// Success Popup — CRKL themed
+// ════════════════════════════════════════════════════════════
+function SuccessPopup({ open, onClose }) {
+  const CONF = Array.from({ length: 22 }, (_, i) => ({
+    color: [PRIMARY, SECONDARY, "#2563eb", "#38bdf8", "#1d4ed8", "#0ea5e9"][
+      i % 6
+    ],
+    left: `${(i / 22) * 96 + 2}%`,
+    size: 6 + (i % 5),
+    dur: 2.1 + (i % 4) * 0.3,
+    delay: i * 0.055,
+    round: i % 3 === 0,
+  }));
 
   return (
-    <Box sx={{ pt: { xs: 9, md: 10 } }}>
-
-      {/* ── HERO ───────────────────────────────────────────── */}
-      <Box sx={{
-        py: { xs: 8, md: 11 },
-        background: `radial-gradient(ellipse at 70% 40%, ${P}18 0%, transparent 60%),
-                     radial-gradient(ellipse at 20% 80%, ${S}12 0%, transparent 55%)`,
-        position: "relative", overflow: "hidden",
-      }}>
-        {/* decorative blobs */}
-        {[
-          { top: -60, right: -60, size: 260, color: `${P}12` },
-          { bottom: -40, left: -40, size: 180, color: `${S}10` },
-        ].map((b, i) => (
-          <Box key={i} sx={{
-            position: "absolute",
-            top: b.top, bottom: b.bottom, left: b.left, right: b.right,
-            width: b.size, height: b.size,
-            borderRadius: "50%",
-            background: b.color,
-            filter: "blur(40px)",
-            pointerEvents: "none",
-          }} />
-        ))}
-
-        <Container maxWidth="md" sx={{ textAlign: "center", position: "relative", zIndex: 1 }}>
-          <Chip
-            label="Get in Touch"
-            sx={{ mb: 3, background: `${P}18`, color: P, fontWeight: 700, letterSpacing: 1, fontSize: "0.75rem" }}
-          />
-          <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "3rem" }, fontWeight: 800, lineHeight: 1.2, mb: 2 }}>
-            Let's Talk About{" "}
-            <Box component="span" sx={{ background: GRAD, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              Your Business
+    <Portal>
+      <AnimatePresence>
+        {open && (
+          <>
+            <Box
+              sx={{
+                position: "fixed",
+                inset: 0,
+                pointerEvents: "none",
+                zIndex: 1700,
+                overflow: "hidden",
+              }}
+            >
+              {CONF.map((c, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 1, y: -10, rotate: 0 }}
+                  animate={{ opacity: 0, y: "108vh", rotate: 580 }}
+                  transition={{
+                    duration: c.dur,
+                    delay: c.delay,
+                    ease: "easeIn",
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: c.left,
+                    width: c.size,
+                    height: c.size,
+                    borderRadius: c.round ? "50%" : "2px",
+                    background: c.color,
+                  }}
+                />
+              ))}
             </Box>
-          </Typography>
-          <Typography sx={{ opacity: 0.65, fontSize: { xs: "1rem", md: "1.15rem" }, lineHeight: 1.8, maxWidth: 600, mx: "auto", mb: 4 }}>
-            Share your company details below. Peri reviews every submission personally and responds within one business day from Chesterfield, Missouri.
-          </Typography>
 
-          {/* Stats row */}
-          <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 3 }}>
-            {[
-              { label: "Response Time", val: "< 24 hrs" },
-              { label: "U.S. Contract", val: "Missouri" },
-              { label: "Discovery Call", val: "No Cost" },
-            ].map((s) => (
-              <Box key={s.label} sx={{ textAlign: "center" }}>
-                <Typography sx={{ fontWeight: 800, fontSize: "1.4rem", background: GRAD, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  {s.val}
-                </Typography>
-                <Typography variant="caption" sx={{ opacity: 0.55, fontWeight: 600 }}>
-                  {s.label}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Container>
-      </Box>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={onClose}
+              style={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 1500,
+                background: "rgba(8,32,58,0.78)",
+                backdropFilter: "blur(6px)",
+              }}
+            />
 
-      {/* ── FORM SECTION ────────────────────────────────────── */}
-      <Box sx={{ py: { xs: 6, md: 10 }, background: (t) => t.palette.background.default }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={{ xs: 4, md: 6 }} alignItems="flex-start">
-
-            {/* LEFT — contact info sidebar */}
-            <Grid item xs={12} md={4}>
-              <Box sx={{ position: { md: "sticky" }, top: 100, display: "flex", flexDirection: "column", gap: 2.5 }}>
-                <Typography variant="h6" sx={{ fontWeight: 800, mb: 0.5 }}>Contact Details</Typography>
-
-                {[
-                  { icon: <PhoneIcon />, label: "Phone", val: "+1 (314) 000-0000" },
-                  { icon: <EmailIcon />, label: "Email", val: "peri@crklinc.com" },
-                  { icon: <LocationIcon />, label: "Office", val: "Chesterfield, Missouri, USA" },
-                ].map((c) => (
-                  <Card key={c.label} sx={{ p: 2, display: "flex", alignItems: "center", gap: 2, border: `1px solid ${P}18`, "&:hover": { borderColor: P, boxShadow: `0 4px 20px ${P}18` }, transition: "all .2s" }}>
-                    <Box sx={{ width: 40, height: 40, borderRadius: "10px", background: `${P}18`, display: "flex", alignItems: "center", justifyContent: "center", color: P, flexShrink: 0 }}>
-                      {c.icon}
-                    </Box>
-                    <Box>
-                      <Typography variant="caption" sx={{ opacity: 0.5, fontWeight: 700, letterSpacing: 0.5 }}>{c.label.toUpperCase()}</Typography>
-                      <Typography sx={{ fontWeight: 600, fontSize: "0.88rem" }}>{c.val}</Typography>
-                    </Box>
-                  </Card>
-                ))}
-
-                <Divider sx={{ my: 1 }} />
-
-                <Card sx={{ p: 2.5, background: GRAD, color: "#fff" }}>
-                  <Typography sx={{ fontWeight: 800, mb: 0.5 }}>Book a Discovery Call</Typography>
-                  <Typography variant="body2" sx={{ opacity: 0.9, mb: 2, lineHeight: 1.7 }}>
-                    30 minutes. No obligation. Talk directly to Peri.
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    endIcon={<ArrowIcon />}
-                    href="#"
-                    sx={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(8px)", color: "#fff", border: "1px solid rgba(255,255,255,0.35)", "&:hover": { background: "rgba(255,255,255,0.32)" }, borderRadius: "10px" }}
+            <Box
+              sx={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 1600,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                px: 2,
+                pointerEvents: "none",
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.82, y: 32 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                  transition: { type: "spring", stiffness: 260, damping: 22 },
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.92,
+                  y: 20,
+                  transition: { duration: 0.18 },
+                }}
+                style={{ width: "min(460px, 92vw)", pointerEvents: "auto" }}
+              >
+                <Paper
+                  elevation={0}
+                  sx={{
+                    borderRadius: "22px",
+                    overflow: "hidden",
+                    border: `1px solid ${PRIMARY}30`,
+                    background: "#fff",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      background: `linear-gradient(140deg, #0a1f3d 0%, ${PRIMARY} 55%, #0f4c81 100%)`,
+                      pt: 4.5,
+                      pb: 4,
+                      px: 4,
+                      textAlign: "center",
+                      position: "relative",
+                    }}
                   >
-                    Schedule Now
-                  </Button>
-                </Card>
-              </Box>
-            </Grid>
-
-            {/* RIGHT — form */}
-            <Grid item xs={12} md={8}>
-              <Card sx={{ p: { xs: 3, md: 5 }, border: `1px solid ${P}18`, boxShadow: `0 16px 60px ${P}10` }}>
-                <Box sx={{ mb: 4 }}>
-                  <Typography variant="h5" sx={{ fontWeight: 800, mb: 0.5 }}>
-                    Tell us about your company
-                  </Typography>
-                  <Typography variant="body2" sx={{ opacity: 0.6, mb: 2 }}>
-                    All fields marked * are required. Your information is kept strictly confidential.
-                  </Typography>
-
-                  {/* Progress bar */}
-                  <Box>
-                    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 0.5 }}>
-                      <Typography variant="caption" sx={{ opacity: 0.55 }}>Form completion</Typography>
-                      <Typography variant="caption" sx={{ color: P, fontWeight: 700 }}>{progress}%</Typography>
-                    </Box>
-                    <LinearProgress
-                      variant="determinate"
-                      value={progress}
+                    <Box
                       sx={{
-                        height: 6, borderRadius: 3,
-                        bgcolor: `${P}18`,
-                        "& .MuiLinearProgress-bar": { background: GRAD, borderRadius: 3 },
+                        position: "absolute",
+                        inset: 0,
+                        opacity: 0.06,
+                        pointerEvents: "none",
+                        backgroundImage:
+                          "linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px)",
+                        backgroundSize: "28px 28px",
                       }}
                     />
+
+                    <motion.div
+                      initial={{ scale: 0, rotate: -20 }}
+                      animate={{
+                        scale: 1,
+                        rotate: 0,
+                        transition: {
+                          type: "spring",
+                          stiffness: 280,
+                          damping: 18,
+                        },
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 72,
+                          height: 72,
+                          borderRadius: "50%",
+                          background: `${SECONDARY}22`,
+                          border: `2px solid ${SECONDARY}55`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          mx: "auto",
+                          mb: 2,
+                        }}
+                      >
+                        <CheckCircleIcon
+                          sx={{ fontSize: 42, color: SECONDARY }}
+                        />
+                      </Box>
+                    </motion.div>
+
+                    <Typography
+                      sx={{
+                        color: "#fff",
+                        fontWeight: 800,
+                        fontSize: "1.4rem",
+                        position: "relative",
+                      }}
+                    >
+                      {POPUP.title}
+                    </Typography>
                   </Box>
-                </Box>
 
-                <Grid container spacing={2.5}>
-                  {/* Row 1 — name + email */}
-                  <Grid item xs={12} sm={6}>
-                    <FormField field={FIELDS[0]} value={form.name} error={touched.name ? errors.name : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <FormField field={FIELDS[1]} value={form.email} error={touched.email ? errors.email : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
+                  <Box sx={{ px: 4, pt: 3, pb: 3.5, position: "relative" }}>
+                    <IconButton
+                      onClick={onClose}
+                      size="small"
+                      sx={{
+                        position: "absolute",
+                        top: 8,
+                        right: 10,
+                        color: "#8aa6c7",
+                        "&:hover": { color: PRIMARY },
+                      }}
+                    >
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
 
-                  {/* Row 2 — phone + company */}
-                  <Grid item xs={12} sm={6}>
-                    <FormField field={FIELDS[2]} value={form.phone} error={touched.phone ? errors.phone : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <FormField field={FIELDS[3]} value={form.company} error={touched.company ? errors.company : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
+                    <Typography
+                      sx={{
+                        fontSize: "0.88rem",
+                        color: "#4a5a55",
+                        textAlign: "center",
+                        mb: 2.5,
+                        lineHeight: 1.8,
+                      }}
+                    >
+                      {POPUP.body}
+                    </Typography>
 
-                  {/* Row 3 — industry + size */}
-                  <Grid item xs={12} sm={6}>
-                    <FormField field={FIELDS[4]} value={form.industry} error={touched.industry ? errors.industry : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <FormField field={FIELDS[5]} value={form.size} error={touched.size ? errors.size : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
-
-                  {/* Row 4 — service + source */}
-                  <Grid item xs={12} sm={6}>
-                    <FormField field={FIELDS[6]} value={form.service} error={touched.service ? errors.service : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <FormField field={FIELDS[7]} value={form.source} error={touched.source ? errors.source : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
-
-                  {/* Row 5 — message full width */}
-                  <Grid item xs={12}>
-                    <FormField field={FIELDS[8]} value={form.message} error={touched.message ? errors.message : ""} onChange={handleChange} onBlur={handleBlur} />
-                  </Grid>
-
-                  {/* Submit */}
-                  <Grid item xs={12}>
-                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 2 }}>
-                      <Typography variant="caption" sx={{ opacity: 0.45 }}>
-                        🔒 Your data is never shared or sold.
-                      </Typography>
-                      <Tooltip title={hasErrors ? "Please fill in all required fields" : ""} placement="top">
-                        <span>
-                          <Button
-                            variant="contained"
-                            size="large"
-                            endIcon={submitting ? null : <SendIcon />}
-                            onClick={handleSubmit}
-                            disabled={submitting}
-                            sx={{
-                              background: GRAD,
-                              px: 5, py: 1.5,
-                              fontSize: "1rem",
-                              borderRadius: "12px",
-                              boxShadow: `0 8px 28px ${P}44`,
-                              "&:hover": { boxShadow: `0 12px 40px ${P}66`, transform: "translateY(-1px)" },
-                              "&:disabled": { background: `${P}40`, color: "#fff" },
-                              transition: "all .2s",
-                            }}
-                          >
-                            {submitting ? "Sending…" : "Submit Inquiry"}
-                          </Button>
-                        </span>
-                      </Tooltip>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Card>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
-      <Snackbar open={snack} autoHideDuration={5000} onClose={() => setSnack(false)} anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
-        <Alert severity="success" variant="filled" sx={{ background: S }}>
-          Message received! We'll be in touch within 24 hours.
-        </Alert>
-      </Snackbar>
-    </Box>
+                    <Button
+                      onClick={onClose}
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        background: `linear-gradient(135deg, ${PRIMARY}, #0f4c81)`,
+                        borderRadius: "11px",
+                        py: 1.4,
+                        fontWeight: 700,
+                        textTransform: "none",
+                        boxShadow: `0 8px 24px ${PRIMARY}35`,
+                        "&:hover": { boxShadow: `0 12px 30px ${PRIMARY}50` },
+                      }}
+                    >
+                      {POPUP.cta}
+                    </Button>
+                  </Box>
+                </Paper>
+              </motion.div>
+            </Box>
+          </>
+        )}
+      </AnimatePresence>
+    </Portal>
   );
 }
 
-// ============================================================
-// FOUNDER PROFILE COMPONENT
-// ============================================================
-// Stepper steps
-const EDUCATION_STEPS = [
-  {
-    label: "Doctorate in Chemistry",
-    institution: "Florida State University",
-    icon: <SchoolIcon />,
-    color: P,
-    detail: "Foundational scientific discipline — analytical precision, research methodology, and evidence-based decision-making.",
-  },
-  {
-    label: "MBA — International Business",
-    institution: "Saint Louis University",
-    icon: <BusinessIcon />,
-    color: S,
-    detail: "Specialization in cross-border commerce, global market dynamics, and multinational operations management.",
-  },
-  {
-    label: "Juris Doctor (Law Degree)",
-    institution: "Saint Louis University",
-    icon: <VerifiedIcon />,
-    color: P,
-    detail: "Grounding in U.S. contract law, corporate governance, and regulatory compliance — applied directly to client engagements.",
-  },
-];
+// ════════════════════════════════════════════════════════════
+// Main Component
+// ════════════════════════════════════════════════════════════
+export default function CRKLContact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    size: "",
+    message: "",
+  });
+  const [services, setServices] = useState({});
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+  const [submitted, setSubmitted] = useState(false);
 
-const CIVIC_STEPS = [
-  { year: "2012", label: "Joined Chesterfield Regional Chamber of Commerce", sub: "Led the Business Education Committee for ~3 years" },
-  { year: "2014–2019", label: "Board of Directors — Chamber of Commerce", sub: "Five-year tenure shaping regional business policy" },
-  { year: "2019", label: "Chairman of the Board", sub: "Chesterfield Regional Chamber of Commerce" },
-  { year: "2017–Present", label: "Finance & Admin Citizens Advisory Committee", sub: "City of Chesterfield — ongoing civic service" },
-];
+  // ── Field change ─────────────────────────────────────────
+  const handleChange = (field) => (e) => {
+    const val = e.target.value;
+    setForm((p) => ({ ...p, [field]: val }));
+    if (touched[field]) {
+      const msg = VALIDATORS[field] ? VALIDATORS[field](val) : "";
+      setErrors((p) => ({ ...p, [field]: msg }));
+    }
+  };
 
-const CAREER_HIGHLIGHTS = [
-  { icon: "🏭", title: "Mallinckrodt — Fortune 500", body: "Deep exposure to American corporate culture inside one of St. Louis's most demanding multinationals." },
-  { icon: "🎯", title: "Results-Based Culture", body: "Internalized goals-and-target-date-driven operations and zero tolerance for quality lapses." },
-  { icon: "💰", title: "Cost Discipline", body: "Mastery of cost discipline and financial accountability at enterprise scale." },
-  { icon: "🤝", title: "Trust & Reliability", body: "Built a career on the professional principle that trust is the non-negotiable foundation of every business relationship." },
-];
+  // ── Blur validation ──────────────────────────────────────
+  const handleBlur = (field) => () => {
+    setTouched((p) => ({ ...p, [field]: true }));
+    const msg = VALIDATORS[field] ? VALIDATORS[field](form[field]) : "";
+    setErrors((p) => ({ ...p, [field]: msg }));
+  };
 
-export function FounderProfile() {
-  const [activeEdu, setActiveEdu]     = useState(0);
-  const [activeCivic, setActiveCivic] = useState(0);
-  const [visible, setVisible]         = useState(false);
-  const ref = useRef(null);
+  const toggleService = (svc) => setServices((p) => ({ ...p, [svc]: !p[svc] }));
 
-  // Intersection observer for entrance animation
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
+  // ── Full validate on submit ──────────────────────────────
+  const validateAll = () => {
+    const fields = ["name", "email", "phone", "company", "size"];
+    const errs = {};
+    fields.forEach((f) => {
+      const msg = VALIDATORS[f] ? VALIDATORS[f](form[f]) : "";
+      if (msg) errs[f] = msg;
+    });
+    // At least one service selected
+    const anyService = Object.values(services).some(Boolean);
+    if (!anyService) errs.services = "Please select at least one service";
+    return errs;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errs = validateAll();
+    // Mark all as touched
+    setTouched({
+      name: true,
+      email: true,
+      phone: true,
+      company: true,
+      size: true,
+    });
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
+
+    // ── [EDIT: SUBMIT_HANDLER] ──────────────────────────
+    // Replace with your real API call:
+    //   await fetch("/api/contact", { method:"POST",
+    //     headers:{"Content-Type":"application/json"},
+    //     body: JSON.stringify({ ...form, services }) })
+    console.log("Form submitted:", { ...form, services });
+    // ───────────────────────────────────────────────────
+
+    setSubmitted(true);
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+      size: "",
+      message: "",
+    });
+    setServices({});
+    setTouched({});
+    setErrors({});
+  };
 
   return (
-    <Box ref={ref} sx={{ py: { xs: 8, md: 12 } }}>
-      <Container maxWidth="lg">
+    <>
+      {/* ── Outer container: fills viewport like Hero ─── */}
+      <Box
+        sx={{
+          width: "100%",
+          minHeight: "100vh",
+          pt: { xs: 10, md: 10 },
+          pb: { xs: 4, md: 6 },
+          px: { xs: 2, sm: 3, md: 10 },
+          borderRadius: { xs: "18px", md: "24px" },
+          overflow: "hidden",
+          border: "1px solid rgba(23, 54, 81, 0.1)",
 
-        {/* ── SECTION HEADER ── */}
-        <Fade in={visible} timeout={700}>
-          <Box sx={{ textAlign: "center", mb: { xs: 6, md: 8 } }}>
-            <Chip
-              icon={<VerifiedIcon sx={{ color: `${P} !important` }} />}
-              label="About Our Founder"
-              sx={{ mb: 2.5, background: `${P}14`, color: P, fontWeight: 700, fontSize: "0.78rem", letterSpacing: 0.8 }}
-            />
-            <Typography variant="h3" sx={{ fontWeight: 800, fontSize: { xs: "1.8rem", md: "2.5rem" }, mb: 2 }}>
-              Periasamy (Peri) Krishnamoorthy
-            </Typography>
-            <Typography sx={{ opacity: 0.6, maxWidth: 600, mx: "auto", lineHeight: 1.85 }}>
-              Born in Madurai. Built in America. Committed to Chesterfield. Over five decades of academic excellence, corporate experience, and civic leadership — all in service of the U.S. small business owner.
-            </Typography>
-          </Box>
-        </Fade>
-
-        {/* ── TOP IDENTITY CARD ── */}
-        <Fade in={visible} timeout={900}>
-          <Card sx={{
-            mb: 5, p: { xs: 3, md: 5 },
-            background: GRAD,
-            color: "#fff",
-            overflow: "hidden",
+          display: "flex",
+          flexDirection: { xs: "column", lg: "row" },
+        }}
+      >
+        {/* ══════════════════════════════════════════════
+            LEFT PANEL
+        ══════════════════════════════════════════════ */}
+        <Box
+          sx={{
+            width: { xs: "100%", lg: "45%" },
+            minHeight: { xs: "auto", lg: "100%" },
+            background: DARK_BG,
             position: "relative",
-          }}>
-            {/* decorative circle */}
-            <Box sx={{ position: "absolute", right: -60, top: -60, width: 240, height: 240, borderRadius: "50%", background: "rgba(255,255,255,0.08)", pointerEvents: "none" }} />
-            <Box sx={{ position: "absolute", right: 60, bottom: -80, width: 160, height: 160, borderRadius: "50%", background: "rgba(255,255,255,0.05)", pointerEvents: "none" }} />
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            px: { xs: 3.5, sm: 5, lg: 7 },
+            py: { xs: 5, lg: 0 },
+          }}
+        >
+          {/* Blobs */}
+          <Box
+            sx={{
+              position: "absolute",
+              top: "-20%",
+              right: "-20%",
+              width: 400,
+              height: 400,
+              borderRadius: "50%",
+              background: `${PRIMARY}22`,
+              filter: "blur(85px)",
+              pointerEvents: "none",
+            }}
+          />
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: "-14%",
+              left: "-12%",
+              width: 300,
+              height: 300,
+              borderRadius: "50%",
+              background: `${SECONDARY}14`,
+              filter: "blur(70px)",
+              pointerEvents: "none",
+            }}
+          />
+          {/* Grid texture */}
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              pointerEvents: "none",
+              opacity: 0.04,
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.5) 1px,transparent 1px)`,
+              backgroundSize: "32px 32px",
+            }}
+          />
 
-            <Grid container spacing={4} alignItems="center">
-              <Grid item xs={12} sm="auto">
-                <Avatar sx={{ width: 100, height: 100, fontSize: "2.6rem", background: "rgba(255,255,255,0.22)", border: "3px solid rgba(255,255,255,0.4)", mx: { xs: "auto", sm: 0 } }}>
-                  PK
-                </Avatar>
-              </Grid>
-              <Grid item xs={12} sm>
-                <Typography variant="h5" sx={{ fontWeight: 800, mb: 0.5 }}>Periasamy Krishnamoorthy</Typography>
-                <Typography sx={{ opacity: 0.88, mb: 2 }}>Founder & Director — CRKL Inc. · Chesterfield, Missouri</Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                  {["PhD Chemistry", "MBA Int'l Business", "JD Law", "IRS Enrolled Agent", "50+ Years U.S. Experience"].map((tag) => (
-                    <Chip key={tag} label={tag} size="small" sx={{ background: "rgba(255,255,255,0.2)", color: "#fff", fontWeight: 600, fontSize: "0.72rem" }} />
-                  ))}
-                </Box>
-              </Grid>
-            </Grid>
-          </Card>
-        </Fade>
+          <Box sx={{ position: "relative", zIndex: 1, maxWidth: 460 }}>
+            {/* Location chip */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, ease: EASE },
+              }}
+            >
+              <Chip
+                label={BRAND.chip}
+                size="small"
+                sx={{
+                  mb: 2.5,
+                  background: `${PRIMARY}2e`,
+                  color: SECONDARY,
+                  fontWeight: 700,
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.06em",
+                  border: `1px solid ${PRIMARY}55`,
+                }}
+              />
+            </motion.div>
 
-        {/* ── TWO-COLUMN: EDUCATION STEPPER + CAREER CARDS ── */}
-        <Grid container spacing={4} sx={{ mb: 4 }}>
+            {/* Headline — mirrors Hero h1 gradient */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.55, delay: 0.08, ease: EASE },
+              }}
+            >
+              <Typography
+                component="h2"
+                sx={{
+                  fontSize: { xs: "1.95rem", sm: "2.4rem", lg: "2.6rem" },
+                  fontWeight: 800,
+                  lineHeight: 1.15,
+                  letterSpacing: "-0.025em",
+                  mb: 2,
+                  color: "#fff",
+                  "& .grad": {
+                    background: `linear-gradient(135deg,${PRIMARY} 20%,${SECONDARY})`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  },
+                }}
+              >
+                Your books.
+                <br />
+                <span className="grad">Our discipline.</span>
+                <br />
+                Your growth.
+              </Typography>
+            </motion.div>
 
-          {/* Education Stepper */}
-          <Grid item xs={12} md={5}>
-            <Fade in={visible} timeout={1100}>
-              <Card sx={{ p: { xs: 3, md: 4 }, height: "100%", border: `1px solid ${P}20` }}>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 3 }}>
-                  <Box sx={{ width: 36, height: 36, borderRadius: "10px", background: `${P}18`, display: "flex", alignItems: "center", justifyContent: "center", color: P }}>
-                    <SchoolIcon sx={{ fontSize: "1.1rem" }} />
-                  </Box>
-                  <Typography variant="h6" sx={{ fontWeight: 800 }}>Academic Credentials</Typography>
-                </Box>
+            {/* About */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, delay: 0.16, ease: EASE },
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "0.83rem",
+                  color: "rgba(255,255,255,0.48)",
+                  lineHeight: 1.85,
+                  mb: 3,
+                }}
+              >
+                {ABOUT}
+              </Typography>
+            </motion.div>
 
-                <Stepper activeStep={activeEdu} orientation="vertical" nonLinear>
-                  {EDUCATION_STEPS.map((step, i) => (
-                    <Step key={i} completed={i < activeEdu}>
-                      <StepLabel
-                        onClick={() => setActiveEdu(i === activeEdu ? -1 : i)}
+            <Divider sx={{ borderColor: "rgba(255,255,255,0.07)", mb: 2.5 }} />
+
+            {/* Contact info */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { delay: 0.24, duration: 0.5 },
+              }}
+            >
+              {CONTACT_INFO.map((r) => (
+                <InfoRow
+                  key={r.label}
+                  Icon={r.Icon}
+                  label={r.label}
+                  value={r.value}
+                />
+              ))}
+            </motion.div>
+          </Box>
+        </Box>
+
+        {/* ══════════════════════════════════════════════
+            RIGHT PANEL — FORM
+            Scrollable only on mobile; fits on desktop
+        ══════════════════════════════════════════════ */}
+        <Box
+          sx={{
+            flex: 1,
+            height: { xs: "auto", lg: "100%" },
+            overflowY: { xs: "visible", lg: "auto" },
+            display: "flex",
+            alignItems: { xs: "flex-start", lg: "center" },
+            justifyContent: "center",
+            background: "#f3f8fc",
+            px: { xs: 3, sm: 5, lg: 5 },
+            py: { xs: 4, lg: 4 },
+            // Apply consistent two-line spacing for text and form controls
+            "& .contact-line-spacing, & .MuiTypography-root, & label, & .MuiFormLabel-root, & .MuiInputBase-input, & .MuiInputBase-inputMultiline, & input, & textarea, & .MuiButton-root":
+              {
+                lineHeight: 1.5,
+              },
+          }}
+        >
+          <Box sx={{ width: "100%", py: { lg: 2 } }}>
+            {/* Form header */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.55, ease: EASE },
+              }}
+            >
+              <Typography
+                sx={{
+                  display: "block",
+                  fontSize: "0.67rem",
+                  fontWeight: 700,
+                  color: PRIMARY,
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  mb: 0.5,
+                }}
+              >
+                Free Discovery Call
+              </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: 800,
+                  color: "#0d1f1c",
+                  letterSpacing: "-0.025em",
+                  mb: 0.5,
+                  fontSize: { xs: "1.7rem", sm: "2rem" },
+                }}
+              >
+                {BRAND.cta}
+              </Typography>
+              <Typography
+                sx={{ fontSize: "0.85rem", color: "#7a8a85", mb: 0.5 }}
+              >
+                {BRAND.ctaSub}
+              </Typography>
+            </motion.div>
+
+            {/* ── FORM ── */}
+            <Box component="form" onSubmit={handleSubmit} noValidate>
+              <Grid container spacing={3}>
+                {/* Name */}
+                <Grid item xs={12} sm={6}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.08, duration: 0.45, ease: EASE },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.85,
+                      }}
+                    >
+                      <FieldLabel required>Your Name</FieldLabel>
+                      <TextField
+                        fullWidth
+                        required
+                        size="small"
+                        placeholder="Enter your full name"
+                        value={form.name}
+                        onChange={handleChange("name")}
+                        onBlur={handleBlur("name")}
+                        error={!!errors.name}
+                        helperText={errors.name}
+                        sx={fieldSx}
+                      />
+                    </Box>
+                  </motion.div>
+                </Grid>
+
+                {/* Email */}
+                <Grid item xs={12} sm={6}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.12, duration: 0.45, ease: EASE },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.85,
+                      }}
+                    >
+                      <FieldLabel required>Work Email</FieldLabel>
+                      <TextField
+                        fullWidth
+                        required
+                        size="small"
+                        type="email"
+                        placeholder="name@company.com"
+                        value={form.email}
+                        onChange={handleChange("email")}
+                        onBlur={handleBlur("email")}
+                        error={!!errors.email}
+                        helperText={errors.email}
+                        sx={fieldSx}
+                      />
+                    </Box>
+                  </motion.div>
+                </Grid>
+
+                {/* Company */}
+                <Grid item xs={12} sm={6}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.16, duration: 0.45, ease: EASE },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.85,
+                      }}
+                    >
+                      <FieldLabel required>Company Name</FieldLabel>
+                      <TextField
+                        fullWidth
+                        required
+                        size="small"
+                        placeholder="Your business name"
+                        value={form.company}
+                        onChange={handleChange("company")}
+                        onBlur={handleBlur("company")}
+                        error={!!errors.company}
+                        helperText={errors.company}
+                        sx={fieldSx}
+                      />
+                    </Box>
+                  </motion.div>
+                </Grid>
+
+                {/* Phone */}
+                <Grid item xs={12} sm={6}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.2, duration: 0.45, ease: EASE },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.85,
+                      }}
+                    >
+                      <FieldLabel>Phone Number</FieldLabel>
+                      <TextField
+                        fullWidth
+                        size="small"
+                        placeholder="+1 (555) 000-0000"
+                        value={form.phone}
+                        onChange={handleChange("phone")}
+                        onBlur={handleBlur("phone")}
+                        error={!!errors.phone}
+                        helperText={errors.phone}
+                        sx={fieldSx}
+                      />
+                    </Box>
+                  </motion.div>
+                </Grid>
+
+                {/* Company size */}
+                <Grid item xs={12}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.24, duration: 0.45, ease: EASE },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.85,
+                      }}
+                    >
+                      <FieldLabel required>Company Size</FieldLabel>
+                      <FormControl fullWidth size="small" error={!!errors.size}>
+                        <Select
+                          displayEmpty
+                          value={form.size}
+                          onChange={handleChange("size")}
+                          onBlur={handleBlur("size")}
+                          renderValue={(value) =>
+                            value ? value : "Select company size"
+                          }
+                          sx={{
+                            borderRadius: "10px",
+                            background: "#ffffff",
+                            fontSize: "0.87rem",
+                            "& .MuiOutlinedInput-notchedOutline": {
+                              borderColor: "rgba(32, 71, 102, 0.18)",
+                            },
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                              borderColor: PRIMARY,
+                            },
+                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                              borderColor: PRIMARY,
+                              borderWidth: "1.5px",
+                            },
+                            "&.Mui-focused": {
+                              boxShadow: `0 0 0 3px ${PRIMARY}1e`,
+                            },
+                          }}
+                        >
+                          <MenuItem value="" disabled>
+                            Select company size
+                          </MenuItem>
+                          {SIZE_OPTIONS.map((s) => (
+                            <MenuItem key={s} value={s}>
+                              {s}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                        {errors.size && (
+                          <Typography
+                            sx={{
+                              fontSize: "0.72rem",
+                              color: "#d32f2f",
+                              mt: "3px",
+                              ml: "14px",
+                            }}
+                          >
+                            {errors.size}
+                          </Typography>
+                        )}
+                      </FormControl>
+                    </Box>
+                  </motion.div>
+                </Grid>
+
+                {/* Services */}
+                <Grid item xs={12}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.28, duration: 0.45, ease: EASE },
+                    }}
+                  >
+                    <FieldLabel required>Services you're exploring</FieldLabel>
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        border: `1px solid ${errors.services ? "#d32f2f" : "#d8e2de"}`,
+                        borderRadius: "10px",
+                        px: 2,
+                        py: 1.25,
+                        background: "#fff",
+                      }}
+                    >
+                      <Grid container spacing={1.2}>
+                        {SERVICES.map((svc) => (
+                          <Grid item xs={12} sm={6} key={svc}>
+                            <Box
+                              component="label"
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 1.1,
+                                width: "100%",
+                                minHeight: 52,
+                                px: 1.4,
+                                py: 1.1,
+                                borderRadius: "10px",
+                                border: `1px solid ${services[svc] ? `${PRIMARY}40` : "#dfe7e3"}`,
+                                background: services[svc]
+                                  ? `${PRIMARY}08`
+                                  : "#fff",
+                                cursor: "pointer",
+                                transition: "all 0.18s ease",
+                                "&:hover": { borderColor: `${PRIMARY}60` },
+                              }}
+                            >
+                              <Checkbox
+                                checked={!!services[svc]}
+                                onChange={() => toggleService(svc)}
+                                size="small"
+                                sx={{
+                                  color: "#c5d0cb",
+                                  "&.Mui-checked": { color: PRIMARY },
+                                  p: 0,
+                                  flexShrink: 0,
+                                }}
+                              />
+                              <Typography
+                                sx={{
+                                  fontSize: "0.82rem",
+                                  color: services[svc] ? PRIMARY : "#3a4a45",
+                                  fontWeight: services[svc] ? 700 : 500,
+                                  lineHeight: 1.4,
+                                }}
+                              >
+                                {svc}
+                              </Typography>
+                            </Box>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Paper>
+                    {errors.services && (
+                      <Typography
                         sx={{
-                          cursor: "pointer",
-                          "& .MuiStepLabel-label": { fontWeight: i === activeEdu ? 700 : 500, color: i === activeEdu ? step.color : "inherit" },
-                          "& .MuiStepIcon-root": { color: i === activeEdu ? step.color : "action.disabled" },
-                          "& .MuiStepIcon-root.Mui-active": { color: step.color },
+                          fontSize: "0.72rem",
+                          color: "#d32f2f",
+                          mt: "3px",
+                          ml: "14px",
                         }}
                       >
-                        <Box>
-                          <Typography sx={{ fontWeight: 700, fontSize: "0.92rem", lineHeight: 1.3 }}>{step.label}</Typography>
-                          <Typography variant="caption" sx={{ opacity: 0.6 }}>{step.institution}</Typography>
-                        </Box>
-                      </StepLabel>
-                      <StepContent>
-                        <Typography variant="body2" sx={{ opacity: 0.75, lineHeight: 1.75, py: 1 }}>
-                          {step.detail}
-                        </Typography>
-                      </StepContent>
-                    </Step>
-                  ))}
-                </Stepper>
-                <Typography variant="caption" sx={{ opacity: 0.4, display: "block", mt: 2 }}>
-                  Click a step to expand details
-                </Typography>
-              </Card>
-            </Fade>
-          </Grid>
-
-          {/* Career highlight cards */}
-          <Grid item xs={12} md={7}>
-            <Fade in={visible} timeout={1300}>
-              <Box>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 2 }}>
-                  <Box sx={{ width: 36, height: 36, borderRadius: "10px", background: `${S}18`, display: "flex", alignItems: "center", justifyContent: "center", color: S }}>
-                    <TrophyIcon sx={{ fontSize: "1.1rem" }} />
-                  </Box>
-                  <Typography variant="h6" sx={{ fontWeight: 800 }}>Career at Mallinckrodt</Typography>
-                </Box>
-                <Typography variant="body2" sx={{ opacity: 0.6, mb: 3, lineHeight: 1.75 }}>
-                  His years at Mallinckrodt — a multinational corporation headquartered in St. Louis — gave him deep fluency in how American business truly operates at the highest level.
-                </Typography>
-                <Grid container spacing={2}>
-                  {CAREER_HIGHLIGHTS.map((c, i) => (
-                    <Grid item xs={12} sm={6} key={i}>
-                      <Card sx={{
-                        p: 2.5, height: "100%",
-                        border: `1px solid ${P}14`,
-                        transition: "all .22s",
-                        "&:hover": { border: `1px solid ${P}55`, transform: "translateY(-3px)", boxShadow: `0 12px 36px ${P}18` },
-                      }}>
-                        <Typography sx={{ fontSize: "1.6rem", mb: 1 }}>{c.icon}</Typography>
-                        <Typography sx={{ fontWeight: 700, mb: 0.5, fontSize: "0.9rem" }}>{c.title}</Typography>
-                        <Typography variant="body2" sx={{ opacity: 0.65, lineHeight: 1.7, fontSize: "0.82rem" }}>{c.body}</Typography>
-                      </Card>
-                    </Grid>
-                  ))}
+                        {errors.services}
+                      </Typography>
+                    )}
+                  </motion.div>
                 </Grid>
-              </Box>
-            </Fade>
-          </Grid>
-        </Grid>
 
-        {/* ── CIVIC LEADERSHIP STEPPER (FULL WIDTH) ── */}
-        <Fade in={visible} timeout={1500}>
-          <Card sx={{ p: { xs: 3, md: 5 }, border: `1px solid ${S}25`, background: (t) => t.palette.mode === "dark" ? `${S}08` : `${S}06` }}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 4 }}>
-              <Box sx={{ width: 36, height: 36, borderRadius: "10px", background: `${S}22`, display: "flex", alignItems: "center", justifyContent: "center", color: S }}>
-                <CivicIcon sx={{ fontSize: "1.1rem" }} />
-              </Box>
-              <Box>
-                <Typography variant="h6" sx={{ fontWeight: 800 }}>Civic Leadership</Typography>
-                <Typography variant="caption" sx={{ opacity: 0.55 }}>Chesterfield, Missouri — Community Service Record</Typography>
-              </Box>
-            </Box>
-
-            {/* Horizontal stepper on md+, vertical on xs */}
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
-              <Stepper activeStep={activeCivic} alternativeLabel nonLinear>
-                {CIVIC_STEPS.map((step, i) => (
-                  <Step key={i} completed={i <= activeCivic}>
-                    <StepLabel
-                      onClick={() => setActiveCivic(i)}
+                {/* Message */}
+                <Grid item xs={20}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.32, duration: 0.45, ease: EASE },
+                    }}
+                    style={{ width: "100%" }}
+                  >
+                    <Box
                       sx={{
-                        cursor: "pointer",
-                        "& .MuiStepLabel-label": { fontWeight: i === activeCivic ? 700 : 500 },
-                        "& .MuiStepIcon-root.Mui-active": { color: S },
-                        "& .MuiStepIcon-root.Mui-completed": { color: S },
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.85,
+                        width: "210%",
+                        maxWidth: "none",
+                        minWidth: 0,
+                        flexBasis: "100%",
                       }}
                     >
-                      <Typography sx={{ fontSize: "0.78rem", fontWeight: 700, color: S }}>{step.year}</Typography>
-                      <Typography sx={{ fontSize: "0.82rem", lineHeight: 1.4 }}>{step.label}</Typography>
-                    </StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-              <Box sx={{ mt: 3, p: 3, borderRadius: 3, background: `${S}12`, border: `1px solid ${S}28` }}>
-                <Typography sx={{ fontWeight: 700, mb: 0.5 }}>{CIVIC_STEPS[activeCivic].label}</Typography>
-                <Typography variant="body2" sx={{ opacity: 0.7 }}>{CIVIC_STEPS[activeCivic].sub}</Typography>
-              </Box>
+                      <FieldLabel>Describe your challenge</FieldLabel>
+                      <Paper
+                        elevation={0}
+                        sx={{
+                          border: "1px solid #d8e2de",
+                          borderRadius: "10px",
+                          px: 2,
+                          py: 1.25,
+                          background: "#fff",
+                          width: "100%",
+                          maxWidth: "none",
+                          minWidth: 0,
+                          boxSizing: "border-box",
+                        }}
+                      >
+                        <TextField
+                          fullWidth
+                          size="small"
+                          placeholder="e.g. We're behind on reconciliations, or our IT team is stretched thin…"
+                          value={form.message}
+                          onChange={handleChange("message")}
+                          multiline
+                          rows={7}
+                          variant="standard"
+                          InputProps={{ disableUnderline: true }}
+                          sx={{
+                            width: "100%",
+                            "& .MuiInputBase-root": {
+                              alignItems: "flex-start",
+                              width: "100%",
+                              "&:before": { display: "none" },
+                              "&:after": { display: "none" },
+                            },
+                            "& .MuiInput-underline:before, & .MuiInput-underline:after":
+                              { display: "none" },
+                            "& .MuiInputBase-inputMultiline": {
+                              paddingTop: "8px",
+                              lineHeight: 1.55,
+                              width: "100%",
+                            },
+                            "& textarea": {
+                              width: "100% !important",
+                              border: "none",
+                              outline: "none",
+                              boxShadow: "none",
+                              resize: "vertical",
+                            },
+                          }}
+                        />
+                      </Paper>
+
+                      <Box
+                        sx={{
+                          width: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "flex-start",
+                          mt: 2,
+                        }}
+                      >
+                        <motion.div
+                          whileHover={{ scale: 1.012 }}
+                          whileTap={{ scale: 0.975 }}
+                          style={{ width: "100%", maxWidth: 340 }}
+                        >
+                          <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            endIcon={<EastIcon />}
+                            sx={{
+                              background: `linear-gradient(135deg,${PRIMARY} 0%,#0c4037 100%)`,
+                              borderRadius: "11px",
+                              py: 1.55,
+                              fontWeight: 800,
+                              fontSize: "0.95rem",
+                              textTransform: "none",
+                              letterSpacing: "0.005em",
+                              boxShadow: `0 6px 24px ${PRIMARY}40`,
+                              transition: "box-shadow 0.25s",
+                              "&:hover": {
+                                boxShadow: `0 12px 32px ${PRIMARY}55`,
+                              },
+                            }}
+                          >
+                            {BRAND.cta}
+                          </Button>
+                        </motion.div>
+                        <Typography
+                          sx={{
+                            fontSize: "0.73rem",
+                            color: "#a0b0ab",
+                            textAlign: "center",
+                            mt: 1.4,
+                          }}
+                        >
+                          🔒 100% confidential · No spam, ever.
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </motion.div>
+                </Grid>
+              </Grid>
             </Box>
+          </Box>
+        </Box>
+      </Box>
 
-            {/* Mobile vertical stepper */}
-            <Box sx={{ display: { xs: "block", md: "none" } }}>
-              <Stepper activeStep={activeCivic} orientation="vertical" nonLinear>
-                {CIVIC_STEPS.map((step, i) => (
-                  <Step key={i} completed={i < activeCivic}>
-                    <StepLabel
-                      onClick={() => setActiveCivic(i)}
-                      sx={{
-                        cursor: "pointer",
-                        "& .MuiStepIcon-root.Mui-active": { color: S },
-                        "& .MuiStepIcon-root.Mui-completed": { color: S },
-                      }}
-                    >
-                      <Typography sx={{ fontSize: "0.76rem", fontWeight: 700, color: S }}>{step.year}</Typography>
-                      <Typography sx={{ fontSize: "0.85rem", fontWeight: i === activeCivic ? 700 : 500 }}>{step.label}</Typography>
-                    </StepLabel>
-                    <StepContent>
-                      <Typography variant="body2" sx={{ opacity: 0.7, py: 1 }}>{step.sub}</Typography>
-                    </StepContent>
-                  </Step>
-                ))}
-              </Stepper>
-            </Box>
-
-            <Divider sx={{ my: 4 }} />
-
-            {/* Bottom quote */}
-            <Box sx={{ textAlign: "center" }}>
-              <Typography variant="body1" sx={{ fontStyle: "italic", opacity: 0.75, maxWidth: 580, mx: "auto", lineHeight: 1.85 }}>
-                "I have lived and worked in Chesterfield for over 30 years. I understand what American business owners need — and I have built CRKL to deliver exactly that."
-              </Typography>
-              <Typography variant="caption" sx={{ opacity: 0.45, display: "block", mt: 1.5 }}>
-                — Periasamy Krishnamoorthy, Founder
-              </Typography>
-            </Box>
-          </Card>
-        </Fade>
-
-      </Container>
-    </Box>
+      {/* ── SUCCESS POPUP ─────────────────────────────── */}
+      <SuccessPopup open={submitted} onClose={() => setSubmitted(false)} />
+    </>
   );
 }
