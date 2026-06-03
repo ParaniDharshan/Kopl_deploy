@@ -187,7 +187,7 @@ export default function MissionVision() {
           >
             KOPL is a India corporation registered in the state of Tamilnadu.
             Peri founded it with one conviction: that small businesses in
-            Chesterfield deserve access to the same high-quality, cost-effective
+            Madurai deserve access to the same high-quality, cost-effective
             outsourcing that large corporations have long benefited from — and
             they deserve it with the trust, accountability, and management
             structure that makes it genuinely viable.
