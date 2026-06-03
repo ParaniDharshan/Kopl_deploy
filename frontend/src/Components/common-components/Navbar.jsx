@@ -100,16 +100,6 @@ function Navbar({ mode, toggleMode }) {
                 display: "block",
               }}
             />
-            <Typography
-              sx={{
-                fontSize: "0.7rem",
-                opacity: 0.55,
-                display: { xs: "none", sm: "block" },
-                color: (theme) => theme.palette.text.primary,
-              }}
-            >
-              U.S.-Managed Business Outsourcing
-            </Typography>
           </Box>
 
           {/* Desktop Nav */}
