@@ -55,7 +55,7 @@ export default function ThreePillars() {
             }}
           >
             Every service is delivered through KOPL's dedicated professionals in
-            Madurai — managed from Chesterfield, Missouri.
+            Madurai.
           </Typography>
         </Box>
 

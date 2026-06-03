@@ -19,14 +19,14 @@ const steps = [
     label: "Tell us what you need",
     icon: <PhoneInTalk sx={{ fontSize: 28 }} />,
     description:
-      "A 30-minute discovery call with CRKL Inc. is all it takes to scope your accounting or IT requirements, timelines, and reporting preferences.",
+      "A 30-minute discovery call with KOPL is all it takes to scope your accounting or IT requirements, timelines, and reporting preferences.",
     tag: "Step 01",
   },
   {
     label: "We match and set up",
     icon: <VerifiedUser sx={{ fontSize: 28 }} />,
     description:
-      "CRKL assigns qualified professionals through KOPL, sets up secure communication channels, and establishes document workflows — all before day one.",
+      "KOPL assigns qualified professionals, sets up secure communication channels, and establishes document workflows — all before day one.",
     tag: "Step 02",
   },
   {
@@ -312,3 +312,4 @@ export default function HowItWorks() {
     </Box>
   );
 }
+

@@ -180,12 +180,12 @@ export default function MissionVision() {
             variant="h2"
             sx={{ fontSize: { xs: "2rem", md: "2.6rem" }, mb: 2 }}
           >
-            About CRKL
+            About KOPL
           </Typography>
           <Typography
             sx={{ opacity: 0.65, mx: "auto", lineHeight: 1.8, mb: 2 }}
           >
-            CRKL Inc. is a U.S. corporation registered in the state of Missouri.
+            KOPL is a India corporation registered in the state of Tamilnadu.
             Peri founded it with one conviction: that small businesses in
             Chesterfield deserve access to the same high-quality, cost-effective
             outsourcing that large corporations have long benefited from — and
@@ -255,3 +255,4 @@ export default function MissionVision() {
     </Box>
   );
 }
+

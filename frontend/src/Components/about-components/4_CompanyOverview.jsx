@@ -40,9 +40,9 @@ export default function CompanyOverview() {
         >
           {[
             {
-              title: "CRKL Inc. — Chesterfield, MO",
+              title: "KOPL — Chesterfield, MO",
               sub: "U.S.-Facing Corporation",
-              desc: "A U.S.-registered corporation in Chesterfield, Missouri. Your contract, your contact, your accountability — all here in the U.S. CRKL Inc. is your single point of contact for every business, contractual, and quality-related matter.",
+              desc: "A U.S.-registered corporation in Chesterfield, Missouri. Your contract, your contact, your accountability — all here in the U.S. KOPL is your single point of contact for every business, contractual, and quality-related matter.",
               color: PRIMARY,
               icon: "🇺🇸",
             },
@@ -129,3 +129,4 @@ export default function CompanyOverview() {
     </Box>
   );
 }
+

@@ -37,18 +37,18 @@ function Footer({ mode }) {
                 mb: 1,
               }}
             >
-              CRKL Inc.
+              KOPL
             </Typography>
             <Typography
               variant="body2"
               sx={{ opacity: 0.55, lineHeight: 1.8, mb: 1 }}
             >
-              U.S.-Managed Business Outsourcing
+              India -Managed Business Outsourcing
               <br />
-              Chesterfield, Missouri
+              Madurai, Tamilnadu
             </Typography>
             <Typography variant="caption" sx={{ opacity: 0.4 }}>
-              crklinc.com
+              kopl.com
             </Typography>
           </Box>
           <Box>
@@ -87,7 +87,7 @@ function Footer({ mode }) {
         {/*<Divider sx={{ my:4, borderColor:"rgba(255,255,255,0.08)" }} />
         <Box sx={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:1 }}>
           <Typography variant="caption" sx={{ opacity:0.35 }}>
-            © {new Date().getFullYear()} CRKL Inc. All rights reserved. Chesterfield, Missouri.
+            © {new Date().getFullYear()} KOPL All rights reserved. Chesterfield, Missouri.
           </Typography>
           <Typography variant="caption" sx={{ opacity:0.35 }}>
             Privacy Policy · Terms of Service
@@ -99,3 +99,4 @@ function Footer({ mode }) {
 }
 
 export default Footer;
+

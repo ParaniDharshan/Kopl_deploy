@@ -11,18 +11,22 @@ import {
   IconButton,
   Divider,
   useTheme,
+  Stack,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BusinessIcon from "@mui/icons-material/Business";
 import GroupsIcon from "@mui/icons-material/Groups";
 import PersonIcon from "@mui/icons-material/Person";
+import { LinkedIn } from "@mui/icons-material";
+import { MailIcon } from "lucide-react";
 import { alpha } from "@mui/material/styles";
 import { PRIMARY, SECONDARY } from "../../Constants.js";
 
-// Local images for About intro
+// Images
 const OFFICE_IMG = new URL("../../assets/Office/Conference Hall.webp", import.meta.url).href;
-const LEADER_IMG = new URL("../../assets/Our Team/2.webp", import.meta.url).href;
+const TEAM_IMG = new URL("../../assets/Events/Annual Conference/IMG20250605214643.webp", import.meta.url).href;
+import PERI_SIR_IMAGE from "../../assets/Images/Peri_Sir_Image.png";
 
 // ─── Content Data ─────────────────────────────────────────────────────────────
 
@@ -37,53 +41,15 @@ const TEAM_BULLETS = [
   "Degree-qualified professionals with U.S. accounting, finance, and IT training",
   "Fast learners with proven ability to adapt to client-specific processes",
   "Committed to consistent, high-quality output — not intermittent performance",
-  "Directly managed by KOPL leadership, overseen by CRKL Inc. from Chesterfield",
+  "Directly managed by CRKL Inc leadership, overseen by CRKL Inc from Chesterfield",
 ];
 
-const LEADERSHIP_TAGS = [
-  "Project Management",
-  "Technology Execution",
-  "TCS Alumni",
-  "Avgira Technologies",
-  "Multi-lingual",
+const PERI_TAGS = [
+  "30+ yrs Chesterfield",
+  "PhD Chemistry",
+  "MBA + JD",
+  "Chamber Chairman 2019",
 ];
-
-const LEADERSHIP_LANGS = ["English", "Hindi", "Tamil", "Telugu"];
-
-// ─── MediaSlot: dashed placeholder for images/video ──────────────────────────
-
-function MediaSlot({ label, icon: Icon, color, minH = 280 }) {
-  return (
-    <Box
-      sx={{
-        height: "100%",
-        minHeight: minH,
-        borderRadius: 3,
-        background: `linear-gradient(135deg, ${alpha(color, 0.1)}, ${alpha(color, 0.03)})`,
-        border: `1.5px dashed ${alpha(color, 0.3)}`,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 1.5,
-        p: 3,
-      }}
-    >
-      <Icon sx={{ fontSize: 42, color: alpha(color, 0.45) }} />
-      <Typography
-        sx={{
-          fontSize: "0.8rem",
-          fontWeight: 600,
-          color: alpha(color, 0.5),
-          textAlign: "center",
-          letterSpacing: 0.4,
-        }}
-      >
-        {label}
-      </Typography>
-    </Box>
-  );
-}
 
 // ─── BulletList ───────────────────────────────────────────────────────────────
 
@@ -111,14 +77,11 @@ function BulletList({ items, color }) {
   );
 }
 
-// ─── SectionBlock: chip + two-column row (content | media, alternating) ───────
-//   reverse=false → content LEFT,  media RIGHT
-//   reverse=true  → media LEFT,    content RIGHT  (via row-reverse)
+// ─── SectionBlock ─────────────────────────────────────────────────────────────
 
 function SectionBlock({ label, labelIcon, labelColor, reverse, mediaSlot, children }) {
   return (
     <Box>
-      {/* Section chip — always full-width above the row */}
       <Chip
         icon={React.cloneElement(labelIcon, { style: { fontSize: 14 } })}
         label={label}
@@ -132,7 +95,6 @@ function SectionBlock({ label, labelIcon, labelColor, reverse, mediaSlot, childr
         }}
       />
 
-      {/* Two-column row */}
       <Box
         sx={{
           display: "flex",
@@ -141,7 +103,6 @@ function SectionBlock({ label, labelIcon, labelColor, reverse, mediaSlot, childr
           alignItems: "stretch",
         }}
       >
-        {/* Content column — grows to fill remaining space */}
         <Box
           sx={{
             flex: 1,
@@ -154,13 +115,7 @@ function SectionBlock({ label, labelIcon, labelColor, reverse, mediaSlot, childr
           {children}
         </Box>
 
-        {/* Media column — fixed width, never shrinks */}
-        <Box
-          sx={{
-            width: { xs: "100%", md: "42%" },
-            flexShrink: 0,
-          }}
-        >
+        <Box sx={{ width: { xs: "100%", md: "42%" }, flexShrink: 0 }}>
           {mediaSlot}
         </Box>
       </Box>
@@ -168,7 +123,7 @@ function SectionBlock({ label, labelIcon, labelColor, reverse, mediaSlot, childr
   );
 }
 
-// ─── ABCDialog: full-screen modal ────────────────────────────────────────────
+// ─── KOPLDialog ───────────────────────────────────────────────────────────────
 
 function KOPLDialog({ open, onClose }) {
   const theme = useTheme();
@@ -212,7 +167,7 @@ function KOPLDialog({ open, onClose }) {
         >
           <Box>
             <Chip
-              label="India Delivery Arm"
+              label="US Delivery Arm"
               size="small"
               sx={{
                 mb: 0.5,
@@ -226,10 +181,10 @@ function KOPLDialog({ open, onClose }) {
               variant="h5"
               sx={{ fontWeight: 800, fontSize: { xs: "1.2rem", md: "1.5rem" }, lineHeight: 1.2 }}
             >
-              Kamala Outsourcing Private Limited — Full Overview
+              CRKL Inc — Full Overview
             </Typography>
             <Typography sx={{ opacity: 0.55, fontSize: "0.85rem", mt: 0.25 }}>
-              Madurai, Tamil Nadu · Founded by M. Peri Periasamy
+              Chesterfield, Missouri · Founded by M. Peri Periasamy
             </Typography>
           </Box>
 
@@ -247,13 +202,7 @@ function KOPLDialog({ open, onClose }) {
       </DialogTitle>
 
       {/* ── Scrollable body ── */}
-      <DialogContent
-        sx={{
-          px: 0,
-          py: 0,
-          overflowY: "auto",
-        }}
-      >
+      <DialogContent sx={{ px: 0, py: 0, overflowY: "auto" }}>
         <Box
           sx={{
             maxWidth: 1100,
@@ -268,7 +217,7 @@ function KOPLDialog({ open, onClose }) {
 
           {/* ── 1. The Office — image RIGHT ── */}
           <SectionBlock
-            label="The KOPL Office"
+            label="The CRKL Inc Office"
             labelIcon={<BusinessIcon />}
             labelColor={PRIMARY}
             reverse={false}
@@ -276,7 +225,7 @@ function KOPLDialog({ open, onClose }) {
               <Box
                 component="img"
                 src={OFFICE_IMG}
-                alt="KOPL Office - Conference Hall"
+                alt="CRKL Inc Office - Conference Hall"
                 sx={{
                   width: "100%",
                   height: "100%",
@@ -291,7 +240,7 @@ function KOPLDialog({ open, onClose }) {
               A professional workspace built for client delivery
             </Typography>
             <Typography sx={{ opacity: 0.72, lineHeight: 1.9, mb: 2.5, fontSize: "0.95rem" }}>
-              All client work is performed at KOPL's dedicated professional office in Madurai.
+              All client work is performed at CRKL Inc's dedicated professional office in Chesterfield.
               The workspace is purpose-built for secure, focused client work — equipped with
               the IT infrastructure, communication tools, and data security protocols required
               to handle U.S. business operations from day one.
@@ -301,83 +250,145 @@ function KOPLDialog({ open, onClose }) {
 
           <Divider sx={{ borderColor: alpha(PRIMARY, 0.1) }} />
 
-          {/* ── 2. Leadership — image LEFT (reverse) ── */}
+          {/* ── 2. Founder — Peri (moved from FounderSection) — image LEFT (reverse) ── */}
           <SectionBlock
-            label="KOPL Leadership"
+            label="Our Founder"
             labelIcon={<PersonIcon />}
-            labelColor={SECONDARY}
+            labelColor={PRIMARY}
             reverse={true}
             mediaSlot={
               <Box
-                component="img"
-                src={LEADER_IMG}
-                alt="KOPL Leadership - Beulah Radhakrishnan"
                 sx={{
+                  position: "relative",
                   width: "100%",
                   height: "100%",
-                  minHeight: { xs: 220, md: 320 },
-                  objectFit: "cover",
                   borderRadius: 3,
+                  overflow: "hidden",
+                  minHeight: { xs: 220, md: 340 },
+                  boxShadow: 3,
+                  "&:hover .overlay": { opacity: 1 },
                 }}
-              />
+              >
+                <Box
+                  component="img"
+                  src={PERI_SIR_IMAGE}
+                  alt="M. Peri Periasamy"
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+                <Box
+                  className="overlay"
+                  sx={{
+                    position: "absolute",
+                    inset: 0,
+                    display: "flex",
+                    alignItems: "flex-end",
+                    p: 2,
+                    background:
+                      "linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(3,18,33,0.78) 100%)",
+                    color: "#fff",
+                    opacity: 0,
+                    transition: "opacity 0.3s ease",
+                  }}
+                >
+                  <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap", gap: 1 }}>
+                    <Button
+                      href="mailto:peri@example.com"
+                      variant="contained"
+                      size="small"
+                      onClick={(e) => e.stopPropagation()}
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: 700,
+                        borderRadius: 999,
+                        bgcolor: "transparent",
+                        color: "#fff",
+                        backdropFilter: "blur(10px)",
+                      }}
+                    >
+                      <MailIcon />
+                    </Button>
+                    <Button
+                      href="https://www.linkedin.com/in/peri-periasamy"
+                      target="_blank"
+                      rel="noreferrer"
+                      variant="contained"
+                      size="small"
+                      onClick={(e) => e.stopPropagation()}
+                      sx={{
+                        fontWeight: 700,
+                        borderRadius: 999,
+                        bgcolor: "transparent",
+                        color: "#fff",
+                        backdropFilter: "blur(10px)",
+                      }}
+                    >
+                      <LinkedIn />
+                    </Button>
+                  </Stack>
+                </Box>
+              </Box>
             }
           >
             <Typography variant="h6" sx={{ fontWeight: 800, mb: 0.4, fontSize: "1.15rem" }}>
-              Beulah Radhakrishnan
+              M. Peri Periasamy
             </Typography>
-            <Typography sx={{ color: SECONDARY, fontWeight: 700, fontSize: "0.88rem", mb: 0.4 }}>
-              General Manager, KOPL
+            <Typography sx={{ color: PRIMARY, fontWeight: 700, fontSize: "0.88rem", mb: 0.4 }}>
+              Founder & CEO, CRKL INC.
             </Typography>
             <Typography sx={{ opacity: 0.5, fontSize: "0.8rem", mb: 2 }}>
-              B.Tech — Information Technology
+              PhD Chemistry · MBA · JD (International Business)
             </Typography>
 
+            <Typography sx={{ opacity: 0.74, lineHeight: 1.9, mb: 1.5, fontSize: "0.95rem" }}>
+              Peri was born and raised in Madurai, Tamil Nadu, India. His father owned a small
+              hardware distribution company — and from his earliest years, Peri worked there
+              during summers and college breaks, learning what it truly means to operate a
+              small business.
+            </Typography>
             <Typography sx={{ opacity: 0.74, lineHeight: 1.9, mb: 2.5, fontSize: "0.95rem" }}>
-              Beulah leads core operations and organisational development at KOPL. She brings
-              over five years of consulting experience with CRKL Inc. and nearly three
-              years as a Software Developer at Tata Consultancy Services — a combination
-              of technical depth and business management capability directly applied to
-              client engagement delivery. Her background also includes consulting at
-              Avgira Technologies and entrepreneurial leadership across multiple ventures.
+              He moved to the United States more than 50 years ago, earned a doctorate at
+              Florida State University, then an MBA and Law degree from Saint Louis University
+              with a concentration in international business. He has lived in Chesterfield for
+              over 30 years, served on the Chamber Board of Directors, and chaired the Chamber
+              in 2019.
             </Typography>
 
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.8, mb: 1.8 }}>
-              {LEADERSHIP_TAGS.map((t) => (
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.8, mb: 2.5 }}>
+              {PERI_TAGS.map((t) => (
                 <Chip
                   key={t}
                   label={t}
                   size="small"
-                  sx={{ background: `${PRIMARY}15`, color: PRIMARY, fontWeight: 600, fontSize: "0.7rem" }}
-                />
-              ))}
-            </Box>
-
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.8, mb: 2.5 }}>
-              {LEADERSHIP_LANGS.map((l) => (
-                <Chip
-                  key={l}
-                  label={l}
-                  size="small"
-                  variant="outlined"
-                  sx={{ borderColor: `${SECONDARY}55`, color: SECONDARY, fontSize: "0.7rem" }}
+                  sx={{
+                    background: `${SECONDARY}15`,
+                    color: SECONDARY,
+                    fontWeight: 600,
+                    fontSize: "0.7rem",
+                  }}
                 />
               ))}
             </Box>
 
             <Box
               sx={{
-                borderLeft: `3px solid ${SECONDARY}`,
+                borderLeft: `3px solid ${PRIMARY}`,
                 pl: 2,
                 py: 0.75,
-                background: alpha(SECONDARY, 0.05),
+                background: alpha(PRIMARY, 0.05),
                 borderRadius: "0 6px 6px 0",
               }}
             >
               <Typography sx={{ fontStyle: "italic", opacity: 0.72, fontSize: "0.92rem", lineHeight: 1.6 }}>
-                "Leadership is about coordination, clarity, and care."
+                "Both experiences allowed me to better understand the business needs of
+                small companies in the Chesterfield region."
               </Typography>
               <Typography sx={{ fontSize: "0.74rem", opacity: 0.48, mt: 0.5, fontWeight: 600 }}>
-                — Beulah Radhakrishnan, General Manager, KOPL
+                — M. Peri Periasamy, Founder
               </Typography>
             </Box>
           </SectionBlock>
@@ -386,7 +397,7 @@ function KOPLDialog({ open, onClose }) {
 
           {/* ── 3. The Team — image RIGHT ── */}
           <SectionBlock
-            label="The KOPL Team"
+            label="The CRKL Inc Team"
             labelIcon={<GroupsIcon />}
             labelColor={PRIMARY}
             reverse={false}
@@ -394,7 +405,7 @@ function KOPLDialog({ open, onClose }) {
               <Box
                 component="img"
                 src={TEAM_IMG}
-                alt="KOPL Team"
+                alt="CRKL Inc Team"
                 sx={{
                   width: "100%",
                   height: "100%",
@@ -409,9 +420,9 @@ function KOPLDialog({ open, onClose }) {
               Selected for qualification, discipline, and delivery
             </Typography>
             <Typography sx={{ opacity: 0.72, lineHeight: 1.9, mb: 2.5, fontSize: "0.95rem" }}>
-              KOPL's professionals are selected for their qualifications, their discipline,
+              CRKL Inc's professionals are selected for their qualifications, their discipline,
               and their demonstrated capacity to deliver to U.S. business standards. Every
-              team member is directly managed by KOPL leadership and overseen by CRKL Inc.
+              team member is directly managed by CRKL Inc leadership and overseen by CRKL Inc
               from Chesterfield.
             </Typography>
             <BulletList items={TEAM_BULLETS} color={SECONDARY} />
@@ -445,7 +456,7 @@ export default function KOPLIntroduction() {
           <Box sx={{ mb: { xs: 3, md: 4 } }}>
             <Chip
               icon={<LocationOnIcon sx={{ fontSize: "14px !important" }} />}
-              label="Madurai, Tamil Nadu — India Delivery"
+              label="Chesterfield, Missouri — US Delivery"
               sx={{
                 mb: 2,
                 background: `${SECONDARY}20`,
@@ -457,7 +468,13 @@ export default function KOPLIntroduction() {
 
             <Typography
               variant="h2"
-              sx={{ fontSize: { xs: "1.85rem", md: "2.5rem" }, fontWeight: 800, mb: 2, maxWidth: 680, lineHeight: 1.25 }}
+              sx={{
+                fontSize: { xs: "1.85rem", md: "2.5rem" },
+                fontWeight: 800,
+                mb: 2,
+                maxWidth: 680,
+                lineHeight: 1.25,
+              }}
             >
               Introducing{" "}
               <Box
@@ -468,27 +485,42 @@ export default function KOPLIntroduction() {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                Kamala Outsourcing Private Limited
+                CRKL Inc
               </Box>
             </Typography>
 
             <Typography
-              sx={{ opacity: 0.75, lineHeight: 1.9, fontSize: { xs: "0.98rem", md: "1.05rem" }, maxWidth: 760, mb: 1 }}
+              sx={{
+                opacity: 0.75,
+                lineHeight: 1.9,
+                fontSize: { xs: "0.98rem", md: "1.05rem" },
+                maxWidth: 760,
+                mb: 1,
+              }}
             >
-              KOPL Limited is the India-based delivery arm of CRKL Inc., founded by{" "}
-              <Box component="span" sx={{ fontWeight: 700, opacity: 1 }}>M. Peri Periasamy</Box>
-              {" "}— the same founder who leads operations in Chesterfield. It is not a
-              third-party vendor and not an agency with a separate agenda. KOPL is where all
-              client outsourcing work is carried out, staffed from Madurai's large, educated,
+              CRKL Inc is the US-based outsourcing company, founded by{" "}
+              <Box component="span" sx={{ fontWeight: 700, opacity: 1 }}>
+                M. Peri Periasamy
+              </Box>{" "}
+              — the same founder who leads operations in Chesterfield. It is not a
+              third-party vendor and not an agency with a separate agenda. CRKL Inc is where all
+              client outsourcing work is carried out, staffed from Chesterfield's large, educated,
               English-speaking professional workforce and overseen by the same individual
               accountable to you in the U.S.
             </Typography>
 
             <Typography
-              sx={{ opacity: 0.5, fontSize: "0.88rem", mb: 3, display: "flex", alignItems: "center", gap: 0.5 }}
+              sx={{
+                opacity: 0.5,
+                fontSize: "0.88rem",
+                mb: 3,
+                display: "flex",
+                alignItems: "center",
+                gap: 0.5,
+              }}
             >
               <LocationOnIcon sx={{ fontSize: 15 }} />
-              Madurai is one of South India's major university and industrial cities — home to
+              Chesterfield is one of Missouri's premier business cities — home to
               a large talent pool in accounting, finance, IT, and software development.
             </Typography>
 
@@ -507,16 +539,38 @@ export default function KOPLIntroduction() {
                 "&:hover": { borderColor: SECONDARY, background: alpha(SECONDARY, 0.07) },
               }}
             >
-              Know More About KOPL →
+              Know More About CRKL Inc →
             </Button>
           </Box>
 
           {/* Summary cards */}
-          <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2, mt: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: 2,
+              mt: 1,
+            }}
+          >
             {[
-              { icon: <BusinessIcon sx={{ fontSize: 20 }} />, label: "The Office", desc: "Dedicated professional workspace in Madurai with U.S.-grade IT infrastructure.", color: PRIMARY },
-              { icon: <PersonIcon sx={{ fontSize: 20 }} />, label: "Leadership", desc: "Beulah Radhakrishnan, General Manager — 5+ years consulting experience with CRKL Inc. and TCS background.", color: SECONDARY },
-              { icon: <GroupsIcon sx={{ fontSize: 20 }} />, label: "The Team", desc: "Degree-qualified professionals trained in U.S. accounting, finance, and IT workflows.", color: PRIMARY },
+              {
+                icon: <BusinessIcon sx={{ fontSize: 20 }} />,
+                label: "The Office",
+                desc: "Dedicated professional workspace in Chesterfield with U.S.-grade IT infrastructure.",
+                color: PRIMARY,
+              },
+              {
+                icon: <PersonIcon sx={{ fontSize: 20 }} />,
+                label: "Our Founder",
+                desc: "M. Peri Periasamy — PhD, MBA & JD. 30+ years in Chesterfield, Chamber Chairman 2019.",
+                color: PRIMARY,
+              },
+              {
+                icon: <GroupsIcon sx={{ fontSize: 20 }} />,
+                label: "The Team",
+                desc: "Degree-qualified professionals trained in U.S. accounting, finance, and IT workflows.",
+                color: SECONDARY,
+              },
             ].map((card) => (
               <Box
                 key={card.label}
@@ -527,7 +581,9 @@ export default function KOPLIntroduction() {
                   borderRadius: 2.5,
                   border: `1px solid ${alpha(card.color, 0.18)}`,
                   background: (theme) =>
-                    theme.palette.mode === "dark" ? alpha(card.color, 0.06) : alpha(card.color, 0.04),
+                    theme.palette.mode === "dark"
+                      ? alpha(card.color, 0.06)
+                      : alpha(card.color, 0.04),
                   cursor: "pointer",
                   transition: "all 0.22s ease",
                   "&:hover": {
@@ -540,16 +596,25 @@ export default function KOPLIntroduction() {
               >
                 <Box
                   sx={{
-                    width: 38, height: 38, borderRadius: 1.5,
+                    width: 38,
+                    height: 38,
+                    borderRadius: 1.5,
                     background: alpha(card.color, 0.12),
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    color: card.color, mb: 1.5,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: card.color,
+                    mb: 1.5,
                   }}
                 >
                   {card.icon}
                 </Box>
-                <Typography sx={{ fontWeight: 700, fontSize: "0.93rem", mb: 0.5 }}>{card.label}</Typography>
-                <Typography sx={{ opacity: 0.65, fontSize: "0.83rem", lineHeight: 1.6 }}>{card.desc}</Typography>
+                <Typography sx={{ fontWeight: 700, fontSize: "0.93rem", mb: 0.5 }}>
+                  {card.label}
+                </Typography>
+                <Typography sx={{ opacity: 0.65, fontSize: "0.83rem", lineHeight: 1.6 }}>
+                  {card.desc}
+                </Typography>
               </Box>
             ))}
           </Box>
@@ -560,6 +625,3 @@ export default function KOPLIntroduction() {
     </>
   );
 }
-
-// Team image (requested)
-const TEAM_IMG = new URL("../../assets/Events/Annual Conference/IMG20250605214643.webp", import.meta.url).href;

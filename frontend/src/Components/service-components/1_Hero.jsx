@@ -40,7 +40,7 @@ export default function ServicesHero() {
           sx={{ opacity: 0.65, fontSize: "1.08rem", lineHeight: 1.8 }}
         >
           Every service is delivered by qualified professionals at KOPL's secure
-          Madurai office — managed from Chesterfield by M. Peri Periasamy.
+          Madurai office — managed from Madurai by Beulah Radhakrishnan.
         </Typography>
       </Container>
     </Box>

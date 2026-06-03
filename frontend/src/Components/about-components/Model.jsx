@@ -82,10 +82,10 @@ const JOURNEY = [
           "Has lived in Chesterfield for over three decades. Raised three daughters here with his wife. He is a member of this community, not a newcomer.",
       },
       {
-        label: "CRKL Inc. — Founded",
+        label: "KOPL — Founded",
         icon: <FoundedIcon />, // imported as Storefront → FoundedIcon
         description:
-          "Founded CRKL Inc. to bring structured, U.S.-managed outsourcing to American small businesses — combining decades of corporate discipline with a genuine understanding of the SME journey.",
+          "Founded KOPL to bring structured, U.S.-managed outsourcing to American small businesses — combining decades of corporate discipline with a genuine understanding of the SME journey.",
       },
     ],
   },
@@ -499,3 +499,4 @@ export default function FounderJourneyModal({ open, onClose }) {
     </>
   );
 }
+

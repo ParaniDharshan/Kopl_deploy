@@ -77,7 +77,7 @@ export default function StepRoadMap() {
           <Typography
             sx={{ opacity: 0.55, fontSize: "1rem", maxWidth: 480, mx: "auto" }}
           >
-            Your contract is with CRKL Inc. Your concerns are ours to carry.
+            Your contract is with KOPL Your concerns are ours to carry.
           </Typography>
         </Box>
 
@@ -490,3 +490,4 @@ export default function StepRoadMap() {
     </Box>
   );
 }
+

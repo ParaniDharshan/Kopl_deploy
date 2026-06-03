@@ -65,7 +65,7 @@ export default function Hero() {
           <Grid xs={12} md={12} sx={{ order: { xs: 2, md: 1 } }}>
             <Box sx={{ maxWidth: 900, mx: "auto", textAlign: "left" }}>
               <Chip
-                label="Chesterfield, Missouri — U.S.-Managed"
+                label="Madurai, Tamilnadu — India"
                 size="small"
                 sx={{
                   mb: 3,
@@ -102,7 +102,7 @@ export default function Hero() {
                   lineHeight: 1.9,
                 }}
               >
-                <strong>CRKL Inc.</strong> helps U.S. small and mid-sized
+                <strong>KOPL</strong> helps U.S. small and mid-sized
                 businesses manage{" "}
                 <strong>accounting, finance, and IT operations</strong> through
                 a structured, secure, and professionally managed outsourcing
@@ -121,3 +121,4 @@ export default function Hero() {
     </Box>
   );
 }
+

@@ -3,13 +3,13 @@ export const PRIMARY = "#1d89c8";
 export const SECONDARY = "#3eb8af";
 export const BOOKING_URL = "#";
 
-export const NAV_LINKS = ["Home", "Why CRKL", "About", "Services", "Gallery",  "Contact"];
+export const NAV_LINKS = ["Home", "Why KOPL", "About", "Services", "Gallery",  "Contact"];
 
 export const SERVICES = [
 	{
 		icon: "📊",
 		title: "Accounting & Finance",
-		summary: "End-to-end financial operations support — from daily transaction recording to month-end close and CPA collaboration. Built for U.S. SMEs using QuickBooks Online.",
+		summary: "End-to-end financial operations support — from daily transaction recording to month-end close and CPA collaboration. Built for SMEs using QuickBooks Online.",
 		items: [
 			{
 				title: "Chart of Accounts setup & bookkeeping",
@@ -42,7 +42,7 @@ export const SERVICES = [
 	{
 		icon: "🧾",
 		title: "Tax Services",
-		summary: "Comprehensive U.S. tax support handled by an IRS Enrolled Agent — qualified to prepare, research, and represent your business before the IRS.",
+		summary: "Comprehensive tax support handled by an IRS Enrolled Agent — qualified to prepare, research, and represent your business before the IRS.",
 		items: [
 			{
 				title: "Preparation of Tax returns",
@@ -121,35 +121,35 @@ export const TIMELINE = [
 
 export const CONCERNS = [
 	{
-		q: "Who am I actually working with — a U.S. company or an Indian firm?",
-		a: "You work with CRKL Inc., a U.S.-registered corporation in Chesterfield, Missouri. Your contract is with a U.S. entity. Your primary contact is U.S.-based. KOPL in India delivers the work — but your relationship, your accountability, and your legal standing are all with CRKL Inc.",
+		q: "Who am I actually working with an Indian firm?",
+		a: "You work with KOPL, an India-registered corporation in Madurai, Tamilnadu. Your contract is with a India entity. Your primary contact is India-based. KOPL in India delivers the work — but your relationship, your accountability, and your legal standing are all with KOPL",
 	},
 	{
 		q: "What happens if something goes wrong or doesn't meet my expectations?",
-		a: "CRKL Inc. handles all contractual, legal, or service issues directly with you in Chesterfield. You don't navigate time zones or foreign legal systems. Peri's commitment: \"If we fall short of your expectations, we will make it right.\"",
+		a: "KOPL handles all contractual, legal, or service issues directly with you in Madurai. You don't navigate time zones or foreign legal systems. Peri's commitment: \"If we fall short of your expectations, we will make it right.\"",
 	},
 	{
 		q: "Is my financial and business data safe?",
 		a: "All KOPL employees sign strict confidentiality and non-disclosure agreements before handling any client data. Work is conducted in a secure, dedicated office space. No data is accessed from personal devices or unsecured networks. Access is role-limited, monitored, and can be revoked at any time.",
 	},
 	{
-		q: "Are your accounting professionals qualified for U.S. standards?",
-		a: "Yes. Our accounting team holds postgraduate commerce degrees and is trained in U.S. workflows using QuickBooks Online. Saravana Kumar is a QuickBooks ProAdvisor (Certified 2024) and IRS Enrolled Agent (2026) — licensed to represent clients before the IRS.",
+		q: "Are your accounting professionals qualified for India standards?",
+		a: "Yes. Our accounting team holds postgraduate commerce degrees and is trained in India workflows using QuickBooks Online. Saravana Kumar is a QuickBooks ProAdvisor (Certified 2024) and IRS Enrolled Agent (2026) — licensed to represent clients before the IRS.",
 	},
 	{
 		q: "Will there be a language or communication barrier?",
-		a: "Our team is fluent in English and experienced in professional U.S. business communication. Our General Manager, Beulah Radhakrishnan, is fluent in English, Hindi, Tamil, and Telugu. All deliverables are produced in clear, professional English.",
+		a: "Our team is fluent in English and experienced in professional India business communication. Our General Manager, Beulah Radhakrishnan, is fluent in English, Hindi, Tamil, and Telugu. All deliverables are produced in clear, professional English.",
 	}
 ];
 
 export const ROADMAP = [
-	{ step: "01", title: "Agreement", sub: "You Sign with CRKL Inc. — and That's Your Only Contract.", body: "CRKL Inc. enters into a formal business agreement with you, defining scope, expectations, and standards. You also define the professional requirements — qualifications, experience, skills — for the individual who will carry out your work at KOPL's Madurai office." },
+	{ step: "01", title: "Agreement", sub: "You Sign with KOPL — and That's Your Only Contract.", body: "KOPL enters into a formal business agreement with you, defining scope, expectations, and standards. You also define the professional requirements — qualifications, experience, skills — for the individual who will carry out your work at KOPL's Madurai office." },
 	{ step: "02", title: "Sourcing", sub: "We Find the Right People. You Set the Standard.", body: "Using your defined requirements, KOPL's team in Madurai identifies and precisely screens qualified candidates from the local professional talent pool, leveraging established relationships with experienced staffing agencies. Only candidates who meet your criteria are presented." },
 	{ step: "03", title: "Interview", sub: "You See Who You're Hiring. You Make the Decision.", body: "We schedule a virtual video interview at a time that suits you, presenting the top one to three candidates. You assess them directly. You ask the questions. And you make the final selection. There is no guessing, no blind placement — the hiring decision is yours." },
 	{ step: "04", title: "Onboarding", sub: "We Handle Everything That Follows.", body: "Once you have approved your chosen candidate, KOPL manages the complete hiring and onboarding process — compensation, benefits, and all human resources administration — at zero additional burden to you. Your new team member is ready to work." },
 	{ step: "05", title: "Workspace", sub: "A Secure, Dedicated Environment from Day One.", body: "Your professional works from KOPL's dedicated, secure office in Madurai — fully equipped with the IT infrastructure, communication tools, and data security protocols required to handle your business work safely and efficiently." },
-	{ step: "06", title: "Management", sub: "You Monitor the Output. We Manage the People.", body: "CRKL Inc. and KOPL jointly manage employee performance, attendance, HR matters, data security, and quality standards on an ongoing basis. Your role is to review the work delivered. Our role is to ensure the team delivers it to your expectations, every day." },
-	{ step: "07", title: "Quality", sub: "If We Fall Short, We Make It Right.", body: "We ask one thing: regularly review the quality and output of the work so we can ensure your expectations are being met. If there is a gap between what was expected and what was delivered, CRKL Inc. will address it. Our promise is not just quality — it is accountability for quality." },
+	{ step: "06", title: "Management", sub: "You Monitor the Output. We Manage the People.", body: "KOPL and KOPL jointly manage employee performance, attendance, HR matters, data security, and quality standards on an ongoing basis. Your role is to review the work delivered. Our role is to ensure the team delivers it to your expectations, every day." },
+	{ step: "07", title: "Quality", sub: "If We Fall Short, We Make It Right.", body: "We ask one thing: regularly review the quality and output of the work so we can ensure your expectations are being met. If there is a gap between what was expected and what was delivered, KOPL will address it. Our promise is not just quality — it is accountability for quality." },
 ];
 
 export const TESTIMONIALS = [
@@ -163,6 +163,6 @@ export const TESTIMONIALS = [
 
 export const CONTACT_INFO = {
 	phone: "+1 (314) 000-0000",
-	email: "peri@crklinc.com",
-	location: "Chesterfield, Missouri, USA",
+	email: "beulah@kopl.com",
+	location: "Madurai, Tamilnadu, India",
 };

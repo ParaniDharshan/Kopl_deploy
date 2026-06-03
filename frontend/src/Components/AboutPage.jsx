@@ -1,7 +1,7 @@
 /**
  * AboutPage.jsx
  * ─────────────────────────────────────────────────────────────────────────────
- * CRKL Inc. — About Us
+ * KOPL — About Us
  *
  * THEME:   uses MUI useTheme() — works directly with your existing
  *          ThemeProvider in App.jsx. No extra context file needed.
@@ -329,7 +329,7 @@ function FounderSection() {
             M. Peri Periasamy
           </Typography>
           <Typography variant="subtitle1" sx={{ color: PRIMARY, fontWeight: 600, mb: 3 }}>
-            Founder — CRKL Inc. &amp; KOPL
+            Founder — KOPL &amp; KOPL
           </Typography>
 
           {/* Two-col bio */}
@@ -455,23 +455,23 @@ function FounderSection() {
 const concerns = [
   {
     concern: '"I don\'t know who I\'m really dealing with on the other side."',
-    answer:  "You are dealing with CRKL Inc. — a U.S. corporation in Chesterfield, Missouri. Your contract is with us. KOPL, our India delivery arm, operates under our direct oversight. You will never be handed off to an unknown foreign entity.",
+    answer:  "You are dealing with KOPL — a U.S. corporation in Chesterfield, Missouri. Your contract is with us. KOPL, our India delivery arm, operates under our direct oversight. You will never be handed off to an unknown foreign entity.",
   },
   {
     concern: '"What if the quality doesn\'t meet my standards?"',
-    answer:  "You define the requirements. You conduct the virtual interview. You approve the candidate. CRKL Inc. and KOPL jointly monitor performance, output, and quality standards from day one — and we are contractually accountable.",
+    answer:  "You define the requirements. You conduct the virtual interview. You approve the candidate. KOPL and KOPL jointly monitor performance, output, and quality standards from day one — and we are contractually accountable.",
   },
   {
     concern: '"How do I know my data and confidential information are safe?"',
-    answer:  "All work is performed in KOPL's dedicated, secure office in Madurai — not remotely or unsupervised. Full IT infrastructure and data security protocols are in place before work begins. CRKL Inc. owns this accountability.",
+    answer:  "All work is performed in KOPL's dedicated, secure office in Madurai — not remotely or unsupervised. Full IT infrastructure and data security protocols are in place before work begins. KOPL owns this accountability.",
   },
   {
     concern: '"If something goes wrong, I have no recourse."',
-    answer:  "Your legal and business recourse is entirely with CRKL Inc. — a Missouri-registered U.S. corporation. You do not navigate foreign legal systems. All accountability rests here, in Chesterfield.",
+    answer:  "Your legal and business recourse is entirely with KOPL — a Missouri-registered U.S. corporation. You do not navigate foreign legal systems. All accountability rests here, in Chesterfield.",
   },
   {
     concern: '"This will cost me more time and energy than it saves."',
-    answer:  "You define the need. You select the person. Then CRKL Inc. and KOPL handle hiring, onboarding, HR, performance management, and daily oversight. You review the output. We manage everything else.",
+    answer:  "You define the need. You select the person. Then KOPL and KOPL handle hiring, onboarding, HR, performance management, and daily oversight. You review the output. We manage everything else.",
   },
 ];
 
@@ -482,7 +482,7 @@ function ConcernsSection() {
         <SectionHeader
           overline="Transparency"
           title="We Understand Your Concerns"
-          subtitle="If you are a small business owner considering outsourcing to India — you should have concerns. CRKL Inc. not only understands those concerns; they were the reason this company was built."
+          subtitle="If you are a small business owner considering outsourcing to India — you should have concerns. KOPL not only understands those concerns; they were the reason this company was built."
           onDark
         />
 
@@ -551,7 +551,7 @@ function ConcernsSection() {
         {/* Summary */}
         <Box sx={{ mt: 5, p: 4, borderRadius: 3, border: `2px solid ${SECONDARY}`, textAlign: "center" }}>
           <Typography variant="h6" sx={{ color: "#fff", fontStyle: "italic", fontWeight: 500, lineHeight: 1.9 }}>
-            &ldquo;CRKL Inc. has taken full ownership of the concerns and risks associated with
+            &ldquo;KOPL has taken full ownership of the concerns and risks associated with
             outsourcing to India — so that you do not have to.&rdquo;
           </Typography>
         </Box>
@@ -602,7 +602,7 @@ function OneRoofSection() {
               boxShadow: "0 12px 40px rgba(29,137,200,.22)",
             }}
           >
-            <Typography variant="h6" sx={{ fontWeight: 800 }}>CRKL Inc.</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 800 }}>KOPL</Typography>
             <Typography variant="caption" sx={{ opacity: 0.85, display: "block", mt: 0.5 }}>
               Chesterfield, Missouri
             </Typography>
@@ -644,7 +644,7 @@ function OneRoofSection() {
         <FlexRow gap={4} sx={{ mb: 7 }}>
           <FlexCell basis="300px">
             <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.9, mb: 2 }}>
-              M. Peri Periasamy founded CRKL Inc. as the U.S.-facing corporation and also founded
+              M. Peri Periasamy founded KOPL as the U.S.-facing corporation and also founded
               Kamala Outsourcing Private Limited (KOPL) in Madurai as its dedicated Indian arm.
               Both companies share the same founder, the same operating values, and the same
               management authority — led from Chesterfield, Missouri.
@@ -721,7 +721,7 @@ function OneRoofSection() {
             <Box sx={{ p: { xs: 3, md: 4 }, flex: "1 1 260px" }}>
               <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.9, mb: 2 }}>
                 Beulah leads core operations and organisational development at KOPL. She brings
-                over five years of consulting experience with CRKL Inc. and nearly three years as
+                over five years of consulting experience with KOPL and nearly three years as
                 a Software Developer at Tata Consultancy Services — a rare combination of
                 technical depth and business management capability.
               </Typography>
@@ -755,8 +755,8 @@ function OneRoofSection() {
 const roadmapSteps = [
   {
     num: "01", label: "Agreement",
-    summary: "You Sign with CRKL Inc. — and That's Your Only Contract.",
-    detail:  "CRKL Inc. enters into a formal business agreement with you, defining the scope, expectations, and standards. You also define the professional requirements for the individual who will carry out your work at KOPL's Madurai office.",
+    summary: "You Sign with KOPL — and That's Your Only Contract.",
+    detail:  "KOPL enters into a formal business agreement with you, defining the scope, expectations, and standards. You also define the professional requirements for the individual who will carry out your work at KOPL's Madurai office.",
   },
   {
     num: "02", label: "Sourcing",
@@ -781,12 +781,12 @@ const roadmapSteps = [
   {
     num: "06", label: "Management",
     summary: "You Monitor the Output. We Manage the People.",
-    detail:  "CRKL Inc. and KOPL jointly manage performance, attendance, HR matters, data security, and quality standards on an ongoing basis. Your role is to review the work delivered.",
+    detail:  "KOPL and KOPL jointly manage performance, attendance, HR matters, data security, and quality standards on an ongoing basis. Your role is to review the work delivered.",
   },
   {
     num: "07", label: "Quality",
     summary: "If We Fall Short, We Make It Right.",
-    detail:  "Regularly review quality and output so we can ensure your expectations are met. If there is a gap, CRKL Inc. will address it. Our promise is not just quality — it is accountability for quality.",
+    detail:  "Regularly review quality and output so we can ensure your expectations are met. If there is a gap, KOPL will address it. Our promise is not just quality — it is accountability for quality.",
   },
 ];
 
@@ -814,7 +814,7 @@ function RoadmapSection() {
       <Container maxWidth="md">
         <SectionHeader
           overline="The Process"
-          title="Your Business Journey with CRKL Inc."
+          title="Your Business Journey with KOPL"
           subtitle="From your first conversation to a high-performing engagement — here is how it unfolds."
         />
 
@@ -1005,3 +1005,4 @@ export default function AboutPage() {
     </Box>
   );
 }
+

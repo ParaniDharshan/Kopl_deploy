@@ -21,8 +21,9 @@ export default function FounderQuote() {
         small companies in the Chesterfield region."
       </Typography>
       <Typography sx={{ color: PRIMARY, fontWeight: 700 }}>
-        — M. Peri Periasamy, Founder, CRKL Inc.
+        — M. Peri Periasamy, Founder, KOPL
       </Typography>
     </Container>
   );
 }
+

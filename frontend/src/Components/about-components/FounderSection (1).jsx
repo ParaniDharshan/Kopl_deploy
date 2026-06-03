@@ -221,7 +221,7 @@ export default function FounderSection() {
             mt: 0.5,
           }}
         >
-          The Mind Behind CRKL
+          The Mind Behind KOPL
         </Typography>
       </Box>
 
@@ -286,7 +286,7 @@ export default function FounderSection() {
               Founder & Principal
             </Typography>
             <Typography variant="body2" sx={{ color: "#90CAF9", mt: 0.5 }}>
-              CRKL Consulting
+              KOPL Consulting
             </Typography>
           </Box>
 

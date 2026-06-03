@@ -34,7 +34,7 @@ export default function KoplLeadership() {
 							<Typography variant="caption" sx={{ opacity:0.6 }}>B.Tech — Information Technology</Typography>
 
 							<Typography sx={{ mt:2, opacity:0.75, lineHeight:1.8, fontSize:"0.95rem" }}>
-								Beulah leads core operations and organizational development at KOPL. With over five years of consulting experience at CRKL Inc. and nearly three years as a Software Developer at Tata Consultancy Services, she brings a rare combination of technical depth and business management capability.
+								Beulah leads core operations and organizational development at KOPL. With over five years of consulting experience at KOPL and nearly three years as a Software Developer at Tata Consultancy Services, she brings a rare combination of technical depth and business management capability.
 							</Typography>
 
 							<Box sx={{ display:"flex", flexWrap:"wrap", gap:1, mt:2.5 }}>
@@ -59,3 +59,4 @@ export default function KoplLeadership() {
     </Box>
   );
 }
+

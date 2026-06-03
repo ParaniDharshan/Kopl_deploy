@@ -17,7 +17,7 @@ export default function AboutCTA() {
           Want to know if we're the right fit?
         </Typography>
         <Typography sx={{ opacity: 0.65, mb: 4 }}>
-          Book a discovery call with CRKL Inc. — we'll be straightforward about
+          Book a discovery call with KOPL — we'll be straightforward about
           what we can and cannot do for your business.
         </Typography>
         <CTAButton text="Contact Us" />
@@ -25,3 +25,4 @@ export default function AboutCTA() {
     </Box>
   );
 }
+

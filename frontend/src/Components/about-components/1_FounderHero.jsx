@@ -27,17 +27,22 @@ import {
   ArrowForward,
   LinkedIn,
 } from "@mui/icons-material";
+import PersonIcon from "@mui/icons-material/Person";
 import ScienceIcon from "@mui/icons-material/Science";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import GavelIcon from "@mui/icons-material/Gavel";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import StarIcon from "@mui/icons-material/Star";
+import { alpha } from "@mui/material/styles";
 import { PRIMARY, SECONDARY } from "../../Constants.js";
 import PERI_SIR_IMAGE from "../../assets/Images/Peri_Sir_Image.png";
 import { MailIcon } from "lucide-react";
 import FounderJourneyModal from "./Model";
 import { NavLink, useNavigate } from "react-router-dom";
+
+// Leadership image for Beulah
+const LEADER_IMG = new URL("../../assets/Our Team/2.webp", import.meta.url).href;
 
 const PRIMARY_LIGHT = "#E8F4FC";
 const SECONDARY_LIGHT = "#E8F8F7";
@@ -50,10 +55,9 @@ const primaryGrad = `linear-gradient(135deg, ${PRIMARY} 0%, #1568a0 100%)`;
 const secondaryGrad = `linear-gradient(135deg, ${SECONDARY} 0%, #2a9990 100%)`;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// LAYOUT HELPERS  — Box flexbox only, no MUI Grid anywhere
+// LAYOUT HELPERS
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** Responsive flex row — wraps to column on narrow screens automatically */
 function FlexRow({ children, gap = 3, sx = {}, ...props }) {
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", gap, ...sx }} {...props}>
@@ -62,7 +66,6 @@ function FlexRow({ children, gap = 3, sx = {}, ...props }) {
   );
 }
 
-/** Flex child — grows equally; stacks when viewport is too narrow for `basis` */
 function FlexCell({ children, basis = "280px", grow = 1, sx = {}, ...props }) {
   return (
     <Box sx={{ flex: `${grow} 1 ${basis}`, minWidth: 0, ...sx }} {...props}>
@@ -141,50 +144,15 @@ function SectionHeader({
   );
 }
 
-const milestones = [
-  {
-    icon: <School />,
-    year: "50+ yrs ago",
-    title: "Florida State University",
-    detail:
-      "Doctorate in Chemistry — the scientific rigour behind every analytical business decision.",
-  },
-  {
-    icon: <School />,
-    year: "Post-doctorate",
-    title: "Saint Louis University",
-    detail:
-      "MBA & Law Degree, international business focus — the legal and financial backbone of structured outsourcing.",
-  },
-  {
-    icon: <Business />,
-    year: "Career",
-    title: "Mallinckrodt Corporation",
-    detail:
-      "Deep fluency in American business culture: results-driven decisions, zero tolerance for quality lapses.",
-  },
-  {
-    icon: <Public />,
-    year: "2012",
-    title: "Chesterfield Chamber — Education Committee",
-    detail:
-      "Led for ~3 years, developing direct understanding of local small-business priorities.",
-  },
-  {
-    icon: <Public />,
-    year: "2014–2019",
-    title: "Chamber Board of Directors · Chairman 2019",
-    detail:
-      "Five years of board-level governance, culminating in the chairmanship.",
-  },
-  {
-    icon: <Public />,
-    year: "2017–Present",
-    title: "Finance & Admin Advisory Committee — Chesterfield",
-    detail:
-      "Ongoing civic role deepening understanding of local government and the small businesses it serves.",
-  },
+const LEADERSHIP_TAGS = [
+  "Project Management",
+  "Technology Execution",
+  "TCS Alumni",
+  "Avgira Technologies",
+  "Multi-lingual",
 ];
+
+const LEADERSHIP_LANGS = ["English", "Hindi", "Tamil", "Telugu"];
 
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -223,89 +191,6 @@ function BentoCard({ children, sx = {}, delay = 0, visible }) {
   );
 }
 
-function CivicStepper({ visible }) {
-  const [active, setActive] = useState(0);
-  useEffect(() => {
-    if (!visible) return;
-    const timer = setInterval(() => {
-      setActive((p) => (p < civicTimeline.length - 1 ? p + 1 : p));
-    }, 700);
-    return () => clearInterval(timer);
-  }, [visible]);
-
-  return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      {civicTimeline.map((item, i) => (
-        <Box key={i} sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              minWidth: 20,
-            }}
-          >
-            <Box
-              sx={{
-                width: 12,
-                height: 12,
-                borderRadius: "50%",
-                mt: "4px",
-                flexShrink: 0,
-                background: i <= active ? PRIMARY : "#E0E0E0",
-                border:
-                  i === active
-                    ? `2.5px solid ${SECONDARY}`
-                    : "2px solid transparent",
-                transition: "background 0.4s, border 0.4s",
-                boxShadow: i === active ? `0 0 0 3px ${PRIMARY_LIGHT}` : "none",
-              }}
-            />
-            {i < civicTimeline.length - 1 && (
-              <Box
-                sx={{
-                  width: 2,
-                  flex: 1,
-                  minHeight: 28,
-                  background: i < active ? PRIMARY : "#E0E0E0",
-                  transition: "background 0.4s",
-                  mt: "2px",
-                  mb: "2px",
-                }}
-              />
-            )}
-          </Box>
-          <Box
-            sx={{
-              pb: i < civicTimeline.length - 1 ? 1.5 : 0,
-              opacity: i <= active ? 1 : 0.3,
-              transition: "opacity 0.4s",
-            }}
-          >
-            <Typography
-              variant="caption"
-              sx={{
-                fontWeight: 700,
-                color: PRIMARY,
-                fontFamily: "monospace",
-                letterSpacing: 0.5,
-              }}
-            >
-              {item.year}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ color: "#37474F", lineHeight: 1.5, fontSize: "0.82rem" }}
-            >
-              {item.event}
-            </Typography>
-          </Box>
-        </Box>
-      ))}
-    </Box>
-  );
-}
-
 export default function FounderSection() {
   const [ref, visible] = useInView(0.1);
   const [open, setOpen] = useState(false);
@@ -329,121 +214,25 @@ export default function FounderSection() {
           variant="h2"
           sx={{ fontSize: { xs: "2rem", md: "2.6rem" }, mb: 2 }}
         >
-          Meet Our Founder
+          Meet Our Leadership
         </Typography>
 
-        {/* Bio block */}
-        <Box
-          sx={{
-            mb: 6,
-            borderRadius: 3,
-          }}
-        >
-          {/* bio */}
-          <FlexRow gap={4}>
-            {/* Left cell with image */}
-            <FlexCell
-              basis="300px"
+        {/* ── KOPL Leadership — Beulah (moved from KOPLIntroduction) ───────── */}
+        <Box sx={{ mb: 6 }}>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "row-reverse" },
+              gap: { xs: 3, md: 5 },
+              alignItems: "stretch",
+            }}
+          >
+            {/* Content */}
+            <Box
               sx={{
-                display: "flex",
-                justifyContent: { xs: "center", md: "space-between" },
-                alignItems: "center",
-              }}
-            >
-              <Box
-                sx={{
-                  position: "relative",
-                  width: "80%",
-                  height: "100%",
-                  borderRadius: 1,
-                  overflow: "hidden",
-                  boxShadow: 3,
-                  "&:hover .overlay": {
-                    opacity: 1, // show overlay on hover
-                  },
-                }}
-              >
-                {/* Founder Image */}
-                <Box
-                  component="img"
-                  src={PERI_SIR_IMAGE}
-                  alt="M. Peri Periasamy"
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
-
-                {/* Overlay with name, role, buttons */}
-                <Box
-                  className="overlay"
-                  sx={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    alignItems: "flex-end",
-                    p: 2,
-                    background:
-                      "linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(3,18,33,0.78) 100%)",
-                    color: "#fff",
-                    opacity: 0,
-                    transition: "opacity 0.3s ease",
-                  }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <Box sx={{ width: "100%" }}>
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      sx={{ flexWrap: "wrap", gap: 1 }}
-                    >
-                      <Button
-                        href="mailto:peri@example.com"
-                        variant="contained"
-                        size="small"
-                        onClick={(e) => e.stopPropagation()}
-                        sx={{
-                          textTransform: "none",
-                          fontWeight: 700,
-                          borderRadius: 999,
-                          bgcolor: "transparent",
-                          color: "#fff",
-                          backdropFilter: "blur(10px)",
-                          transition: "opacity 0.3s ease",
-                        }}
-                      >
-                        <MailIcon />
-                      </Button>
-
-                      <Button
-                        href="https://www.linkedin.com/in/peri-periasamy"
-                        target="_blank"
-                        rel="noreferrer"
-                        variant="contained"
-                        size="small"
-                        onClick={(e) => e.stopPropagation()}
-                        sx={{
-                          fontWeight: 700,
-                          borderRadius: 999,
-                          bgcolor: "transparent",
-                          color: "#fff",
-                          backdropFilter: "blur(10px)",
-                          transition: "opacity 0.3s ease",
-                        }}
-                      >
-                        <LinkedIn />
-                      </Button>
-                    </Stack>
-                  </Box>
-                </Box>
-              </Box>
-            </FlexCell>
-
-            <FlexCell
-              basis="300px"
-              sx={{
+                flex: 1,
+                minWidth: 0,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
@@ -451,105 +240,126 @@ export default function FounderSection() {
             >
               <Typography
                 variant="h4"
-                sx={{ fontWeight: 700, color: PRIMARY, mb: 2 }}
+                sx={(theme) => ({
+                  fontWeight: 800,
+                  mb: 0.4,
+                  color: theme.palette.mode === "dark" ? "white" : NAVY,
+                })}
               >
-                Who is M.Peri Periasamy ?
+                Beulah Radhakrishnan
+              </Typography>
+
+              <Typography
+                sx={{ color: SECONDARY, fontWeight: 700, fontSize: "0.92rem", mb: 0.4 }}
+              >
+                General Manager, KOPL
               </Typography>
               <Typography
-                variant="body1"
-                sx={{ color: "text.secondary", lineHeight: 1.9, mb: 2 }}
+                sx={{ opacity: 0.5, fontSize: "0.82rem", mb: 2 }}
               >
-                Peri was born and raised in Madurai, Tamil Nadu, India. His
-                father owned a small hardware distribution company — and from
-                his earliest years, Peri worked there during summers and college
-                breaks, learning what it truly means to operate a small
-                business.
+                B.Tech — Information Technology
               </Typography>
+
               <Typography
                 variant="body1"
-                sx={{ color: "text.secondary", lineHeight: 1.9 }}
+                sx={{ color: "text.secondary", lineHeight: 1.9, mb: 2.5 }}
               >
-                He moved to the United States more than 50 years ago, earned a
-                doctorate at Florida State University, then an MBA and Law
-                degree from Saint Louis University with a concentration in
-                international business.
+                Beulah leads core operations and organisational development at
+                KOPL. She brings over five years of consulting experience with
+                KOPL and nearly three years as a Software Developer at Tata
+                Consultancy Services — a combination of technical depth and
+                business management capability directly applied to client
+                engagement delivery. Her background also includes consulting at
+                Avgira Technologies and entrepreneurial leadership across
+                multiple ventures.
               </Typography>
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: 3 }}>
-                {[
-                  "30+ yrs Chesterfield",
-                  "PhD Chemistry",
-                  "MBA + JD",
-                  "Chamber Chairman 2019",
-                ].map((tag) => (
+
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.8, mb: 1.8 }}>
+                {LEADERSHIP_TAGS.map((t) => (
                   <Chip
-                    key={tag}
-                    label={tag}
+                    key={t}
+                    label={t}
+                    size="small"
                     sx={{
-                      bgcolor: SECONDARY,
-                      color: "#fff",
+                      background: `${PRIMARY}15`,
+                      color: PRIMARY,
                       fontWeight: 600,
-                      fontSize: 12,
+                      fontSize: "0.7rem",
                     }}
                   />
                 ))}
               </Box>
-              {/* Trigger Button — drop this wherever you need it */}
-              <Button
-                variant="outlined"
-                onClick={() => setOpen(true)}
+
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.8, mb: 2.5 }}>
+                {LEADERSHIP_LANGS.map((l) => (
+                  <Chip
+                    key={l}
+                    label={l}
+                    size="small"
+                    variant="outlined"
+                    sx={{
+                      borderColor: `${SECONDARY}55`,
+                      color: SECONDARY,
+                      fontSize: "0.7rem",
+                    }}
+                  />
+                ))}
+              </Box>
+
+              <Box
                 sx={{
-                  borderColor: `${PRIMARY}55`,
-                  color: PRIMARY,
-                  fontWeight: 600,
-                  borderRadius: 2,
-                  px: 3,
-                  py: 1,
-                  mt: 3,
-                  "&:hover": {
-                    borderColor: PRIMARY,
-                    background: `${PRIMARY}0e`,
-                  },
+                  borderLeft: `3px solid ${SECONDARY}`,
+                  pl: 2,
+                  py: 0.75,
+                  background: alpha(SECONDARY, 0.05),
+                  borderRadius: "0 6px 6px 0",
                 }}
               >
-                View Peri's Journey
-              </Button>
-            </FlexCell>
-          </FlexRow>
-        </Box>
+                <Typography
+                  sx={{
+                    fontStyle: "italic",
+                    opacity: 0.72,
+                    fontSize: "0.92rem",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  "Leadership is about coordination, clarity, and care."
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "0.74rem",
+                    opacity: 0.48,
+                    mt: 0.5,
+                    fontWeight: 600,
+                  }}
+                >
+                  — Beulah Radhakrishnan, General Manager, KOPL
+                </Typography>
+              </Box>
+            </Box>
 
-        {/* Quote */}
-        <Box
-          sx={{
-            mt: 5,
-            p: 4,
-            borderRadius: 3,
-            bgcolor: dark ? NAVY : PRIMARY_LIGHT,
-            textAlign: "center",
-          }}
-        >
-          <Typography
-            variant="body1"
-            sx={{
-              fontStyle: "italic",
-              color: "rgba(26, 25, 25, 0.88)",
-              lineHeight: 1.9,
-            }}
-          >
-            &ldquo;Both experiences allowed me to better understand the business
-            needs of small companies in the Chesterfield region.&rdquo;
-          </Typography>
-          <Typography
-            variant="caption"
-            sx={{
-              display: "block",
-              mt: 2,
-              color: SECONDARY,
-              fontWeight: 700,
-              letterSpacing: 1.5,
-            }}
-          >
-            — M. PERI PERIASAMY
-          </Typography>
+            {/* Image */}
+            <Box
+              sx={{
+                width: { xs: "100%", md: "38%" },
+                flexShrink: 0,
+              }}
+            >
+              <Box
+                component="img"
+                src={LEADER_IMG}
+                alt="KOPL Leadership - Beulah Radhakrishnan"
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  minHeight: { xs: 220, md: 340 },
+                  objectFit: "cover",
+                  borderRadius: 3,
+                  boxShadow: 3,
+                }}
+              />
+            </Box>
+          </Box>
         </Box>
       </Container>
       {open && (

@@ -549,7 +549,7 @@ export default function FaqGroup() {
             Still have a question?{" "}
             <Box
               component="a"
-              href="mailto:hello@crklinc.com"
+              href="mailto:hello@kopl.com"
               sx={{
                 color: SECONDARY,
                 fontWeight: 700,
@@ -557,7 +557,7 @@ export default function FaqGroup() {
                 "&:hover": { textDecoration: "underline" },
               }}
             >
-              hello@crklinc.com
+              hello@kopl.com
             </Box>{" "}
             or{" "}
             <Box

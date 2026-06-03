@@ -79,7 +79,7 @@ export default function App() {
             <Route path="/gallery/office" element={<OfficeGallery />} />
             <Route path="/gallery/team" element={<TeamGallery />} />
             <Route path="/gallery/events" element={<EventsGallery />} />
-            <Route path="/why-crkl" element={<WhyCRKL />} />
+            <Route path="/why-kopl" element={<WhyCRKL />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>

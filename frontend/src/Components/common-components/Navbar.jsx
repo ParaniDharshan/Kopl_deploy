@@ -24,11 +24,11 @@ import {
 
 import { Link, useLocation } from "react-router-dom";
 import { PRIMARY, SECONDARY, NAV_LINKS } from "../../Constants.js";
-import CRKL_LOGO from "../../assets/Images/CRKL_WEB_LOGO-removebg-preview.png";
+import CRKL_LOGO from "../../assets/Images/KOPL_LOGO.png";
 
 const routeMap = {
   Home: "/",
-  "Why CRKL": "/why-crkl",
+  "Why KOPL": "/why-kopl",
   About: "/about",
   Services: "/services",
   Gallery: "/gallery",
@@ -93,9 +93,9 @@ function Navbar({ mode, toggleMode }) {
             <Box
               component="img"
               src={CRKL_LOGO}
-              alt="CRKL Inc. Logo"
+              alt="KOPL Logo"
               sx={{
-                height: { xs: 40, md: 50 }, // responsive sizing
+                height: { xs: 40, md: 70 }, // responsive sizing
                 width: "auto",
                 display: "block",
               }}
@@ -193,7 +193,7 @@ function Navbar({ mode, toggleMode }) {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              CRKL Inc.
+              KOPL
             </Typography>
             <IconButton onClick={() => setDrawerOpen(false)}>
               <CloseIcon />
@@ -227,3 +227,4 @@ function Navbar({ mode, toggleMode }) {
 }
 
 export default Navbar;
+

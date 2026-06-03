@@ -11,7 +11,7 @@ export const teamItems = [
 		height: 900,
 		name: "M. Peri Periasamy",
 		role: "Founder & CEO",
-		email: "team1@crklinc.com",
+		email: "team1@kopl.com",
 		linkedinUrl: "https://www.linkedin.com/",
 	},
 	{
@@ -21,7 +21,7 @@ export const teamItems = [
 		height: 900,
 		name: "Beulah Radhakrishnan",
 		role: "General Manager",
-		email: "team2@crklinc.com",
+		email: "team2@kopl.com",
 		linkedinUrl: "https://www.linkedin.com/",
 	},
 	{
@@ -32,7 +32,7 @@ export const teamItems = [
 		name: "Saravana Kumar",
 		role: "Client Relations",
 		category: "Finance",
-		email: "team3@crklinc.com",
+		email: "team3@kopl.com",
 		linkedinUrl: "https://www.linkedin.com/",
 	},
 	{
@@ -43,7 +43,7 @@ export const teamItems = [
 		name: "Bhala Murugan",
 		role: "Administration",
 		category: "Finance",
-		email: "team4@crklinc.com",
+		email: "team4@kopl.com",
 		linkedinUrl: "https://www.linkedin.com/",
 	},
 	{
@@ -54,7 +54,7 @@ export const teamItems = [
 		name: "Ragul",
 		role: "Support",
 		category: "Finance",
-		email: "team5@crklinc.com",
+		email: "team5@kopl.com",
 		linkedinUrl: "https://www.linkedin.com/",
 	},
 	{
@@ -65,7 +65,7 @@ export const teamItems = [
 		name: "Vasanth",
 		role: "Leadership",
 		category: "IT",
-		email: "team6@crklinc.com",
+		email: "team6@kopl.com",
 		linkedinUrl: "https://www.linkedin.com/",
 	},
 ];

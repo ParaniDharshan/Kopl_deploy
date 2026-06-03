@@ -387,7 +387,7 @@ export default function EducationAndCareer() {
                   Periasamy Krishnamoorthy
                 </Typography>
                 <Typography sx={{ opacity: 0.88, mb: 2 }}>
-                  Founder & Director — CRKL Inc. · Chesterfield, Missouri
+                  Founder & Director — KOPL · Chesterfield, Missouri
                 </Typography>
                 <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
                   {[
@@ -613,7 +613,7 @@ export default function EducationAndCareer() {
               >
                 "I have lived and worked in Chesterfield for over 30 years. I
                 understand what American business owners need — and I have built
-                CRKL to deliver exactly that."
+                KOPL to deliver exactly that."
               </Typography>
               <Typography
                 variant="caption"
@@ -628,3 +628,4 @@ export default function EducationAndCareer() {
     </Box>
   );
 }
+

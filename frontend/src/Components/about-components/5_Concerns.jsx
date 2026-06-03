@@ -48,9 +48,9 @@ export default function Concerns() {
             If you are a small business owner in Chesterfield, and someone has
             suggested you consider outsourcing work to a firm with operations in
             India — you should have concerns. Every serious business owner does.
-            CRKL Inc. not only understands those concerns; they were the reason
+            KOPL not only understands those concerns; they were the reason
             this company was built. Here is what we hear most often — and how
-            CRKL Inc. has structured its entire model to address each one.
+            KOPL has structured its entire model to address each one.
           </Typography>
         </Box>
 
@@ -115,7 +115,7 @@ export default function Concerns() {
                       size="small"
                       variant="text"
                       onClick={() =>
-                        {navigate("/why-crkl"), window.scrollTo({ top: 0, behavior: "smooth" })}
+                        {navigate("/why-kopl"), window.scrollTo({ top: 0, behavior: "smooth" })}
                       }
                       sx={{
                         textTransform: "none",
@@ -148,7 +148,7 @@ export default function Concerns() {
           }}
         >
           <Typography sx={{ fontWeight: 700, fontSize: "1.05rem", mb: 0.5 }}>
-            CRKL Inc. has taken full ownership of the concerns and risks
+            KOPL has taken full ownership of the concerns and risks
             associated with outsourcing to India — so that you do not have to.
           </Typography>
         </Box>

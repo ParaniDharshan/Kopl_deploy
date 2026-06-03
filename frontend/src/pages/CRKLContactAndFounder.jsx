@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * CRKL Inc. — Two Drop-in Components
+ * KOPL — Two Drop-in Components
  * ============================================================
  * 1. <ContactPage />   — Hero + Full Contact Form
  * 2. <FounderProfile /> — Director Bio with Stepper + Cards
@@ -282,7 +282,7 @@ export function FounderProfile() {
               </Grid>
               <Grid item xs={12} sm>
                 <Typography variant="h5" sx={{ fontWeight: 800, mb: 0.5 }}>Periasamy Krishnamoorthy</Typography>
-                <Typography sx={{ opacity: 0.88, mb: 2 }}>Founder & Director — CRKL Inc. · Chesterfield, Missouri</Typography>
+                <Typography sx={{ opacity: 0.88, mb: 2 }}>Founder & Director — KOPL · Chesterfield, Missouri</Typography>
                 <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
                   {["PhD Chemistry", "MBA Int'l Business", "JD Law", "IRS Enrolled Agent", "50+ Years U.S. Experience"].map((tag) => (
                     <Chip key={tag} label={tag} size="small" sx={{ background: "rgba(255,255,255,0.2)", color: "#fff", fontWeight: 600, fontSize: "0.72rem" }} />
@@ -441,7 +441,7 @@ export function FounderProfile() {
             {/* Bottom quote */}
             <Box sx={{ textAlign: "center" }}>
               <Typography variant="body1" sx={{ fontStyle: "italic", opacity: 0.75, maxWidth: 580, mx: "auto", lineHeight: 1.85 }}>
-                "I have lived and worked in Chesterfield for over 30 years. I understand what American business owners need — and I have built CRKL to deliver exactly that."
+                "I have lived and worked in Chesterfield for over 30 years. I understand what American business owners need — and I have built KOPL to deliver exactly that."
               </Typography>
               <Typography variant="caption" sx={{ opacity: 0.45, display: "block", mt: 1.5 }}>
                 — Periasamy Krishnamoorthy, Founder
@@ -454,3 +454,4 @@ export function FounderProfile() {
     </Box>
   );
 }
+

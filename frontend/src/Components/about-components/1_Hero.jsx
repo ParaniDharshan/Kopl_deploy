@@ -52,7 +52,7 @@ export default function Hero() {
           <Grid item xs={12} md={12} sx={{ order: { xs: 2, md: 1 } }}>
             <Box sx={{ maxWidth: 900, mx: "auto", textAlign: "left" }}>
               <Chip
-                label="Chesterfield, Missouri — U.S.-Managed"
+                label="Madurai, Tamilnadu — India"
                 size="small"
                 sx={{
                   mb: 3,

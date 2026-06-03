@@ -8,7 +8,7 @@ const SOLUTIONS = [
     icon: "🤝",
     title: "U.S. Contract, U.S. Accountability",
     description:
-      "Your signed agreement is with CRKL Inc. — a Missouri-registered U.S. corporation. Not with KOPL. Not with India. With us.",
+      "Your signed agreement is with KOPL — a Missouri-registered U.S. corporation. Not with KOPL. Not with India. With us.",
   },
   {
     icon: "🔒",
@@ -26,7 +26,7 @@ const SOLUTIONS = [
     icon: "⚡",
     title: "We Manage Everything Else",
     description:
-      "Hiring, onboarding, HR, performance management, and daily oversight — handled by CRKL Inc. and KOPL. You review the output.",
+      "Hiring, onboarding, HR, performance management, and daily oversight — handled by KOPL and KOPL. You review the output.",
   },
   {
     icon: "📋",
@@ -127,7 +127,7 @@ export default function TheSolutions() {
           >
             Instead of connecting U.S. small businesses to an unknown Indian
             firm, we started our own — KOPL — as the dedicated Indian arm of
-            CRKL Inc. One roof. One management. One standard.
+            KOPL One roof. One management. One standard.
           </Typography>
         </Box>
 
@@ -248,3 +248,4 @@ export default function TheSolutions() {
     </Box>
   );
 }
+

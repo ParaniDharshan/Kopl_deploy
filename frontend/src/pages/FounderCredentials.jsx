@@ -2,12 +2,12 @@
  * ============================================================
  * FounderCredentials.jsx
  * Drop-in replacement for the Education / Career / Civic
- * section inside About() in CRKLWebsite.jsx
+ * section inside About() in KOPLWebsite.jsx
  * ============================================================
  *
  * HOW TO USE:
  * 1. Copy this file into your src/ folder.
- * 2. In CRKLWebsite.jsx, add this import at the top:
+ * 2. In KOPLWebsite.jsx, add this import at the top:
  *       import FounderCredentials from "./FounderCredentials";
  * 3. In the About() function, find this comment block:
  *       {/* ── EDUCATION & CAREER ── *\/}
@@ -367,7 +367,7 @@ export default function FounderCredentials() {
                     M. Peri Periasamy
                   </Typography>
                   <Typography variant="caption" sx={{ opacity: 0.55 }}>
-                    Founder — CRKL Inc. &amp; KOPL
+                    Founder — KOPL &amp; KOPL
                   </Typography>
                 </Box>
               </Box>
@@ -379,7 +379,7 @@ export default function FounderCredentials() {
                 M. Peri Periasamy
               </Typography>
               <Typography variant="body2" sx={{ opacity: 0.55, mb: 1.25 }}>
-                Founder — CRKL Inc. &amp; KOPL &nbsp;·&nbsp; Chesterfield, Missouri
+                Founder — KOPL &amp; KOPL &nbsp;·&nbsp; Chesterfield, Missouri
               </Typography>
               <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
                 {["IRS Enrolled Agent", "Chamber Chairman 2019", "50+ Years in the U.S."].map((tag) => (
@@ -527,3 +527,4 @@ export default function FounderCredentials() {
     </Box>
   );
 }
+

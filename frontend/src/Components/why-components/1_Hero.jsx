@@ -37,7 +37,7 @@ export default function WhyHero() {
         }}
       >
         <Chip
-          label="Why CRKL Inc."
+          label="Why KOPL"
           sx={{
             mb: 3,
             px: 1.5,
@@ -74,10 +74,11 @@ export default function WhyHero() {
         >
           As outsourcing expanded, a clear pattern emerged: large companies reap
           its cost savings, while small businesses remain reluctant. Their
-          hesitation centers on real, valid concerns. CRKL Inc. was built to
+          hesitation centers on real, valid concerns. KOPL was built to
           address every single one.
         </Typography>
       </Container>
     </Box>
   );
 }
+
