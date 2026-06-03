@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/common-components/Navbar.jsx";
-import Footer from "./components/common-components/Footer";
-import ScrollToTop from "./components/common-components/ScrollToTop";
+import Navbar from "./Components/common-components/Navbar.jsx";
+import Footer from "./Components/common-components/Footer";
+import ScrollToTop from "./Components/common-components/ScrollToTop";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Gallery from "./pages/Gallery.jsx";
-import OfficeGallery from "./components/gallery-components/OfficeGallery";
-import TeamGallery from "./components/gallery-components/TeamGallery";
-import EventsGallery from "./components/gallery-components/EventsGallery";
+import OfficeGallery from "./Components/gallery-components/OfficeGallery";
+import TeamGallery from "./Components/gallery-components/TeamGallery";
+import EventsGallery from "./Components/gallery-components/EventsGallery";
 import WhyCRKL from "./pages/WhyCRKL";
 import Contact from "./pages/Contact";
 
