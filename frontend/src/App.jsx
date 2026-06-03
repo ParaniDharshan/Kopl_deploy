@@ -9,7 +9,7 @@ import ScrollToTop from "./components/common-components/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
-import Gallery from "./pages/Gallery";
+import Gallery from "./pages/Gallery.jsx";
 import OfficeGallery from "./components/gallery-components/OfficeGallery";
 import TeamGallery from "./components/gallery-components/TeamGallery";
 import EventsGallery from "./components/gallery-components/EventsGallery";
