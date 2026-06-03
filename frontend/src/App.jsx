@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/common-components/Navbar";
+import Navbar from "./components/common-components/Navbar.jsx";
 import Footer from "./components/common-components/Footer";
 import ScrollToTop from "./components/common-components/ScrollToTop";
 
